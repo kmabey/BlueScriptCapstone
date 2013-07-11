@@ -19,5 +19,10 @@ namespace MiniProject01.Controllers
         {
             return View();
         }
+
+        public ActionResult GetStats()
+        {
+            return View();
+        }
     }
 }
