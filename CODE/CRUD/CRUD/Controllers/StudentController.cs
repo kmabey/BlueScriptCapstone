@@ -15,6 +15,11 @@ namespace CRUD.Controllers
         {
             return View(db.Students.ToList());
         }
+        public ViewResult Details(int id)
+        {
+            Student student = db.Students.Find(id);
+            return View(student);
+        }
 
     }
 }
