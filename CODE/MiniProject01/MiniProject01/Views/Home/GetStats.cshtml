@@ -8,6 +8,22 @@
     <title>String Counter</title>
 </head>
 <body>
+    @{
+        if (IsPost)
+        {
+        <p>
+            You entered:
+            @Model.name
+            <br />
+            Inside this input: @Model.input
+            <br />
+            <br />
+            @Model.name
+            was found @Model.number 
+            times!
+        </p> 
+        }
+    }
     @using (Html.BeginForm())
     {
         <p>
@@ -17,7 +33,7 @@
             Input: @Html.TextBoxFor(x => x.input)
         </p>
         
-        <input type="submit" value="Submit RSVP" />
+        <input type="submit" value="Search for String" />
     }
 </body>
 </html>

@@ -13,5 +13,7 @@ namespace MiniProject01.Models
 
         [Required]
         public string input { get; set; }
+
+        public int number { get; set; }
     }
 }

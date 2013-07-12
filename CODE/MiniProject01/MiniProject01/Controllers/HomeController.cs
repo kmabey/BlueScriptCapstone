@@ -16,14 +16,17 @@ namespace MiniProject01.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult GetStats()
         {
             return View();
         }
 
-        public ActionResult GetStats()
+        [HttpPost]
+        public ActionResult GetStats(InformationModel info)
         {
-            return View();
+            //TODO: add regex stuff here.
+            return View("GetStats", info);
         }
     }
 }
