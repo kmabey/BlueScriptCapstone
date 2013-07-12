@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MiniProject01.Models;
+using System.Text.RegularExpressions;
 
 namespace MiniProject01.Controllers
 {
@@ -25,7 +26,9 @@ namespace MiniProject01.Controllers
         [HttpPost]
         public ActionResult GetStats(InformationModel info)
         {
-            //TODO: add regex stuff here.
+            Regex regex = new Regex("" + info.name);
+            MatchCollection matches = regex.Matches(info.input);
+            info.number = matches.Count;
             return View("GetStats", info);
         }
     }
