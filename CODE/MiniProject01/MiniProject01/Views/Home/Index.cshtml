@@ -1,12 +1,37 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
 <h2>@ViewBag.Message</h2>
 <p>
-
     @Html.ActionLink("Check Stats", "GetStats", "Home")
     <textarea class="bigTextBox" rows="4" cols="50">
     </textarea>
-
 </p>
+@{
+    if (IsPost)
+    {
+        string inputString = Request["inputString"];
+        string fullInput = Request["fullInput"]; 
+    <p>
+        You entered:
+        <br />
+        @inputString
+        <br />
+        Inside this input: @fullInput
+        <br />
+        <br />
+        @inputString 
+        was found <!-- add number of how many times string was found -->
+    </p> 
+    }
+    <form method="post" action="GetStats" >
+    String to Find:<br>
+    <input type="text" name="inputString" value="" /><br>
+    Input to search:<br>
+    <br>
+    <input type="text" name="fullInput" value="" /><br>
+    <br>
+    <input type="submit" value="Submit" class="submit"  />
+    </form> 
+
+}
