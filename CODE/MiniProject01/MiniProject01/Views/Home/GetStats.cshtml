@@ -1,0 +1,23 @@
+﻿@model MiniProject01.Models.InformationModel
+@{
+    ViewBag.Title = "GetStats";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Counter</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <p>
+            String to look for: @Html.TextBoxFor(x => x.name)
+        </p>
+        <p>
+            Input: @Html.TextBoxFor(x => x.input)
+        </p>
+        
+        <input type="submit" value="Submit RSVP" />
+    }
+</body>
+</html>
