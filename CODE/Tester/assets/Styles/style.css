@@ -10,20 +10,9 @@ body
 }
 
 /*Editable text*/
-div.lookingfor
+div.mytext
 {
-    height: 3em;
-    width: 50em;
+    font-size: 1.2em;
     border: .3em solid black;
-    margin-bottom: 1em;
-}
-div.textbox
-{
-    max-width: 96em;
-    min-width: 50em; 
-    height: 50em;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto; 
-    border: .3em solid black;
+    max-width: 40rem;
 }

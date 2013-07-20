@@ -7,8 +7,17 @@
     <link rel="stylesheet" href="/assets/Styles/style.css" />
 </head>
 
-<body>
-    <div class="lookingfor" contenteditable="true"></div>
-    <div class="textbox" contenteditable="true"></div>
+<body onload="highlightSearchWord('bob');">
+    <div class="mytext" contenteditable="true">
+        bob is happy.
+    </div>
+<br>
+<input type="button" value="Highlight word" 
+onClick="searchPrompt('bob', false);"> 
+
+    
+    
+    <script src="/assets/JavaScript/search.js" type="text/javascript" language=JavaScript></script>
 </body>
+
 </html>
