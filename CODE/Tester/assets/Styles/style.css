@@ -1,0 +1,29 @@
+﻿html
+{
+    font-size: 62.5%;
+}
+
+body
+{
+    font-family:"Arial", Arial, sans-serif;
+    background-color: #ccffff;
+}
+
+/*Editable text*/
+div.lookingfor
+{
+    height: 3em;
+    width: 50em;
+    border: .3em solid black;
+    margin-bottom: 1em;
+}
+div.textbox
+{
+    max-width: 96em;
+    min-width: 50em; 
+    height: 50em;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto; 
+    border: .3em solid black;
+}
