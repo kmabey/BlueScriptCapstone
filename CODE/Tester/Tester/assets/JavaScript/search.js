@@ -25,17 +25,15 @@ function doHighlight(bodyText, searchTerm) {
   
 
 
-function highlightSearchWord(searchText)
-{
+function highlightSearchWord(searchText) {
+
   if (!document.body || typeof(document.body.innerHTML) == "undefined") {
       alert("Sorry, for some reason the text of this page is unavailable. Searching will not work.");
     return false;
   }
   
   var bodyText = document.body.innerHTML;
-  for (var i = 0; i < searchArray.length; i++) {
-    bodyText = doHighlight(bodyText, searchArray[i]);
-  }
+    bodyText = doHighlight(bodyText, searchText);
   
   document.body.innerHTML = bodyText;
   return true;
@@ -43,11 +41,7 @@ function highlightSearchWord(searchText)
 
 
 function searchPrompt(defaultText)
-{
-    
-    var highlightStartTag = "";
-    var highlightEndTag = "";
-    
+{   
     var promptText = "Please enter the word you would like to search for:";
   
     var searchText = prompt(promptText, defaultText);
@@ -57,5 +51,5 @@ function searchPrompt(defaultText)
     return false;
   }
   
-  return highlightSearchWord(searchText, true, highlightStartTag, highlightEndTag);
+  return highlightSearchWord(searchText);
 }

@@ -12,7 +12,9 @@ body
 /*Editable text*/
 div.mytext
 {
-    font-size: 1.2em;
-    border: .3em solid black;
+    font-size: 2em;
+    border: .3rem solid black;
+    min-height: 20rem;
     max-width: 40rem;
+    background-color:White;
 }
