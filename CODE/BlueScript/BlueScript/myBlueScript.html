@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="/assets/Styles/style.css" />
 
 </head>
-<body>
+<body onload="init();">
 	
 	<!--Header-->
 	<div class="row-fluid">
@@ -18,11 +18,15 @@
 	<!--Side Nav & drag and drop area-->
 	<div class="row-fluid">
 		<div class="span4"></div>
-		<div class="span8"></div>
+		<div class="span8">
+			<canvas id="workarea">This is where the canvas is</canvas>
+		</div>
 	</div>
 
 	<!--Only script tags after this line of code. -->
 	<script src="http://code.jquery.com/jquery.js"></script>
+	<script src="http://code.createjs.com/createjs-2013.05.14.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/JavaScript/myjs.js" ></script>
 </body>
 </html>

@@ -6,3 +6,15 @@ body
 {
     
 }
+
+
+
+#workarea
+{
+    height: 50%;
+    width: 100%;
+}
+.span8
+{
+    background:yellow;
+}
