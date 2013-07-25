@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="../../assets/Styles/reset.css" />
+	<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../assets/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="../../assets/Styles/style.css" />
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div class="row-fluid">
+				<div class="span5"></div>
+				<div class="span6 offset1">
+					<nav>
+						<ul id="menu">
+							<li>@Html.ActionLink("Home", "Index", "Home")</li>
+							<li>@Html.ActionLink("My Blue Script", "MyBlueScript", "Home")</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+            
+        </header>
+        <section id="main">
+            @RenderBody()
+        </section>
+        <footer>
+        </footer>
+    </div>
+
+	<!--Only script tags after this line of code. -->
+	<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../assets/JavaScript/myjs.js" ></script>
+</body>
+</html>
