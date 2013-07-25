@@ -4,7 +4,7 @@
 }
 body 
 {
-    
+    background: #73b1e7;
 }
 dt 
 {
@@ -31,18 +31,27 @@ dd
     background: -ms-linear-gradient(top,  rgba(0,51,102,1) 0%,rgba(0,51,153,1) 100%); /* IE10+ */
     background: linear-gradient(to bottom,  rgba(0,51,102,1) 0%,rgba(0,51,153,1) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003366', endColorstr='#003399',GradientType=0 ); /* IE6-8 */
-
+    height:8.6rem;
+	border-bottom: .3rem soild white;
 }
 .nav.nav-pills a
 {
     text-align: right;
 	color: White;
+    font-size: 1.5rem;
 	
 }
-.nav.nav-pills a:hover
+.nav.nav-pills a:hover a:active
 {
 	color: black;
+    font-weight:bolder;
 	
+	
+}
+.sidebar
+{
+	background: #003399;
+    min-height: 50rem;
 }
 dl.locations 
 {
