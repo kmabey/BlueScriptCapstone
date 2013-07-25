@@ -33,7 +33,8 @@ dl.characters
     margin: 1em;
     background: #3366cc;	
 }
-.event {
+.event 
+{
     float: left;
     margin: 1em;
     background: #003366;
@@ -41,9 +42,20 @@ dl.characters
     text-align:left;
     cursor: move;
     max-width: 40rem;
+    border: none;
 }
-.eventname {
+.event.over
+{
+  border: 2px dashed #000;
+}
+.eventname 
+{
     padding: .5em;
 	color:#ffffff;
     font-size: 2em;
+}
+.bin 
+{
+	float: right;
+	width: 100%;
 }
