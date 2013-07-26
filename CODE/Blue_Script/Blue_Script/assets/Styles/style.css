@@ -41,7 +41,7 @@ dd
     font-size: 1.5rem;
 	
 }
-.nav.nav-pills a:hover a:active
+.dropdown a:hover a:active
 {
 	color: black;
     font-weight:bolder;
@@ -52,6 +52,11 @@ dd
 {
 	background: #003399;
     min-height: 50rem;
+}
+.dropdown-menu 
+{
+	margin-left:200px;
+    margin-top:-38px;
 }
 dl.locations 
 {
