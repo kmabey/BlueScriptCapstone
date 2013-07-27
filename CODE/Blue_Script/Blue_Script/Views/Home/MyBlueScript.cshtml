@@ -11,7 +11,7 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Add New</a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Event</a></li>
+							<li><a href="#eventModal" role="button" data-toggle="modal">Event</a></li>
 							<li><a href="#">Character</a></li>
 							<li><a href="#">Location</a></li>
 						</ul>
@@ -23,7 +23,7 @@
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@for(var i = 0; i<10; i++)
+			@for(var i = 0; i<6; i++)
 				{
 					<div class="event" draggable="true">
 						<p class="eventname">Event Name</p>
@@ -53,8 +53,31 @@
 							<dt>Characters</dt>
 							<dd>Character Name</dd>
 						</dl>
-						<a class="btn btn-small pull-right" href="#"><i class="icon-trash"></i></a>
+						<div class="btn-group pull-right">
+							<a class="btn btn-mini btn-success" href="#">
+								<i class="icon-save"></i></a>
+							<a class="btn btn-mini btn-danger" href="#">
+								<i class="icon-trash"></i></a>
+						</div>
 					</div>
 			</div>
 		</div>
 	</div>
+
+
+
+
+<!-- Add Event Modal -->
+<div id="eventModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>New Event</h3>
+  </div>
+  <div class="modal-body">
+    <p>this is where you edit information for your new event.</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>

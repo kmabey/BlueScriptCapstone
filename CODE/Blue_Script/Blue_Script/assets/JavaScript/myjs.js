@@ -2,6 +2,12 @@
 {
     element('bin').addEventListener('dragover', handleDragOver, false);
     element('bin').addEventListener('drop', handleDrop, false);
+
+    $(".btn.btn-mini.btn-danger").live('click', function () 
+    {
+        $(this).parent().parent().remove();
+    });
+
 });
 
 var dragSrcEl = null;
