@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () 
 {
-
+    element('bin').addEventListener('dragover', handleDragOver, false);
+    element('bin').addEventListener('drop', handleDrop, false);
 });
 
 var dragSrcEl = null;
@@ -13,28 +14,31 @@ function handleDragStart(e)
     e.dataTransfer.setData('text/html', this.innerHTML);
 }
 
+//Called whenever you are on top of an object with this event.
 function handleDragOver(e) 
 {
-    if (e.preventDefault) 
-    {
-        e.preventDefault(); 
-    }
 
-    e.dataTransfer.dropEffect = 'move';  
+    //WARNING: You must have this if statement or the drop event will not be called.
+    if (e.preventDefault) e.preventDefault();
+
+    //e.dataTransfer.dropEffect = 'move';  
 
     return false;
 }
 
+//Called when object enters the bounds of another object.
 function handleDragEnter(e) 
 {
     this.classList.add('over');
 }
 
+//Called when you leave a object that has this event.
 function handleDragLeave(e) 
 {
     this.classList.remove('over');
 }
 
+//Called when you drop on top of an object with this event.
 function handleDrop(e) 
 {
     if (e.stopPropagation) 
@@ -51,24 +55,23 @@ function handleDrop(e)
     return false;
 }
 
+//Called when you stop dragging(release) an object.
 function handleDragEnd(e) 
 {
-    [ ].forEach.call(events, function (ev) 
+    [ ].forEach.call(objects, function (object) 
     {
-        ev.classList.remove('over');
+        object.classList.remove('over');
     });
 }
 
-var events = document.querySelectorAll('[draggable=true]');
-[ ].forEach.call(events, function (ev) 
+var objects = document.querySelectorAll('[draggable=true]');
+[ ].forEach.call(objects, function (object) 
 {
-    ev.addEventListener('dragstart', handleDragStart, false);
-    ev.addEventListener('dragenter', handleDragEnter, false);
-    ev.addEventListener('dragover', handleDragOver, false);
-    ev.addEventListener('dragleave', handleDragLeave, false);
-    ev.addEventListener('drop', handleDrop, false);
-    ev.addEventListener('dragend', handleDragEnd, false);
+    object.addEventListener('dragstart', handleDragStart, false);
+    object.addEventListener('dragenter', handleDragEnter, false);
+    object.addEventListener('dragover', handleDragOver, false);
+    object.addEventListener('dragleave', handleDragLeave, false);
+    object.addEventListener('drop', handleDrop, false);
+    object.addEventListener('dragend', handleDragEnd, false);
 });
 
-var bin = document.getElementById('bin');
-bin.addEventListener('drop', handleDrop, false);
