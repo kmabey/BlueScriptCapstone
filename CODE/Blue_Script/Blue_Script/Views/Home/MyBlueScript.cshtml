@@ -23,7 +23,7 @@
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@for(var i = 0; i<3; i++)
+			@for(var i = 0; i<10; i++)
 				{
 					<div class="event" draggable="true">
 						<p class="eventname">Event Name</p>
@@ -35,6 +35,12 @@
 							<dt>Characters</dt>
 							<dd>Character Name</dd>
 						</dl>
+						<div class="btn-group pull-right">
+							<a class="btn btn-mini btn-success" href="#">
+								<i class="icon-save"></i></a>
+							<a class="btn btn-mini btn-danger" href="#">
+								<i class="icon-trash"></i></a>
+						</div>
 					</div>
 				}
 				<div class="event" draggable="true">
@@ -47,14 +53,8 @@
 							<dt>Characters</dt>
 							<dd>Character Name</dd>
 						</dl>
+						<a class="btn btn-small pull-right" href="#"><i class="icon-trash"></i></a>
 					</div>
-			</div>
-		</div>
-		<div class="row-fluid">
-			<div class="span2 offset10">
-				<div id="bin">
-					<i class="icon-remove-sign icon-4x"></i>
-				</div>
 			</div>
 		</div>
 	</div>

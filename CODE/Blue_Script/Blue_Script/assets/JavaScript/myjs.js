@@ -21,7 +21,7 @@ function handleDragOver(e)
     //WARNING: You must have this if statement or the drop event will not be called.
     if (e.preventDefault) e.preventDefault();
 
-    //e.dataTransfer.dropEffect = 'move';  
+    e.dataTransfer.dropEffect = 'move';  
 
     return false;
 }
@@ -39,18 +39,18 @@ function handleDragLeave(e)
 }
 
 //Called when you drop on top of an object with this event.
+var counter = 1;
 function handleDrop(e) 
 {
-    if (e.stopPropagation) 
-    {
-        e.stopPropagation();
-    }
+    if (e.stopPropagation) e.stopPropagation();
 
     if (dragSrcEl != this) 
     {
         dragSrcEl.innerHTML = this.innerHTML;
         this.innerHTML = e.dataTransfer.getData('text/html');
     }
+
+    text('count: ' + counter++);
 
     return false;
 }
