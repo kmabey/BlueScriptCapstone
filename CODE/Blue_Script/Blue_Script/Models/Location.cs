@@ -10,7 +10,7 @@ namespace Blue_Script.Models
         public int LocationID { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
-        public virtual ICollection<Event> Events { get; set; }
+        public List<Event> Events { get; set; }
 
         public Location()
         {

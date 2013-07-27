@@ -9,7 +9,7 @@ namespace Blue_Script.Controllers
 {
     public class HomeController : Controller
     {
-        private ScriptContext repo = new ScriptContext();
+        private ScriptContext context = new ScriptContext();
         public ActionResult Index()
         {
             return View();
@@ -17,7 +17,7 @@ namespace Blue_Script.Controllers
 
         public ActionResult MyBlueScript()
         {
-            return View(repo.Events);
+            return View(context.Events);
         }
     }
 }

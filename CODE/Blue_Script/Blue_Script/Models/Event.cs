@@ -10,8 +10,8 @@ namespace Blue_Script.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
-        public virtual ICollection<Character> Characters { get; set; }
-        public virtual ICollection<Location> Locations { get; set; }
+        public List<Character> Characters { get; set; }
+        public List<Location> Locations { get; set; }
 
         public Event()
         {
