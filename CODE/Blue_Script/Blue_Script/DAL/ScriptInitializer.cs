@@ -31,9 +31,27 @@ namespace Blue_Script.DAL
 
             var events = new List<Event>
             {
-                new Event { Name = "Killer Strikes", Notes = "Chapter One of novel" }
+                new Event { Name = "Killer Strikes", Notes = "Chapter One of novel" },
+                new Event { Name = "Friend Found", Notes = "Chapter Two of novel" },
+                new Event { Name = "Find out who killer is", Notes = "Chapter Three of novel" },
+                new Event { Name = "Killer incounter", Notes = "Chapter Four of novel" }
             };
             events.ForEach(s => context.Events.Add(s));
+            context.SaveChanges();
+
+            events[0].Characters.Add(characters[2]);
+            events[0].Characters.Add(characters[3]);
+            events[1].Characters.Add(characters[0]);
+            events[1].Characters.Add(characters[1]);
+            events[2].Characters.Add(characters[0]);
+            events[2].Characters.Add(characters[1]);
+            events[3].Characters.Add(characters[0]);
+            events[3].Characters.Add(characters[3]);
+           
+            events[0].Locations.Add(locations[1]);
+            events[1].Locations.Add(locations[0]);
+            events[2].Locations.Add(locations[1]);
+            events[3].Locations.Add(locations[0]);
             context.SaveChanges();
         }
     }

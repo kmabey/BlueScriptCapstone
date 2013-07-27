@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Blue_Script.Models.Event>
+@{
     ViewBag.Title = "My BlueScript";
 }
 
@@ -23,17 +24,23 @@
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@for(var i = 0; i<6; i++)
+			@foreach(var item in Model)
 				{
 					<div class="event" draggable="true">
-						<p class="eventname">Event Name</p>
+						<p class="eventname">@item.Name</p>
 						<dl class="locations">
 							<dt>Locations</dt>
-							<dd>Location Name</dd>
+							@foreach(var location in item.Locations)
+							{
+								<dd>@location.Name</dd>
+							}
 						</dl>
 						<dl class="characters">
 							<dt>Characters</dt>
-							<dd>Character Name</dd>
+							@foreach(var character in item.Characters)
+							{
+								<dd>@character.FullName</dd>
+							}
 						</dl>
 						<div class="btn-group pull-right">
 							<a class="btn btn-mini btn-success" href="#">
@@ -43,23 +50,6 @@
 						</div>
 					</div>
 				}
-				<div class="event" draggable="true">
-						<p class="eventname">Move Me!</p>
-						<dl class="locations">
-							<dt>Locations</dt>
-							<dd>Location Name</dd>
-						</dl>
-						<dl class="characters">
-							<dt>Characters</dt>
-							<dd>Character Name</dd>
-						</dl>
-						<div class="btn-group pull-right">
-							<a class="btn btn-mini btn-success" href="#">
-								<i class="icon-save"></i></a>
-							<a class="btn btn-mini btn-danger" href="#">
-								<i class="icon-trash"></i></a>
-						</div>
-					</div>
 			</div>
 		</div>
 	</div>

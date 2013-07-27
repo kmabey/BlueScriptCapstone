@@ -12,5 +12,11 @@ namespace Blue_Script.Models
         public string Notes { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<Location> Locations { get; set; }
+
+        public Event()
+        {
+            this.Characters = new List<Character>();
+            this.Locations = new List<Location>();
+        }
     }
 }
