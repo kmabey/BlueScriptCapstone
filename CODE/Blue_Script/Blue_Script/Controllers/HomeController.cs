@@ -9,6 +9,13 @@ namespace Blue_Script.Controllers
 {
     public class HomeController : Controller
     {
+        BlueScriptEntities db;
+
+        public HomeController()
+        {
+            db = new BlueScriptEntities();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -16,6 +23,7 @@ namespace Blue_Script.Controllers
 
         public ActionResult MyBlueScript()
         {
+            ViewData.Model = db.Events.ToList();
             return View();
         }
     }
