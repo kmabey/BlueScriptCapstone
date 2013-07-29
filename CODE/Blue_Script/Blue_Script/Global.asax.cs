@@ -38,7 +38,6 @@ namespace Blue_Script
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-            Database.SetInitializer<ScriptContext>(new ScriptInitializer());
         }
     }
 }

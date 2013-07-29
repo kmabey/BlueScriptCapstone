@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BlueScriptModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BlueScriptModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="BlueScriptModel.Store.__MigrationHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Character" EntityType="BlueScriptModel.Store.Character" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Event" EntityType="BlueScriptModel.Store.Event" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventCharacter" EntityType="BlueScriptModel.Store.EventCharacter" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Location" EntityType="BlueScriptModel.Store.Location" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LocationEvent" EntityType="BlueScriptModel.Store.LocationEvent" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_dbo_EventCharacter_dbo_Character_Character_CharacterID" Association="BlueScriptModel.Store.FK_dbo_EventCharacter_dbo_Character_Character_CharacterID">
+            <End Role="Character" EntitySet="Character" />
+            <End Role="EventCharacter" EntitySet="EventCharacter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_EventCharacter_dbo_Event_Event_ID" Association="BlueScriptModel.Store.FK_dbo_EventCharacter_dbo_Event_Event_ID">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventCharacter" EntitySet="EventCharacter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LocationEvent_dbo_Event_Event_ID" Association="BlueScriptModel.Store.FK_dbo_LocationEvent_dbo_Event_Event_ID">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="LocationEvent" EntitySet="LocationEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_LocationEvent_dbo_Location_Location_LocationID" Association="BlueScriptModel.Store.FK_dbo_LocationEvent_dbo_Location_Location_LocationID">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LocationEvent" EntitySet="LocationEvent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="CharacterID" />
+          </Key>
+          <Property Name="CharacterID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EventCharacter">
+          <Key>
+            <PropertyRef Name="Event_ID" />
+            <PropertyRef Name="Character_CharacterID" />
+          </Key>
+          <Property Name="Event_ID" Type="int" Nullable="false" />
+          <Property Name="Character_CharacterID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LocationEvent">
+          <Key>
+            <PropertyRef Name="Location_LocationID" />
+            <PropertyRef Name="Event_ID" />
+          </Key>
+          <Property Name="Location_LocationID" Type="int" Nullable="false" />
+          <Property Name="Event_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_EventCharacter_dbo_Character_Character_CharacterID">
+          <End Role="Character" Type="BlueScriptModel.Store.Character" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventCharacter" Type="BlueScriptModel.Store.EventCharacter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Character">
+              <PropertyRef Name="CharacterID" />
+            </Principal>
+            <Dependent Role="EventCharacter">
+              <PropertyRef Name="Character_CharacterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_EventCharacter_dbo_Event_Event_ID">
+          <End Role="Event" Type="BlueScriptModel.Store.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventCharacter" Type="BlueScriptModel.Store.EventCharacter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EventCharacter">
+              <PropertyRef Name="Event_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LocationEvent_dbo_Event_Event_ID">
+          <End Role="Event" Type="BlueScriptModel.Store.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LocationEvent" Type="BlueScriptModel.Store.LocationEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationEvent">
+              <PropertyRef Name="Event_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_LocationEvent_dbo_Location_Location_LocationID">
+          <End Role="Location" Type="BlueScriptModel.Store.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LocationEvent" Type="BlueScriptModel.Store.LocationEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="LocationEvent">
+              <PropertyRef Name="Location_LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlueScriptModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="BlueScriptEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="BlueScriptModel.C__MigrationHistory" />
+          <EntitySet Name="Characters" EntityType="BlueScriptModel.Character" />
+          <EntitySet Name="Events" EntityType="BlueScriptModel.Event" />
+          <EntitySet Name="Locations" EntityType="BlueScriptModel.Location" />
+          <AssociationSet Name="EventCharacter" Association="BlueScriptModel.EventCharacter">
+            <End Role="Character" EntitySet="Characters" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="LocationEvent" Association="BlueScriptModel.LocationEvent">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="CharacterID" />
+          </Key>
+          <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="BlueScriptModel.EventCharacter" FromRole="Character" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Characters" Relationship="BlueScriptModel.EventCharacter" FromRole="Event" ToRole="Character" />
+          <NavigationProperty Name="Locations" Relationship="BlueScriptModel.LocationEvent" FromRole="Event" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationID" />
+          </Key>
+          <Property Name="LocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Events" Relationship="BlueScriptModel.LocationEvent" FromRole="Location" ToRole="Event" />
+        </EntityType>
+        <Association Name="EventCharacter">
+          <End Role="Character" Type="BlueScriptModel.Character" Multiplicity="*" />
+          <End Role="Event" Type="BlueScriptModel.Event" Multiplicity="*" />
+        </Association>
+        <Association Name="LocationEvent">
+          <End Role="Event" Type="BlueScriptModel.Event" Multiplicity="*" />
+          <End Role="Location" Type="BlueScriptModel.Location" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlueScriptModelStoreContainer" CdmEntityContainer="BlueScriptEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="BlueScriptModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characters">
+            <EntityTypeMapping TypeName="BlueScriptModel.Character">
+              <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="BlueScriptModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="BlueScriptModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="EventCharacter" TypeName="BlueScriptModel.EventCharacter" StoreEntitySet="EventCharacter">
+            <EndProperty Name="Character">
+              <ScalarProperty Name="CharacterID" ColumnName="Character_CharacterID" />
+            </EndProperty>
+            <EndProperty Name="Event">
+              <ScalarProperty Name="ID" ColumnName="Event_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LocationEvent" TypeName="BlueScriptModel.LocationEvent" StoreEntitySet="LocationEvent">
+            <EndProperty Name="Event">
+              <ScalarProperty Name="ID" ColumnName="Event_ID" />
+            </EndProperty>
+            <EndProperty Name="Location">
+              <ScalarProperty Name="LocationID" ColumnName="Location_LocationID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="BlueScriptModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Character" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Event" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Location" Width="1.5" PointX="5.25" PointY="1" Height="1.7879850260416657" IsExpanded="true" />
+        <AssociationConnector Association="BlueScriptModel.EventCharacter" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.8939925130208337" />
+          <ConnectorPoint PointX="3" PointY="1.8939925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="BlueScriptModel.LocationEvent" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="1.8939925130208328" />
+          <ConnectorPoint PointX="5.25" PointY="1.8939925130208328" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
