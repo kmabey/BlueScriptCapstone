@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Data.Entity;
 using Blue_Script.Models;
-using Blue_Script.DAL;
 
 namespace Blue_Script
 {
