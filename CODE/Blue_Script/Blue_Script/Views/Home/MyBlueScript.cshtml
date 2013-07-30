@@ -2,7 +2,21 @@
 @{
     ViewBag.Title = "My BlueScript";
 }
-
+<!-- 
+TODO: 
+	Make adding charaters and locations right at your fingertips(inside the event)
+	Be able to view, and edit via Modal
+	Be able to delete
+	Add buttons where they are needed
+	Fix CSS Colors
+	Fix Navigation
+	Add Dummy data to database
+	Add login screen via Modal
+	Add logo to site.
+	Implement Home page(Design)
+	Make events partial views that work like edit views(CRUD)
+	Get Dummy data to show up on the view
+-->
 <!--Side Nav & drag and drop area-->
 
 	<div class="row-fluid">
@@ -24,23 +38,22 @@
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@for (var i = 0; i< 7; i++)
+			@foreach (var e in Model)
 				{
 					<div class="event" draggable="true">
-						<p>Event Number @i</p>
+						<p>@e.Name</p>
 						<dl>
-							<dt>Locations</dt>
-								<dd>Downtown</dd>
-								<dd>Bob's Apartment</dd>
+							<dt>Location(s)</dt>
+								<dd contenteditable="true">Bob's Apartment</dd>
 						</dl>
 						<dl>
-							<dt>Characters</dt>
-								<dd>Bob</dd>
-								<dd>Rick</dd>
+							<dt>Character(s)</dt>
+								<dd contenteditable="true">Bob</dd>
+								<dd contenteditable="true">Rick</dd>
 						</dl>
 						<dl>
 							<dt>Notes</dt>
-								<dd>Lorem ipsum...</dd>
+								<dd contenteditable="true">Lorem ipsum...</dd>
 						</dl>
 						<div class="btn-group pull-right">
 							<a class="btn btn-mini btn-success" href="#">
@@ -50,6 +63,9 @@
 						</div>
 					</div>
 				}
+				<div class="event">
+					<a href="#eventModal" role="button" data-toggle="modal"><i class="icon-plus-sign-alt icon-4x"></i></a>
+				</div>
 			</div>
 		</div>
 	</div>
