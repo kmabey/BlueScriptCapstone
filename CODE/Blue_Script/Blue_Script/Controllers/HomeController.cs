@@ -22,8 +22,22 @@ namespace Blue_Script.Controllers
 
         public ActionResult MyBlueScript()
         {
-            ViewBag.Events = db.Events;
-            return View();
+            return View(db.Events);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Event eve)
+        {
+            try
+            {
+                db.Entry(eve).State = System.Data.EntityState.Deleted;
+                db.SaveChanges();
+                return RedirectToAction("MyBlueScript");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

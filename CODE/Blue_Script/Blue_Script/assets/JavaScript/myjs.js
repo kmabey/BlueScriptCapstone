@@ -49,8 +49,6 @@ function handleDrop(e)
         this.innerHTML = e.dataTransfer.getData('text/html');
     }
 
-    text('count: ' + counter++);
-
     return false;
 }
 

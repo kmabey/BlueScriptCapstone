@@ -64,7 +64,6 @@ body
     background: #003366;
     border-radius: 1.5em;
     text-align:left;
-    cursor: move;
     max-width: 40rem;
     border: none;
 }
