@@ -1,4 +1,4 @@
-﻿@model Blue_Script.Event
+﻿@model IEnumerable<Blue_Script.Event>
 @{
     ViewBag.Title = "My BlueScript";
 }
@@ -24,17 +24,23 @@
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@for(var i=0;i<7;i++)
+			@for (var i = 0; i< 7; i++)
 				{
 					<div class="event" draggable="true">
-						<p class="eventname">Event Name</p>
-						<dl class="locations">
+						<p>Event Number @i</p>
+						<dl>
 							<dt>Locations</dt>
-								<dd>I'm a location</dd>
+								<dd>Downtown</dd>
+								<dd>Bob's Apartment</dd>
 						</dl>
-						<dl class="characters">
+						<dl>
 							<dt>Characters</dt>
-								<dd>Bobby</dd>
+								<dd>Bob</dd>
+								<dd>Rick</dd>
+						</dl>
+						<dl>
+							<dt>Notes</dt>
+								<dd>Lorem ipsum...</dd>
 						</dl>
 						<div class="btn-group pull-right">
 							<a class="btn btn-mini btn-success" href="#">

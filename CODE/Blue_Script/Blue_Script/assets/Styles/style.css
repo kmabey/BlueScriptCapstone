@@ -5,14 +5,7 @@
 body 
 {
     background: #73b1e7;
-}
-dt 
-{
-	color:#ffffff;
-}
-dd 
-{
-	color:#ffffff;
+    color:#ffffff;
 }
 #workarea
 {
@@ -59,12 +52,7 @@ dd
 	margin-left:200px;
     margin-top:-38px;
 }
-dl.locations 
-{
-    margin: 1em;
-	background: #0066cc;
-}
-dl.characters 
+.event dl
 {
     margin: 1em;
     background: #3366cc;	
@@ -74,7 +62,7 @@ dl.characters
     float: left;
     margin: 1em;
     background: #003366;
-    border: .3em solid black;
+    border-radius: 1.5em;
     text-align:left;
     cursor: move;
     max-width: 40rem;
@@ -84,9 +72,8 @@ dl.characters
 {
   border: 2px dashed #000;
 }
-.eventname 
+.event p
 {
     padding: .5em;
-	color:#ffffff;
     font-size: 2em;
 }
