@@ -12,17 +12,17 @@ namespace Blue_Script
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class Setting
     {
-        public Location()
+        public Setting()
         {
-            this.Events = new HashSet<Event>();
+            this.Events = new HashSet<Scene>();
         }
     
         public int LocationID { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
     
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Scene> Events { get; set; }
     }
 }

@@ -22,11 +22,11 @@ namespace Blue_Script.Controllers
 
         public ActionResult MyBlueScript()
         {
-            return View(db.Events);
+            return View(db.Scenes);
         }
 
         [HttpPost]
-        public ActionResult Delete(Event eve)
+        public ActionResult Delete(Scene eve)
         {
             try
             {

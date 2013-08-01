@@ -16,13 +16,13 @@ namespace Blue_Script
     {
         public Character()
         {
-            this.Events = new HashSet<Event>();
+            this.Events = new HashSet<Scene>();
         }
     
         public int CharacterID { get; set; }
         public string FullName { get; set; }
         public string Notes { get; set; }
     
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Scene> Events { get; set; }
     }
 }

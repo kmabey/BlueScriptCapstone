@@ -12,12 +12,12 @@ namespace Blue_Script
     using System;
     using System.Collections.Generic;
     
-    public partial class Event
+    public partial class Scene
     {
-        public Event()
+        public Scene()
         {
             this.Characters = new HashSet<Character>();
-            this.Locations = new HashSet<Location>();
+            this.Setting = new HashSet<Setting>();
         }
     
         public int ID { get; set; }
@@ -25,6 +25,6 @@ namespace Blue_Script
         public string Notes { get; set; }
     
         public virtual ICollection<Character> Characters { get; set; }
-        public virtual ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Setting> Setting { get; set; }
     }
 }

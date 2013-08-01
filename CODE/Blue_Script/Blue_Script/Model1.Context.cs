@@ -25,9 +25,8 @@ namespace Blue_Script
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public DbSet<Character> Characters { get; set; }
-        public DbSet<Event> Events { get; set; }
-        public DbSet<Location> Locations { get; set; }
+        public DbSet<Scene> Scenes { get; set; }
+        public DbSet<Setting> Settings { get; set; }
     }
 }

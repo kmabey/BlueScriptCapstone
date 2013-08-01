@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blue_Script.Event>
+﻿@model IEnumerable<Blue_Script.Scene>
 @{
     ViewBag.Title = "My BlueScript";
 }
@@ -26,7 +26,7 @@ TODO:
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">Add New</a>
 						<ul class="dropdown-menu">
-							<li><a href="#eventModal" role="button" data-toggle="modal">Event</a></li>
+							<li><a href="#eventModal" role="button" data-toggle="modal">Scene</a></li>
 							<li><a href="#">Character</a></li>
 							<li><a href="#">Location</a></li>
 						</ul>
@@ -38,27 +38,27 @@ TODO:
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@foreach (var e in Model)
+			@foreach (var s in Model)
 				{
 					<div class="event" draggable="true">
-						<p>@e.Name</p>
+						<p>@s.Name</p>
 						<dl>
 							<dt>Location(s)</dt>
-							@foreach(var l in e.Locations)
+							@foreach(var l in s.Locations)
 							{
 								<dd contenteditable="true">@l.Name</dd>
 							}
 						</dl>
 						<dl>
 							<dt>Character(s)</dt>
-							@foreach(var c in e.Characters)
+							@foreach(var c in s.Characters)
 							{
 								<dd contenteditable="true">@c.FullName</dd>
 							}
 						</dl>
 						<dl>
 							<dt>Notes</dt>
-								<dd contenteditable="true">@e.Notes</dd>
+								<dd contenteditable="true">@s.Notes</dd>
 						</dl>
 						<div class="btn-group pull-right">
 							<a class="btn btn-mini btn-success" href="#">
@@ -78,17 +78,17 @@ TODO:
 
 
 
-<!-- Add Event Modal -->
+<!-- Add Scene Modal -->
 <div id="eventModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>New Event</h3>
+    <h3>New Scene</h3>
   </div>
   <div class="modal-body">
     <p>this is where you edit information for your new event.</p>
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <button class="btn btn-primary">Add Event</button>
+    <button class="btn btn-primary">Add Scene</button>
   </div>
 </div>
