@@ -40,25 +40,26 @@ TODO:
 			<div class="workarea">
 			@for(var i = 0; i<Model.Count(); i++)
 				{
-					using (Html.BeginForm())
+					<div class="event" draggable="true">
+					@using (Html.BeginForm())
 					{
 						<fieldset>
 						<legend>Scene</legend>
 						<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Name)</div>
-						
-						@for(var l = 0; l<Model.ElementAt(i).Setting.Count(); l++)
+						@foreach(var l in Model.ElementAt(i).Setting)
 						{
-							<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Setting.ElementAt(l))</div>
+							<div class="editor-field">@l.Name</div>
 						}
 						@foreach (var c in Model.ElementAt(i).Characters)
 						{
-							<div class="editor-field">@Html.Editor(c.FullName)</div>
+							<div class="editor-field">@c.FullName</div>
 						}
 						@Html.TextBox(Model.ElementAt(i).Notes)
 						<input type="submit" value="Save" />
 						</fieldset>
 
 					}
+					</div>
 					
 				}
 				<div class="event">

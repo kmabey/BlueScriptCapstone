@@ -12,6 +12,10 @@ body
     height: 50%;
     width: 100%;
 }
+legend 
+{
+	color: White;
+}
 .headerholder
 {
     background: rgb(0,51,102); /* Old browsers */
@@ -38,9 +42,7 @@ body
 {
 	color: black;
     font-weight:bolder;
-    background: 
-	
-	
+    background: blue;
 }
 .sidebar
 {
