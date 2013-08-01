@@ -38,35 +38,28 @@ TODO:
 		</div>
 		<div class="span10">
 			<div class="workarea">
-			@foreach (var s in Model)
+			@for(var i = 0; i<Model.Count(); i++)
 				{
-					<div class="event" draggable="true">
-						<p>@s.Name</p>
-						<dl>
-							<dt>Location(s)</dt>
-							@foreach(var l in s.Locations)
-							{
-								<dd contenteditable="true">@l.Name</dd>
-							}
-						</dl>
-						<dl>
-							<dt>Character(s)</dt>
-							@foreach(var c in s.Characters)
-							{
-								<dd contenteditable="true">@c.FullName</dd>
-							}
-						</dl>
-						<dl>
-							<dt>Notes</dt>
-								<dd contenteditable="true">@s.Notes</dd>
-						</dl>
-						<div class="btn-group pull-right">
-							<a class="btn btn-mini btn-success" href="#">
-								<i class="icon-save"></i></a>
-							<a class="btn btn-mini btn-danger" href="#">
-								<i class="icon-trash"></i></a>
-						</div>
-					</div>
+					using (Html.BeginForm())
+					{
+						<fieldset>
+						<legend>Scene</legend>
+						<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Name)</div>
+						
+						@for(var l = 0; l<Model.ElementAt(i).Setting.Count(); l++)
+						{
+							<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Setting.ElementAt(l))</div>
+						}
+						@foreach (var c in Model.ElementAt(i).Characters)
+						{
+							<div class="editor-field">@Html.Editor(c.FullName)</div>
+						}
+						@Html.TextBox(Model.ElementAt(i).Notes)
+						<input type="submit" value="Save" />
+						</fieldset>
+
+					}
+					
 				}
 				<div class="event">
 					<a href="#eventModal" role="button" data-toggle="modal"><i class="icon-plus-sign-alt icon-4x"></i></a>
