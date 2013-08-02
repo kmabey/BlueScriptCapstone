@@ -50,6 +50,7 @@ TODO:
 						@foreach(var l in Model.ElementAt(i).Setting)
 						{
 							<div class="editor-field">@Html.EditorFor(model => l.Name)</div>
+							@Html.ActionLink(l.Name, "SettingPartial", new {id = l.LocationID}, new {@class = "editDialog"})
 						}
 						@foreach (var c in Model.ElementAt(i).Characters)
 						{
@@ -70,20 +71,20 @@ TODO:
 		</div>
 	</div>
 
-
-
+<div id="dialog-edit" style="display: none">
+    </div>
 
 <!-- Add Scene Modal -->
-<div id="eventModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="eventModal" class="modal hide fade" tabindex="-1" role="dialog" >
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>New Scene</h3>
   </div>
   <div class="modal-body">
     <p>this is where you edit information for your new event.</p>
   </div>
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn" data-dismiss="modal">Close</button>
     <button class="btn btn-primary">Add Scene</button>
   </div>
 </div>

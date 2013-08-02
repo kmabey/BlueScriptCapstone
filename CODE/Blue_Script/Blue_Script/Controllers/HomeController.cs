@@ -41,6 +41,28 @@ namespace Blue_Script.Controllers
             }
         }
 
+        public ActionResult SettingPartial(int? sID)
+        {
+            Setting setting = db.Settings.FirstOrDefault(s => s.LocationID == sID);
+            return PartialView("SettingPartial", setting);
+        }
+
+        [HttpPost]
+        public ActionResult SettingPartial(Setting setting)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(setting).State = System.Data.EntityState.Modified;
+                db.SaveChanges();
+                TempData["message"] = setting.Name + " has been saved";
+                return RedirectToAction("MyBlueScript");
+            }
+            else
+            {
+                return View(db.Scenes);
+            }
+        }
+
         [HttpPost]
         public ActionResult Delete(Scene eve)
         {
