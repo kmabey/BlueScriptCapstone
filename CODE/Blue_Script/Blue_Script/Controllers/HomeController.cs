@@ -26,6 +26,22 @@ namespace Blue_Script.Controllers
         }
 
         [HttpPost]
+        public ActionResult MyBlueScript(Scene scene)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Entry(scene).State = System.Data.EntityState.Modified;
+                db.SaveChanges();
+                TempData["message"] = scene.Name + " has been saved";
+                return RedirectToAction("MyBlueScript");
+            }
+            else
+            {
+                return View(db.Scenes);
+            }
+        }
+
+        [HttpPost]
         public ActionResult Delete(Scene eve)
         {
             try

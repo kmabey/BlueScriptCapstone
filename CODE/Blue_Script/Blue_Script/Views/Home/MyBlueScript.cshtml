@@ -41,10 +41,11 @@ TODO:
 			@for(var i = 0; i<Model.Count(); i++)
 				{
 					<div class="event" draggable="true">
-					@using (Html.BeginForm())
+					@using (Html.BeginForm("MyBlueScript", "Home"))
 					{
 						<fieldset>
 						<legend>Scene</legend>
+						@Html.HiddenFor(model => Model.ElementAt(i).ID)
 						<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Name)</div>
 						@foreach(var l in Model.ElementAt(i).Setting)
 						{

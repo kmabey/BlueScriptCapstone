@@ -11,6 +11,7 @@ namespace Blue_Script
 {
     using System;
     using System.Collections.Generic;
+    using System.Web.Mvc;
     
     public partial class Scene
     {
@@ -19,8 +20,10 @@ namespace Blue_Script
             this.Characters = new HashSet<Character>();
             this.Setting = new HashSet<Setting>();
         }
-    
+
+        [HiddenInput(DisplayValue = false)]
         public int ID { get; set; }
+
         public string Name { get; set; }
         public string Notes { get; set; }
     
