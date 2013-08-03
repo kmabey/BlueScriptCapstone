@@ -41,14 +41,8 @@ namespace Blue_Script.Controllers
             }
         }
 
-        public ActionResult SettingPartial(int? sID)
-        {
-            Setting setting = db.Settings.FirstOrDefault(s => s.LocationID == sID);
-            return PartialView("SettingPartial", setting);
-        }
-
         [HttpPost]
-        public ActionResult SettingPartial(Setting setting)
+        public ActionResult Setting(Setting setting)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +53,7 @@ namespace Blue_Script.Controllers
             }
             else
             {
-                return View(db.Scenes);
+                return View("MyBlueScript", db.Scenes);
             }
         }
 
