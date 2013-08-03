@@ -45,62 +45,60 @@ TODO:
 						<fieldset>
 							<legend>Scene</legend>
 							@Html.HiddenFor(model => Model.ElementAt(i).ID)
-							<h5>Name</h5>
+							<h5>
+								Name</h5>
 							<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Name)</div>
-							<h5>Setting</h5>
-							@foreach (var l in Model.ElementAt(i).Setting)
-	   {
-								
-								<p>@l.Name <a href="#modal@(l.LocationID)" role="button" class="btn btn-mini float-right" data-toggle="modal">
-									<i class="icon-edit"></i></a></p>
-								
-						
-								
-								<!-- Edit Setting Modal -->
-								<div id="modal@(l.LocationID)" class="modal hide fade" tabindex="-1" role="dialog" >
-									@using (Html.BeginForm("Setting", "Home"))
-		 {
+							<h5>
+								Setting</h5>
+							<p>@Model.ElementAt(i).Setting.Name <a href="#modal@(Model.ElementAt(i).Setting.ID)" role="button" class="btn btn-mini float-right" data-toggle="modal">
+								<i class="icon-edit"></i></a>
+							</p>
+							<!-- Edit Setting Modal -->
+							<div id="modal@(Model.ElementAt(i).Setting.ID)" class="modal hide fade" tabindex="-1" role="dialog" >
+								@using (Html.BeginForm("Setting", "Home"))
+		{
 									
-										@Html.ValidationSummary(true)
-										<fieldset>
-											<legend></legend>
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">
-													×</button>
-												<h3>
-													Edit Setting</h3>
+									@Html.ValidationSummary(true)
+									<fieldset>
+										<legend></legend>
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">
+												×</button>
+											<h3>
+												Edit Setting</h3>
+										</div>
+										<div class="modal-body">
+											@Html.HiddenFor(model => Model.ElementAt(i).Setting.ID)
+											<div class="editor-label">@Html.LabelFor(model => Model.ElementAt(i).Setting.Name)</div>
+											<div class="editor-field">
+												@Html.EditorFor(model => Model.ElementAt(i).Setting.Name)
+												@Html.ValidationMessageFor(model => Model.ElementAt(i).Setting.Name)
 											</div>
-											<div class="modal-body">
-												@Html.HiddenFor(model => l.LocationID)
-												<div class="editor-label">@Html.LabelFor(model => l.Name)</div>
-												<div class="editor-field">
-													@Html.EditorFor(model => l.Name)
-													@Html.ValidationMessageFor(model => l.Name)
-												</div>
-												<div class="editor-label">@Html.LabelFor(model => l.Notes)</div>
-												<div class="editor-field">
-													@Html.EditorFor(model => l.Notes)
-													@Html.ValidationMessageFor(model => l.Notes)
-												</div>
-												<div class="modal-footer">
-													<button class="btn" data-dismiss="modal">
-														Cancel</button>
-													<input type="submit" value="Save Changes" class="btn btn-primary" />
-												</div>
+											<div class="editor-label">@Html.LabelFor(model => Model.ElementAt(i).Setting.Notes)</div>
+											<div class="editor-field">
+												@Html.EditorFor(model => Model.ElementAt(i).Setting.Notes)
+												@Html.ValidationMessageFor(model => Model.ElementAt(i).Setting.Notes)
 											</div>
-										</fieldset>
+											<div class="modal-footer">
+												<button class="btn" data-dismiss="modal">
+													Cancel</button>
+												<input type="submit" value="Save Changes" class="btn btn-primary" />
+											</div>
+										</div>
+									</fieldset>
 									
 									
-		 }
-								</div>
-								<!--End Setting Model-->
-	   }
-							<h5>Characters</h5>
+		}
+							</div>
+							<!--End Setting Model-->
+							<h5>
+								Characters</h5>
 							@foreach (var c in Model.ElementAt(i).Characters)
 	   {
 								<div class="editor-field">@Html.EditorFor(model => c.FullName)</div>
 	   }
-							<h5>Notes</h5>
+							<h5>
+								Notes</h5>
 							@Html.EditorFor(model => Model.ElementAt(i).Notes)
 							<input type="submit" value="Save" />
 						</fieldset>

@@ -177,6 +177,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Model1.edmx.sql" />
     <Content Include="README.jQuery.vsdoc.txt" />
     <Content Include="Scripts\jquery-2.0.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
@@ -259,7 +260,6 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-2.0.3.min.map" />
-    <Content Include="Views\Home\SettingPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
