@@ -12,19 +12,10 @@ namespace Blue_Script
     using System;
     using System.Collections.Generic;
     
-    public partial class Scene
+    public partial class C__MigrationHistory
     {
-        public Scene()
-        {
-            this.Characters = new HashSet<Character>();
-        }
-    
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Notes { get; set; }
-        public Nullable<int> SettingID { get; set; }
-    
-        public virtual Setting Setting { get; set; }
-        public virtual ICollection<Character> Characters { get; set; }
+        public string MigrationId { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }
