@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 08/03/2013 16:55:05
+-- Date Created: 08/03/2013 22:44:36
 -- Generated from EDMX file: C:\Users\Kylie\Documents\0_School\Homework\8th_Quarter\Capstone\BlueScriptCapstone\CODE\Blue_Script\Blue_Script\Model1.edmx
 -- --------------------------------------------------
 
@@ -17,19 +17,31 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_SceneSetting]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Scenes] DROP CONSTRAINT [FK_SceneSetting];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SceneCharacter_Scene]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SceneCharacter] DROP CONSTRAINT [FK_SceneCharacter_Scene];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SceneCharacter_Character]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[SceneCharacter] DROP CONSTRAINT [FK_SceneCharacter_Character];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Character]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Character];
+IF OBJECT_ID(N'[dbo].[Characters]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Characters];
 GO
-IF OBJECT_ID(N'[dbo].[Scene]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Scene];
+IF OBJECT_ID(N'[dbo].[Scenes]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Scenes];
 GO
-IF OBJECT_ID(N'[dbo].[Setting]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Setting];
+IF OBJECT_ID(N'[dbo].[Settings]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Settings];
+GO
+IF OBJECT_ID(N'[dbo].[SceneCharacter]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SceneCharacter];
 GO
 
 -- --------------------------------------------------
