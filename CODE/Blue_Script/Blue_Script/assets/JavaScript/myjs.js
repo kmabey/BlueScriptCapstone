@@ -112,7 +112,8 @@
         $("#dialog-edit").dialog('close');
 
     });
-}); 
+      }); 
+
 
 var dragSrcEl = null;
 function handleDragStart(e) 
