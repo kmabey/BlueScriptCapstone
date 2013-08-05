@@ -10,7 +10,6 @@ TODO:
 	Add buttons where they are needed
 	Fix CSS Colors
 	Fix Navigation
-	Add Dummy data to database
 	Add login screen via Modal
 	Add logo to site.
 	Implement Home page(Design)
@@ -51,8 +50,7 @@ TODO:
 							<h5>Setting: @Model.ElementAt(i).Setting.Name <a href="#modal@(Model.ElementAt(i).Setting.ID)" role="button" class="btn btn-mini float-right" data-toggle="modal">
 							<i class="icon-edit"></i></a></h5>
 
-							<h5>
-								Characters</h5>
+							<h5>Characters</h5>
 							@foreach (var c in Model.ElementAt(i).Characters)
 	   {
 								<p>@c.FullName <a href="#modal@(c.CharacterID)" role="button" class="btn btn-mini float-right" data-toggle="modal">
@@ -108,7 +106,7 @@ TODO:
 					
    }
 			<div class="event">
-				<a href="#eventModal" role="button" data-toggle="modal"><i class="icon-plus-sign-alt icon-4x">
+				<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x">
 				</i></a>
 			</div>
 		</div>
