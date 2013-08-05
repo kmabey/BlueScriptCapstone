@@ -47,10 +47,10 @@ TODO:
 							<h5>
 								Name</h5>
 							<div class="editor-field">@Html.EditorFor(model => Model.ElementAt(i).Name)</div>
-							<h5>Setting: Edit <a href="#modalThisWillBeTheSettingID" role="button" class="btn btn-mini float-right" data-toggle="modal">
+							<h5>Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings) <a href="#modalThisWillBeTheSettingID" role="button" class="btn btn-mini float-right" data-toggle="modal">
 							<i class="icon-edit"></i></a></h5>
 
-							<h5>Characters</h5>
+							<h5>Characters: </h5>
 							@foreach (var c in Model.ElementAt(i).Characters)
 	   {
 								<p>@c.FullName <a href="#modal@(c.CharacterID)" role="button" class="btn btn-mini float-right" data-toggle="modal">

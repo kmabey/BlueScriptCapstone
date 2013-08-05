@@ -22,6 +22,8 @@ namespace Blue_Script.Controllers
 
         public ActionResult MyBlueScript()
         {
+			var query = db.Settings.Select(c => new { c.ID, c.Name });
+			ViewBag.PossibleSettings = new SelectList(query.AsEnumerable(), "ID", "Name");
             return View(db.Scenes);
         }
 

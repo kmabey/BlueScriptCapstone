@@ -6,6 +6,8 @@
 //    Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Blue_Script
 {
@@ -18,10 +20,16 @@ namespace Blue_Script
         {
             this.Characters = new HashSet<Character>();
         }
-    
+
+		[HiddenInput(DisplayValue = false)]
         public int ID { get; set; }
+
         public string Name { get; set; }
+
+		[Required(ErrorMessage = "Please enter a description")]
+		[DataType(DataType.MultilineText)]
         public string Notes { get; set; }
+
         public Nullable<int> SettingID { get; set; }
     
         public virtual Setting Setting { get; set; }
