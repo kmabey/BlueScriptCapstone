@@ -36,7 +36,7 @@ TODO:
 				<ul class="dropdown-menu">
 					@foreach (var item in (IEnumerable<SelectListItem>)ViewBag.PossibleSettings)
 	 {
-					<li><a href="#">@item.Text</a></li>
+					<li><a href="@Url.Action("EditSetting", "Home", new { m = item })" data-toggle="modal">@item.Text</a></li>
 	 }
 					
 				</ul></li>
