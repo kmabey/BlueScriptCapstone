@@ -24,8 +24,31 @@ namespace Blue_Script.Controllers
         {
 			var query = db.Settings.Select(c => new { c.ID, c.Name });
 			ViewBag.PossibleSettings = new SelectList(query.AsEnumerable(), "ID", "Name");
-            return View(db.Scenes);
+			var query2 = db.Characters.Select(c => new { c.CharacterID, c.FullName });
+			ViewData["myCharacters"] = new SelectList(query2.AsEnumerable(), "CharacterID", "FullName");
+            
+			return View(db.Scenes);
         }
+
+		public ActionResult CreateCharacter()
+		{
+			return PartialView();
+		}
+
+		public ActionResult EditCharacter()
+		{
+			return PartialView();
+		}
+
+		public ActionResult CreateSetting()
+		{
+			return PartialView(new Setting());
+		}
+
+		public ActionResult EditSetting()
+		{
+			return PartialView();
+		}
 
 		public ActionResult CreateScene()
 		{
@@ -93,6 +116,22 @@ namespace Blue_Script.Controllers
 								   orderby s.Name
 								   select s;
 			ViewBag.PossibleSettings = new SelectList(q.AsEnumerable(), "ID", "Name", selectedSetting);
-		} 
+		}
+
+		private void PopulateAssignedCharacters(Scene scene)
+		{
+			var allCharacters = db.Characters;
+			var instructorCourses = new HashSet<int>(scene.Characters.Select(c => c.CharacterID));
+			var viewModel = new List<Character>();
+			foreach (var cha in allCharacters)
+			{
+				viewModel.Add(new Character
+				{
+					CharacterID = cha.CharacterID,
+					FullName = cha.FullName
+				});
+			}
+			ViewBag.Characters = viewModel;
+		}
     }
 }

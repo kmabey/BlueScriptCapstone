@@ -402,6 +402,8 @@
     <None Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Views\Home\ScenePartial.cshtml" />
     <Content Include="Views\Home\CreateScene.cshtml" />
+    <Content Include="Views\Home\EditSetting.cshtml" />
+    <Content Include="Views\Home\CreateSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
