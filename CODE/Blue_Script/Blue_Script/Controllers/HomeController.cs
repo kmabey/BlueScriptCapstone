@@ -40,13 +40,6 @@ namespace Blue_Script.Controllers
 			return PartialView(scene);
 		}
 
-		public ActionResult CreateSceneOld()
-		{
-			db.Scenes.Add(new Scene {Name = "New Scene", Notes = "Notes go here", SettingID = 1 });
-			db.SaveChanges();
-			return View("MyBlueScript", db.Scenes);
-		}
-
         [HttpPost]
         public ActionResult MyBlueScript(Scene scene)
         {
