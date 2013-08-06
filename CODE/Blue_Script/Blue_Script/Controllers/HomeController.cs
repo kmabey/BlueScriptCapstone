@@ -29,6 +29,19 @@ namespace Blue_Script.Controllers
 
 		public ActionResult CreateScene()
 		{
+			PopulateSettingsDropDownList();
+			return PartialView(new Scene());
+		}
+
+		public ActionResult ScenePartial(int id)
+		{
+			Scene scene = db.Scenes.Find(id);
+			PopulateSettingsDropDownList(scene.Setting);
+			return PartialView(scene);
+		}
+
+		public ActionResult CreateSceneOld()
+		{
 			db.Scenes.Add(new Scene {Name = "New Scene", Notes = "Notes go here", SettingID = 1 });
 			db.SaveChanges();
 			return View("MyBlueScript", db.Scenes);
@@ -80,5 +93,13 @@ namespace Blue_Script.Controllers
                 return View();
             }
         }
+
+		private void PopulateSettingsDropDownList(object selectedSetting = null)
+		{
+			var q = from s in db.Settings
+								   orderby s.Name
+								   select s;
+			ViewBag.PossibleSettings = new SelectList(q.AsEnumerable(), "ID", "Name", selectedSetting);
+		} 
     }
 }

@@ -6,8 +6,7 @@
 						<fieldset>
 							<legend>Scene</legend>
 							@Html.HiddenFor(model => Model.ID)
-							<h5>
-								Name</h5>
+							<h5>Name</h5>
 							<div class="editor-field">@Html.EditorFor(model => Model.Name)</div>
 							<h5>Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings) 
 							<a href="#modalThisWillBeTheSettingID" role="button" class="btn btn-mini float-right" data-toggle="modal">

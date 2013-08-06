@@ -39,7 +39,7 @@ TODO:
 			@for (var i = 0; i < Model.Count(); i++)
    {
 	   <div class = "event">
-	   @Html.Partial("ScenePartial", Model.ElementAt(i))
+	   @Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
 	   </div>
 					
    }
