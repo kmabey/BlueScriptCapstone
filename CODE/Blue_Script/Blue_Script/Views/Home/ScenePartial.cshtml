@@ -18,6 +18,20 @@
 			<h5>
 				Characters:
 			</h5>
+			<div class="editor-field">
+				@{
+	 List<Blue_Script.Models.AssignedCharacters> characters = ViewBag.Characters;
+
+	 foreach (var character in characters)
+	 {
+					<input type="checkbox" 
+                               name="selectedCharacters" 
+                               value="@character.CharacterID" 
+                               @(Html.Raw(character.Assigned ? "checked=\"checked\"" : "")) /> 
+					@character.CharacterID @: @character.FullName
+     }
+				}
+			</div>
 			<h5>
 				Notes</h5>
 			@Html.EditorFor(model => Model.Notes)

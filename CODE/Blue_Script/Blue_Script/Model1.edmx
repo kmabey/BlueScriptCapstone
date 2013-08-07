@@ -4,30 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BlueScriptModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+      <Schema Namespace="BlueScriptModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="BlueScriptModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="BlueScriptModel.Store.__MigrationHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Character" EntityType="BlueScriptModel.Store.Character" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scene" EntityType="BlueScriptModel.Store.Scene" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="scenecharacter" EntityType="BlueScriptModel.Store.scenecharacter" store:Type="Tables" store:Schema="dbo" store:Name="scenecharacter">
-            <DefiningQuery>SELECT 
-      [scenecharacter].[ID] AS [ID], 
-      [scenecharacter].[CharacterID] AS [CharacterID]
-      FROM [dbo].[scenecharacter] AS [scenecharacter]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Setting" EntityType="BlueScriptModel.Store.Setting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="BlueScriptModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Scene_Setting" Association="BlueScriptModel.Store.FK_Scene_Setting">
             <End Role="Setting" EntitySet="Setting" />
             <End Role="Scene" EntitySet="Scene" />
-          </AssociationSet>
-          <AssociationSet Name="FK_scenecharacter_Character" Association="BlueScriptModel.Store.FK_scenecharacter_Character">
-            <End Role="Character" EntitySet="Character" />
-            <End Role="scenecharacter" EntitySet="scenecharacter" />
-          </AssociationSet>
-          <AssociationSet Name="FK_scenecharacter_Scene" Association="BlueScriptModel.Store.FK_scenecharacter_Scene">
-            <End Role="Scene" EntitySet="Scene" />
-            <End Role="scenecharacter" EntitySet="scenecharacter" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="__MigrationHistory">
@@ -54,17 +40,6 @@
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
           <Property Name="SettingID" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'BlueScript.dbo.scenecharacter' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-        <EntityType Name="scenecharacter">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="CharacterID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="CharacterID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -93,30 +68,6 @@
             </Principal>
             <Dependent Role="Scene">
               <PropertyRef Name="SettingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_scenecharacter_Character">
-          <End Role="Character" Type="BlueScriptModel.Store.Character" Multiplicity="1" />
-          <End Role="scenecharacter" Type="BlueScriptModel.Store.scenecharacter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Character">
-              <PropertyRef Name="CharacterID" />
-            </Principal>
-            <Dependent Role="scenecharacter">
-              <PropertyRef Name="CharacterID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_scenecharacter_Scene">
-          <End Role="Scene" Type="BlueScriptModel.Store.Scene" Multiplicity="1" />
-          <End Role="scenecharacter" Type="BlueScriptModel.Store.scenecharacter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Scene">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="scenecharacter">
-              <PropertyRef Name="ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -151,7 +102,8 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BlueScriptModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -165,61 +117,61 @@
             <End Role="Setting" EntitySet="Settings" />
             <End Role="Scene" EntitySet="Scenes" />
           </AssociationSet>
-          <AssociationSet Name="scenecharacter" Association="BlueScriptModel.scenecharacter">
-            <End Role="Character" EntitySet="Characters" />
+          <AssociationSet Name="SceneCharacter" Association="BlueScriptModel.SceneCharacter">
             <End Role="Scene" EntitySet="Scenes" />
+            <End Role="Character" EntitySet="Characters" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
           </Key>
-          <Property Type="String" Name="MigrationId" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="Binary" Name="Model" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Type="String" Name="ProductVersion" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
         </EntityType>
         <EntityType Name="Character">
           <Key>
             <PropertyRef Name="CharacterID" />
           </Key>
-          <Property Type="Int32" Name="CharacterID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="FullName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Notes" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Scenes" Relationship="BlueScriptModel.scenecharacter" FromRole="Character" ToRole="Scene" />
+          <Property Name="CharacterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Scenes" Relationship="BlueScriptModel.SceneCharacter" FromRole="Character" ToRole="Scene" />
         </EntityType>
         <EntityType Name="Scene">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Notes" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="SettingID" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="SettingID" Type="Int32" />
           <NavigationProperty Name="Setting" Relationship="BlueScriptModel.FK_Scene_Setting" FromRole="Scene" ToRole="Setting" />
-          <NavigationProperty Name="Characters" Relationship="BlueScriptModel.scenecharacter" FromRole="Scene" ToRole="Character" />
+          <NavigationProperty Name="Characters" Relationship="BlueScriptModel.SceneCharacter" FromRole="Scene" ToRole="Character" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Notes" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Scenes" Relationship="BlueScriptModel.FK_Scene_Setting" FromRole="Setting" ToRole="Scene" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="version" />
-          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Scene_Setting">
-          <End Type="BlueScriptModel.Setting" Role="Setting" Multiplicity="0..1" />
-          <End Type="BlueScriptModel.Scene" Role="Scene" Multiplicity="*" />
+          <End Role="Setting" Type="BlueScriptModel.Setting" Multiplicity="0..1" />
+          <End Role="Scene" Type="BlueScriptModel.Scene" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Setting">
               <PropertyRef Name="ID" />
@@ -229,74 +181,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="scenecharacter">
-          <End Type="BlueScriptModel.Character" Role="Character" Multiplicity="*" />
+        <Association Name="SceneCharacter">
           <End Type="BlueScriptModel.Scene" Role="Scene" Multiplicity="*" />
+          <End Type="BlueScriptModel.Character" Role="Character" Multiplicity="*" />
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="BlueScriptModelStoreContainer" CdmEntityContainer="BlueScriptEntities">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlueScriptModelStoreContainer" CdmEntityContainer="BlueScriptEntities">
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="BlueScriptModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Characters">
             <EntityTypeMapping TypeName="BlueScriptModel.Character">
               <MappingFragment StoreEntitySet="Character">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Scenes">
             <EntityTypeMapping TypeName="BlueScriptModel.Scene">
               <MappingFragment StoreEntitySet="Scene">
-                <ScalarProperty Name="SettingID" ColumnName="SettingID" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="SettingID" ColumnName="SettingID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="BlueScriptModel.Setting">
               <MappingFragment StoreEntitySet="Setting">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="BlueScriptModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="scenecharacter" TypeName="BlueScriptModel.scenecharacter" StoreEntitySet="scenecharacter">
+          <AssociationSetMapping Name="SceneCharacter" TypeName="BlueScriptModel.SceneCharacter" StoreEntitySet="Scene">
+            <EndProperty Name="Character">
+              <ScalarProperty Name="CharacterID" ColumnName="ID" />
+            </EndProperty>
             <EndProperty Name="Scene">
               <ScalarProperty Name="ID" ColumnName="ID" />
             </EndProperty>
-            <EndProperty Name="Character">
-              <ScalarProperty Name="CharacterID" ColumnName="CharacterID" />
-            </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
@@ -316,19 +269,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model1">
-        <EntityTypeShape EntityType="BlueScriptModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="4.75" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="BlueScriptModel.Character" Width="1.5" PointX="0.75" PointY="1.125" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="BlueScriptModel.Scene" Width="1.5" PointX="3" PointY="0.875" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="BlueScriptModel.Setting" Width="1.5" PointX="0.75" PointY="5.125" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="BlueScriptModel.sysdiagram" Width="1.5" PointX="4.75" PointY="4.75" Height="1.9802864583333317" />
-        <AssociationConnector Association="BlueScriptModel.FK_Scene_Setting" >
-          <ConnectorPoint PointX="2.25" PointY="6.6605843098958335" />
-          <ConnectorPoint PointX="4.40625" PointY="6.6605843098958335" />
-          <ConnectorPoint PointX="4.40625" PointY="3.0475878906249996" />
+        <EntityTypeShape EntityType="BlueScriptModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Character" Width="1.5" PointX="2.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Scene" Width="1.5" PointX="3" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Setting" Width="1.5" PointX="0.75" PointY="1" Height="1.7879850260416657" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.sysdiagram" Width="1.5" PointX="4.75" PointY="3.75" Height="1.9802864583333317" IsExpanded="true" />
+        <AssociationConnector Association="BlueScriptModel.FK_Scene_Setting" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.8939925130208328" />
+          <ConnectorPoint PointX="3" PointY="1.8939925130208328" />
         </AssociationConnector>
-        <AssociationConnector Association="BlueScriptModel.scenecharacter" >
-          <ConnectorPoint PointX="2.25" PointY="2.0189925130208337" />
-          <ConnectorPoint PointX="3" PointY="2.0189925130208337" />
+        <AssociationConnector Association="BlueScriptModel.SceneCharacter">
+          <ConnectorPoint PointX="3.625" PointY="3.047587890625" />
+          <ConnectorPoint PointX="3.625" PointY="3.75" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
