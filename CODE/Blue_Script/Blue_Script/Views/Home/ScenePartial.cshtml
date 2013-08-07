@@ -1,67 +1,28 @@
 ﻿@model Blue_Script.Scene
-
 <div class="event" draggable="true">
-					@using (Html.BeginForm("MyBlueScript", "Home"))
-	 {
-						<fieldset>
-							<legend>Scene</legend>
-							@Html.HiddenFor(model => Model.ID)
-							<h5>Name</h5>
-							<div class="editor-field">@Html.EditorFor(model => Model.Name)</div>
-							<h5>Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings) 
-							<a href="#modalThisWillBeTheSettingID" role="button" class="btn btn-mini float-right" data-toggle="modal">
-							<i class="icon-edit"></i></a></h5>
+	@using (Html.BeginForm("EditScene", "Home"))
+ {
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		<fieldset>
+			<legend>Scene</legend>
+			@Html.HiddenFor(model => Model.ID)
+			<h5>
+				Name</h5>
+			<div class="editor-field">@Html.EditorFor(model => Model.Name)</div>
+			<h5>
+				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings)
+				<a href="#modalThisWillBeTheSettingID" role="button" class="btn btn-mini float-right"
+					data-toggle="modal"><i class="icon-edit"></i></a>
+			</h5>
+			<h5>
+				Characters:
+			</h5>
+			<h5>
+				Notes</h5>
+			@Html.EditorFor(model => Model.Notes)
+			<input type="submit" value="Save" />
+		</fieldset>
 
-							<h5>Characters: </h5>
-							@foreach (var c in Model.Characters)
-	   {
-								<p>@c.FullName <a href="#modal@(c.CharacterID)" role="button" class="btn btn-mini float-right" data-toggle="modal">
-								<i class="icon-edit"></i></a>
-							</p>
-							<!-- Edit Character Modal -->
-							<div id="modal@(c.CharacterID)" class="modal hide fade" tabindex="-1" role="dialog" >
-								@using (Html.BeginForm("Setting", "Home"))
-		{
-									
-									@Html.ValidationSummary(true)
-									<fieldset>
-										<legend></legend>
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">
-												×</button>
-											<h3>
-												Edit Character</h3>
-										</div>
-										<div class="modal-body">
-											@Html.HiddenFor(model => c.CharacterID)
-											<div class="editor-label">@Html.LabelFor(model => c.FullName)</div>
-											<div class="editor-field">
-												@Html.EditorFor(model => c.FullName)
-												@Html.ValidationMessageFor(model => c.FullName)
-											</div>
-											<div class="editor-label">@Html.LabelFor(model => c.Notes)</div>
-											<div class="editor-field">
-												@Html.EditorFor(model => c.Notes)
-												@Html.ValidationMessageFor(model => c.Notes)
-											</div>
-											<div class="modal-footer">
-												<button class="btn" data-dismiss="modal">
-													Cancel</button>
-												<input type="submit" value="Save Changes" class="btn btn-primary" />
-											</div>
-										</div>
-									</fieldset>
-									
-									
-		}
-							</div>
-							<!--End Character Model-->
-	   }
-							<h5>
-								Notes</h5>
-							@Html.EditorFor(model => Model.Notes)
-							<input type="submit" value="Save" />
-						</fieldset>
-
-	 }
-				</div>
+ }
+</div>

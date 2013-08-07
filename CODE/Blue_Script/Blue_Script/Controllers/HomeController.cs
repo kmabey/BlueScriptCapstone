@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Blue_Script.Models;
+using System.Data;
 
 namespace Blue_Script.Controllers
 {
@@ -63,21 +64,33 @@ namespace Blue_Script.Controllers
 			return PartialView(scene);
 		}
 
-        [HttpPost]
-        public ActionResult MyBlueScript(Scene scene)
-        {
-            if(ModelState.IsValid)
-            {
-                db.Entry(scene).State = System.Data.EntityState.Modified;
-                db.SaveChanges();
-                TempData["message"] = scene.Name + " has been saved";
-                return RedirectToAction("MyBlueScript");
-            }
-            else
-            {
-                return View(db.Scenes);
-            }
-        }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult EditScene(int id, FormCollection formCollection, string[] selectedCharacters)
+		{
+			var sceneToUpdate = db.Scenes.Find(id);
+			if (TryUpdateModel(sceneToUpdate, "",
+			   new string[] { "Name", "Notes" }))
+			{
+				try
+				{
+
+					UpdateSceneCharacters(selectedCharacters, sceneToUpdate);
+
+					db.Entry(sceneToUpdate).State = EntityState.Modified;
+					db.SaveChanges();
+
+					return RedirectToAction("MyBlueScript");
+				}
+				catch (DataException /* dex */)
+				{
+					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+				}
+			}
+			PopulateAssignedCharacters(sceneToUpdate);
+			return View("MyBlueScript", sceneToUpdate);
+		}
 
         [HttpPost]
         public ActionResult Setting(Setting setting)
@@ -121,17 +134,48 @@ namespace Blue_Script.Controllers
 		private void PopulateAssignedCharacters(Scene scene)
 		{
 			var allCharacters = db.Characters;
-			var instructorCourses = new HashSet<int>(scene.Characters.Select(c => c.CharacterID));
-			var viewModel = new List<Character>();
+			var sceneCharacters = new HashSet<int>(scene.Characters.Select(c => c.CharacterID));
+			var viewModel = new List<AssignedCharacters>();
 			foreach (var cha in allCharacters)
 			{
-				viewModel.Add(new Character
+				viewModel.Add(new AssignedCharacters
 				{
 					CharacterID = cha.CharacterID,
-					FullName = cha.FullName
+					FullName = cha.FullName,
+					Assigned = sceneCharacters.Contains(cha.CharacterID)
 				});
 			}
 			ViewBag.Characters = viewModel;
+		}
+
+		private void UpdateSceneCharacters(string[] selectedCharacters, Scene sceneToUpdate)
+		{
+			if (selectedCharacters == null)
+			{
+				sceneToUpdate.Characters = new List<Character>();
+				return;
+			}
+
+			var selectedCharactersHS = new HashSet<string>(selectedCharacters);
+			var sceneCharacters = new HashSet<int>
+				(sceneToUpdate.Characters.Select(c => c.CharacterID));
+			foreach (var character in db.Characters)
+			{
+				if (selectedCharactersHS.Contains(character.CharacterID.ToString()))
+				{
+					if (!sceneCharacters.Contains(character.CharacterID))
+					{
+						sceneToUpdate.Characters.Add(character);
+					}
+				}
+				else
+				{
+					if (sceneCharacters.Contains(character.CharacterID))
+					{
+						sceneToUpdate.Characters.Remove(character);
+					}
+				}
+			}
 		}
     }
 }
