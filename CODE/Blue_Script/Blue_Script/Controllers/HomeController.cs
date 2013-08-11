@@ -10,7 +10,7 @@ namespace Blue_Script.Controllers
 {
     public class HomeController : Controller
     {
-        BlueScriptEntities db = new BlueScriptEntities();
+        BSEntities db = new BSEntities();
 
         public HomeController()
         {
@@ -61,6 +61,7 @@ namespace Blue_Script.Controllers
 		{
 			Scene scene = db.Scenes.Find(id);
 			PopulateSettingsDropDownList(scene.Setting);
+			PopulateAssignedCharacters(scene);
 			return PartialView(scene);
 		}
 
