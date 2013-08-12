@@ -29,16 +29,6 @@ namespace Blue_Script.Controllers
 			ViewBag.TotalScenes = ViewBag.Scenes.Count;
 			ViewBag.TotalCharacters = ViewBag.Characters.Count;
 			ViewBag.TotalSettings = ViewBag.Settings.Count;
-			var characterModel = new List<CharacterView>();
-			foreach(var item in ViewBag.Characters)
-			{
-				characterModel.Add(new CharacterView
-				{
-					character = item,
-					characterNum = (item.scenes.count / ViewBag.TotalScenes) * 10,
-					percent = ((item.scenes.count / ViewBag.TotalScenes) * 10) + "%"
-				});
-			}
 			return View();
 		}
 
@@ -47,7 +37,12 @@ namespace Blue_Script.Controllers
 			var query = db.Settings.Select(c => new { c.ID, c.Name });
 			ViewBag.PossibleSettings = new SelectList(query.AsEnumerable(), "ID", "Name");
 			var query2 = db.Characters.Select(c => new { c.CharacterID, c.FullName });
-			ViewData["myCharacters"] = new SelectList(query2.AsEnumerable(), "CharacterID", "FullName");
+			var myChars = new List<Character>();
+			foreach(var item in db.Characters)
+			{
+				myChars.Add(item);
+			}
+			ViewBag.myCharacters = myChars;
             
 			return View(db.Scenes);
         }
@@ -57,9 +52,10 @@ namespace Blue_Script.Controllers
 			return PartialView();
 		}
 
-		public ActionResult EditCharacter()
+		public ActionResult EditCharacter(int id)
 		{
-			return PartialView();
+			Character chara = db.Characters.Find(id);
+			return PartialView(chara);
 		}
 
 		public ActionResult CreateSetting()

@@ -3,19 +3,19 @@
 }
 
 <div class="row-fluid">
-	<div class="span2">
-		<header>Basic Statistics</header>
+	<div class="span2 backcolorWhite">
+		<h3>Basic Statistics</h3>
 		<dl>
 			<dt># of Scenes</dt>
-			<dd>@ViewBag.TotalScenes</dd>
+			<dd>@ViewBag.Scenes.Count</dd>
 		</dl>
 		<dl>
 			<dt># of Settings</dt>
-			<dd>@ViewBag.TotalSettings</dd>
+			<dd>@ViewBag.Settings.Count</dd>
 		</dl>
 		<dl>
 			<dt># of Characters</dt>
-			<dd>@ViewBag.TotalCharacters</dd>
+			<dd>@ViewBag.Characters.Count</dd>
 		</dl>
 	</div>
 	<div class="span6 backcolorWhite">
@@ -35,7 +35,37 @@
 					<td>@item.FullName</td>
 					<td>@(item.Scenes.Count)</td>
 					<td><div class="progress progress-striped active">
-						<div class="bar" style="width: @((item.Scenes.Count / ViewBag.TotalScenes)*10)%;"></div>
+					@{
+						var percent = ((item.Scenes.Count / ViewBag.TotalScenes)*10) + "%";
+					}
+						<div class="bar" style="width: @(percent);"></div>
+					</div></td>
+				</tr>
+	}
+			</tbody>
+		</table>
+	</div>
+	<div class="span3 backcolorWhite">
+		<h3>Setting Statistics</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Setting</th>
+					<th>Scenes used in</th>
+					<th>%</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in ViewBag.Settings)
+	{
+				<tr>
+					<td>@item.Name</td>
+					<td>@(item.Scenes.Count)</td>
+					<td><div class="progress progress-striped active">
+					@{
+						var percent = ((item.Scenes.Count / ViewBag.TotalScenes)*10) + "%";
+					}
+						<div class="bar" style="width: @(percent);"></div>
 					</div></td>
 				</tr>
 	}
