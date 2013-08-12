@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Current Statistics";
+}
+
+<div class="row-fluid">
+	<div class="span2">
+		<header>Basic Statistics</header>
+		<dl>
+			<dt># of Scenes</dt>
+			<dd>@ViewBag.Scenes.Count</dd>
+		</dl>
+		<dl>
+			<dt># of Settings</dt>
+			<dd>@ViewBag.Settings.Count</dd>
+		</dl>
+		<dl>
+			<dt># of Characters</dt>
+			<dd>@ViewBag.Characters.Count</dd>
+		</dl>
+	</div>
+	<div class="span6 backcolorWhite">
+		<h3>Character Statistics</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Character</th>
+					<th>Scenes used in</th>
+					<th>%</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in ViewBag.Characters)
+	{
+				<tr>
+					<td>@item.FullName</td>
+					<td>Scenes used in goes here</td>
+					<td><div class="progress progress-striped active">
+						<div class="bar" style="width: 50%;"></div>
+					</div></td>
+				</tr>
+	}
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -21,6 +21,14 @@ namespace Blue_Script.Controllers
             return View();
         }
 
+		public ActionResult MyStats()
+		{
+			ViewBag.Scenes = new List<Scene>(db.Scenes);
+			ViewBag.Characters = new List<Character>(db.Characters);
+			ViewBag.Settings = new List<Setting>(db.Settings);
+			return View();
+		}
+
         public ActionResult MyBlueScript()
         {
 			var query = db.Settings.Select(c => new { c.ID, c.Name });
@@ -54,7 +62,7 @@ namespace Blue_Script.Controllers
 		public ActionResult CreateScene()
 		{
 			PopulateSettingsDropDownList();
-			return PartialView(new Scene());
+			return PartialView("ScenePartial", new Scene());
 		}
 
 		public ActionResult ScenePartial(int id)
