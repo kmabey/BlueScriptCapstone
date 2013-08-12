@@ -26,7 +26,7 @@ TODO:
 				<li class="nav-header">Characters</li>
 				@foreach (var item in ViewBag.myCharacters)
 	  {
-					<li><a href="#" class="simpledialog">@item.FullName</a></li>
+					<li><a href="#" class="simpledialog" onclick="OpenDialog(@item.CharacterID)">@item.FullName</a></li>
 	  }
 				<li class="nav-header">Settings</li>
 				@foreach (var setting in ViewBag.Settings)
@@ -54,5 +54,48 @@ TODO:
 </div>
 
 <div class="dialogbox" style="display: none;">
-	@Html.Action("EditCharacter", "Home");
 </div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$(".simpledialog").click(function () {
+			InitializeDialog($('.dialogbox'));
+
+			$('.dialogbox').dialog('open');
+		});
+
+		function OpenDialog(currentID) 
+		{
+			InitializeDialog($('.dialogbox'), currentID);
+
+			$('.dialogbox').dialog('open');
+		}
+
+		function InitializeDialog($element, currentID) 
+		{
+
+
+			$element.dialog({
+				autoOpen: false,
+				width: 400,
+				resizable: true,
+				draggable: true,
+				title: "Edit Character",
+				model: true,
+				show: 'slide',
+				closeText: 'x',
+				dialogClass: 'alert',
+				closeOnEscape: true,
+				open: function (event, ui) {
+					//Load the Partial View Here using Controller and Action
+					$element.load('/Home/EditCharacter', {id:currentID});
+				},
+
+				close: function () {
+					$(this).dialog('close');
+				}
+
+			});
+
+		}
+	});
+</script>

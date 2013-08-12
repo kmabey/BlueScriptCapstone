@@ -1,23 +1,36 @@
 ﻿$(document).ready(function () {
-	$(".simpledialog").live("click", (function (e) {
-		e.preventDefault();
-		var url = $(this).attr('href');
-		$(".dialogbox").dialog({
-			title: "Dialog Title one",
-			position: [50, 50],
-			modal:true,
-			buttons: {
-				"OK": function () {
-					alert("Ok clicked");
-					$(this).dialog("close");
-				},
-				"Cancel": function () {
-					alert("Cancel clicked");
-					$(this).dialog("close");
-				}
+	$(".simpledialog").click(function () {
+		InitializeDialog($('.dialogbox'));
+
+		$('.dialogbox').dialog('open');
+	});
+
+	function InitializeDialog($element) {
+
+
+		$element.dialog({
+			autoOpen: false,
+			width: 400,
+			resizable: true,
+			draggable: true,
+			title: "Test Dialog",
+			model: true,
+			show: 'slide',
+			closeText: 'x',
+			dialogClass: 'alert',
+			closeOnEscape: true,
+			open: function (event, ui) {
+				//Load the Partial View Here using Controller and Action
+				$element.load('/Home/EditCharacter');
+			},
+
+			close: function () {
+				$(this).dialog('close');
 			}
+
 		});
-	}));
+
+	}
 });
 
 

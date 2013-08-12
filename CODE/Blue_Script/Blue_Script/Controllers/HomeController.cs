@@ -53,11 +53,12 @@ namespace Blue_Script.Controllers
 			return PartialView();
 		}
 
-		public ActionResult EditCharacter()
+		public ActionResult EditCharacter(int id)
 		{
+			Character character = db.Characters.Find(id);
 			if(Request.IsAjaxRequest())
 			{
-				return PartialView();
+				return PartialView(character);
 			}
 			else
 			{
