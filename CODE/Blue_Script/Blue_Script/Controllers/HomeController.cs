@@ -52,10 +52,16 @@ namespace Blue_Script.Controllers
 			return PartialView();
 		}
 
-		public ActionResult EditCharacter(int id)
+		public ActionResult EditCharacter()
 		{
-			Character chara = db.Characters.Find(id);
-			return PartialView(chara);
+			if(Request.IsAjaxRequest())
+			{
+				return PartialView();
+			}
+			else
+			{
+				return View();
+			}
 		}
 
 		public ActionResult CreateSetting()
