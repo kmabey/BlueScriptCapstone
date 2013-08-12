@@ -26,6 +26,19 @@ namespace Blue_Script.Controllers
 			ViewBag.Scenes = new List<Scene>(db.Scenes);
 			ViewBag.Characters = new List<Character>(db.Characters);
 			ViewBag.Settings = new List<Setting>(db.Settings);
+			ViewBag.TotalScenes = ViewBag.Scenes.Count;
+			ViewBag.TotalCharacters = ViewBag.Characters.Count;
+			ViewBag.TotalSettings = ViewBag.Settings.Count;
+			var characterModel = new List<CharacterView>();
+			foreach(var item in ViewBag.Characters)
+			{
+				characterModel.Add(new CharacterView
+				{
+					character = item,
+					characterNum = (item.scenes.count / ViewBag.TotalScenes) * 10,
+					percent = ((item.scenes.count / ViewBag.TotalScenes) * 10) + "%"
+				});
+			}
 			return View();
 		}
 
