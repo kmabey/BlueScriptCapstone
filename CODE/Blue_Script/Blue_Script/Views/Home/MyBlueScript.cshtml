@@ -31,7 +31,7 @@ TODO:
 				<ul class="dropdown-menu">
 				@foreach (var item in ViewBag.myCharacters)
 	{
-					<li><a href="@Url.Action("CreateCharacter", "Home", new { id=item.CharacterID })" data-toggle="modal">@item.FullName</a></li>
+					<li><a href="@Url.Action("EditCharacter", "Home", new { id=item.CharacterID })" data-toggle="modal">@item.FullName</a></li>
 	}
 					
 				</ul></li>
