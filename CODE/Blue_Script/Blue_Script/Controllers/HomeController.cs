@@ -71,7 +71,7 @@ namespace Blue_Script.Controllers
 		public ActionResult CreateScene()
 		{
 			var newScene = new Scene {Name = "SceneName", Characters = new List<Character>(),
-			Setting = db.Settings.Single(s => s.ID == 1), Notes = "Notes go here."};
+			Setting = null, Notes = "Notes go here."};
 			PopulateSettingsDropDownList();
 			PopulateAssignedCharacters(newScene);
 			db.Scenes.Add(newScene);
