@@ -1,12 +1,24 @@
 ﻿$(document).ready(function () {
-
-	$("#dialog").click(function () {
-		$("#dialogbox").dialog({
-			title: "My Dialog"
-			});
-	});
-
-}); 
+	$(".simpledialog").live("click", (function (e) {
+		e.preventDefault();
+		var url = $(this).attr('href');
+		$(".dialogbox").dialog({
+			title: "Dialog Title one",
+			position: [50, 50],
+			modal:true,
+			buttons: {
+				"OK": function () {
+					alert("Ok clicked");
+					$(this).dialog("close");
+				},
+				"Cancel": function () {
+					alert("Cancel clicked");
+					$(this).dialog("close");
+				}
+			}
+		});
+	}));
+});
 
 
 var dragSrcEl = null;

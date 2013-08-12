@@ -18,25 +18,21 @@ TODO:
 <div class="row-fluid">
 	<div class="span2">
 		<div class="sidebar">
-			<ul class="nav nav-pills nav-stacked">
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Add
-					New</a>
-					<ul class="dropdown-menu">
-						<li><a href="@Url.Action("CreateScene", "Home")" role="button" data-toggle="modal">Scene</a></li>
-						<li><a href="#">Character</a></li>
-						<li><a href="@Url.Action("CreateSetting", "Home")" data-toggle="modal">Setting</a></li>
-					</ul>
-				</li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Characters</a>
-					<ul class="dropdown-menu">
-						@foreach (var item in ViewBag.myCharacters)
+			<ul class="nav nav-list">
+				<li class="nav-header">Add New</li>
+				<li><a href="#">Scene</a>
+				<li><a href="#">Character</a>
+				<li><a href="#">Setting</a>
+				<li class="nav-header">Characters</li>
+				@foreach (var item in ViewBag.myCharacters)
 	  {
-							<li><a href="#" id="dialog">@item.FullName</a></li>
+					<li><a href="#" class="simpledialog">@item.FullName</a></li>
 	  }
-					</ul>
-				</li>
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Setting</a>
-				</li>
+				<li class="nav-header">Settings</li>
+				@foreach (var setting in ViewBag.Settings)
+	  {
+					<li><a href="#" id="dialog2">@setting.Name</a></li>
+	  }
 			</ul>
 		</div>
 	</div>
@@ -57,6 +53,6 @@ TODO:
 	</div>
 </div>
 
-<div id="dialogbox" style="display: none;">
+<div class="dialogbox" style="display: none;">
 	@Html.Action("EditCharacter", "Home");
 </div>

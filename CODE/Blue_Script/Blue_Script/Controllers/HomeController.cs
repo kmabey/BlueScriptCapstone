@@ -43,6 +43,7 @@ namespace Blue_Script.Controllers
 				myChars.Add(item);
 			}
 			ViewBag.myCharacters = myChars;
+			ViewBag.Settings = new List<Setting>(db.Settings);
             
 			return View(db.Scenes);
         }
