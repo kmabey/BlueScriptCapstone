@@ -12,8 +12,7 @@
 			<div class="editor-field">@Html.EditorFor(model => Model.Name)</div>
 			<h5>
 				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings)
-				<a href="#modalThisWillBeTheSettingID" role="button" class="btn btn-mini float-right"
-					data-toggle="modal"><i class="icon-edit"></i></a>
+				
 			</h5>
 			<h5>
 				Characters:
@@ -28,7 +27,7 @@
                                name="selectedCharacters" 
                                value="@character.CharacterID" 
                                @(Html.Raw(character.Assigned ? "checked=\"checked\"" : "")) /> 
-					@character.CharacterID @: @character.FullName
+					 @: @character.FullName
      }
 				}
 			</div>
