@@ -188,27 +188,23 @@ namespace Blue_Script.Controllers
 
 		public ActionResult DeleteCharacter(int id)
 		{
-			Character character = db.Characters.Where(m => m.CharacterID == id).FirstOrDefault();
+			Character character = new Character() { CharacterID = id };
 			if (character != null)
 			{
-				try
-				{
-					db.Characters.Remove(character);
+					db.Entry(character).State = EntityState.Deleted;
 					db.SaveChanges();
-				}
-				catch { }
 			}
 			return RedirectToAction("MyBlueScript");
 		}
 
 		public ActionResult DeleteSetting(int id)
 		{
-			Setting setting = db.Settings.Where(m => m.ID == id).FirstOrDefault();
+			Setting setting = new Setting() {ID = id };
 			if (setting != null)
 			{
 				try
 				{
-					db.Settings.Remove(setting);
+					db.Entry(setting).State = EntityState.Deleted;
 					db.SaveChanges();
 				}
 				catch { }

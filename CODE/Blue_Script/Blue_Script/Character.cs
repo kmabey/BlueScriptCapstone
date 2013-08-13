@@ -11,8 +11,6 @@ namespace Blue_Script
 {
     using System;
     using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-	using System.Web.Mvc;
     
     public partial class Character
     {
@@ -20,13 +18,9 @@ namespace Blue_Script
         {
             this.Scenes = new HashSet<Scene>();
         }
-
-		[HiddenInput(DisplayValue = false)]
+    
         public int CharacterID { get; set; }
-
         public string FullName { get; set; }
-
-		[DataType(DataType.MultilineText)]
         public string Notes { get; set; }
     
         public virtual ICollection<Scene> Scenes { get; set; }
