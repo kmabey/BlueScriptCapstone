@@ -18,6 +18,10 @@ legend
 	text-align: center;
 	
 }
+legend.black 
+{
+	color: Black;
+}
 .headerholder
 {
     background: rgb(0,51,102); /* Old browsers */
