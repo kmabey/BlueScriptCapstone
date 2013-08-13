@@ -16,7 +16,7 @@ namespace Blue_Script.Controllers
         {
         }
 
-        public ActionResult MyBlueScript()
+        public ActionResult Index()
         {
             return View();
         }
@@ -186,32 +186,34 @@ namespace Blue_Script.Controllers
 			}
 		}
 
-		public ActionResult CreateCharacter()
+		public ActionResult DeleteCharacter(int id)
 		{
-			return PartialView();
-		}
-
-		public ActionResult EditCharacter(int id)
-		{
-			Character character = db.Characters.Find(id);
-			if(Request.IsAjaxRequest())
+			Character character = db.Characters.Where(m => m.CharacterID == id).FirstOrDefault();
+			if (character != null)
 			{
-				return PartialView(character);
+				try
+				{
+					db.Characters.Remove(character);
+					db.SaveChanges();
+				}
+				catch { }
 			}
-			else
+			return RedirectToAction("MyBlueScript");
+		}
+
+		public ActionResult DeleteSetting(int id)
+		{
+			Setting setting = db.Settings.Where(m => m.ID == id).FirstOrDefault();
+			if (setting != null)
 			{
-				return View();
+				try
+				{
+					db.Settings.Remove(setting);
+					db.SaveChanges();
+				}
+				catch { }
 			}
-		}
-
-		public ActionResult CreateSetting()
-		{
-			return PartialView(new Setting());
-		}
-
-		public ActionResult EditSetting()
-		{
-			return PartialView();
+			return RedirectToAction("MyBlueScript");
 		}
 
 		public ActionResult CreateScene()

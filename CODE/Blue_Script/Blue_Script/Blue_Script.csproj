@@ -861,7 +861,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="README.jQuery.vsdoc.txt" />
     <Content Include="Scripts\DataTables-1.9.4\docs\media\js\doc.js" />
     <Content Include="Scripts\DataTables-1.9.4\docs\media\js\jquery.js" />
     <Content Include="Scripts\DataTables-1.9.4\docs\media\js\shBrushJScript.js" />
@@ -1037,10 +1036,9 @@
     <None Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Views\Home\ScenePartial.cshtml" />
     <Content Include="Views\Home\CreateScene.cshtml" />
-    <Content Include="Views\Home\EditSetting.cshtml" />
-    <Content Include="Views\Home\CreateSetting.cshtml" />
     <Content Include="Views\Home\MyStats.cshtml" />
     <Content Include="Views\Home\EditCharacter.cshtml" />
+    <Content Include="Views\Home\EditSetting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

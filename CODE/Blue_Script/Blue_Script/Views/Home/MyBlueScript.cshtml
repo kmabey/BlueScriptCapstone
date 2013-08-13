@@ -15,7 +15,7 @@
 				@foreach (var item in ViewBag.myCharacters)
 	  {
 					<li>
-						@Html.ActionLink((string)item.FullName, "AddEditCharacter", new { id = item.CharacterID }, new { @class = "editDialog" })
+						@Html.ActionLink((string)item.FullName, "AddEditCharacter", "Home", new { id = item.CharacterID }, new { @class = "editDialog" })
 						@Html.ActionLink("X", "DeleteCharacter", new { id = item.CharacterID }, new { @class = "confirmDialog" })
 					</li>
 	  }
@@ -57,47 +57,6 @@
     </div>
 <script type="text/javascript">
 	$(document).ready(function () {
-		$(".simpledialog").click(function () {
-			InitializeDialog($('.dialogbox'));
-
-			$('.dialogbox').dialog('open');
-		});
-
-		function OpenDialog(currentID) 
-		{
-			InitializeDialog($('.dialogbox'), currentID);
-
-			$('.dialogbox').dialog('open');
-		}
-
-		function InitializeDialog($element, currentID) 
-		{
-
-
-			$element.dialog({
-				autoOpen: false,
-				width: 400,
-				resizable: true,
-				draggable: true,
-				title: "Edit Character",
-				model: true,
-				show: 'slide',
-				closeText: 'x',
-				dialogClass: 'alert',
-				closeOnEscape: true,
-				open: function (event, ui) {
-					//Load the Partial View Here using Controller and Action
-					$element.load('/Home/EditCharacter', {id:currentID});
-				},
-
-				close: function () {
-					$(this).dialog('close');
-				}
-
-			});
-
-		}
-
 
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
@@ -105,9 +64,9 @@
 		$("#openDialog").live("click", function (e) {
 			e.preventDefault();
 			var url = $(this).attr('href');
-
+			
 			$("#dialog-edit").dialog({
-				title: 'Add Student',
+				title: 'Add New',
 				autoOpen: false,
 				resizable: false,
 				height: 355,
@@ -130,7 +89,7 @@
 		$(".editDialog").live("click", function (e) {
 			var url = $(this).attr('href');
 			$("#dialog-edit").dialog({
-				title: 'Edit Customer',
+				title: 'Edit',
 				autoOpen: false,
 				resizable: false,
 				height: 355,
