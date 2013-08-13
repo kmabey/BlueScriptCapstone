@@ -1,6 +1,6 @@
 ﻿@model Blue_Script.Setting
 
-@using (Ajax.BeginForm("AddEditSetting", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "settingDialog" }))
+@using (Ajax.BeginForm("AddEditSetting", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "dialog-edit" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>

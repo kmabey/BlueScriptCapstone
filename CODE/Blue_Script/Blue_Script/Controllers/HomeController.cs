@@ -202,13 +202,17 @@ namespace Blue_Script.Controllers
 			Setting setting = new Setting() {ID = id };
 			if (setting != null)
 			{
-				try
-				{
 					db.Entry(setting).State = EntityState.Deleted;
 					db.SaveChanges();
-				}
-				catch { }
 			}
+			return RedirectToAction("MyBlueScript");
+		}
+
+		public ActionResult DeleteScene(int id)
+		{
+			Scene scene = new Scene() { ID = id };
+			db.Entry(scene).State = System.Data.EntityState.Deleted;
+			db.SaveChanges();
 			return RedirectToAction("MyBlueScript");
 		}
 
@@ -258,21 +262,6 @@ namespace Blue_Script.Controllers
 			PopulateAssignedCharacters(sceneToUpdate);
 			return View("MyBlueScript", sceneToUpdate);
 		}
-
-        [HttpPost]
-        public ActionResult DeleteScene(Scene s)
-        {
-            try
-            {
-                db.Entry(s).State = System.Data.EntityState.Deleted;
-                db.SaveChanges();
-                return RedirectToAction("MyBlueScript");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
 		private void PopulateSettingsDropDownList(object selectedSetting = null)
 		{
