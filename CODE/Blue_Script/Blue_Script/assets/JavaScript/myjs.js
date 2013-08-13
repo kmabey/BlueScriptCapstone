@@ -1,36 +1,4 @@
 ﻿$(document).ready(function () {
-	$(".simpledialog").click(function () {
-		InitializeDialog($('.dialogbox'));
-
-		$('.dialogbox').dialog('open');
-	});
-
-	function InitializeDialog($element) {
-
-
-		$element.dialog({
-			autoOpen: false,
-			width: 400,
-			resizable: true,
-			draggable: true,
-			title: "Test Dialog",
-			model: true,
-			show: 'slide',
-			closeText: 'x',
-			dialogClass: 'alert',
-			closeOnEscape: true,
-			open: function (event, ui) {
-				//Load the Partial View Here using Controller and Action
-				$element.load('/Home/EditCharacter');
-			},
-
-			close: function () {
-				$(this).dialog('close');
-			}
-
-		});
-
-	}
 });
 
 

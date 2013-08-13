@@ -16,7 +16,7 @@ namespace Blue_Script.Controllers
         {
         }
 
-        public ActionResult Index()
+        public ActionResult MyBlueScript()
         {
             return View();
         }
@@ -47,6 +47,144 @@ namespace Blue_Script.Controllers
             
 			return View(db.Scenes);
         }
+
+		[HttpGet]
+		public ActionResult AddEditCharacter(int? id)
+		{
+			if (Request.IsAjaxRequest())
+			{
+				if (id != null)
+				{
+					ViewBag.IsUpdate = true;
+					Character character = db.Characters.Where(m => m.CharacterID == id).FirstOrDefault();
+					return PartialView("EditCharacter", character);
+				}
+				ViewBag.IsUpdate = false;
+				return PartialView("EditCharacter");
+			}
+			else
+			{
+				if (id != null)
+				{
+					ViewBag.IsUpdate = true;
+					Character character = db.Characters.Where(m => m.CharacterID == id).FirstOrDefault();
+					return PartialView("EditCharacter", character);
+				}
+				ViewBag.IsUpdate = false;
+				return View("EditCharacter");
+			}
+		}
+
+		[HttpGet]
+		public ActionResult AddEditSetting(int? id)
+		{
+			if (Request.IsAjaxRequest())
+			{
+				if (id != null)
+				{
+					ViewBag.IsUpdate = true;
+					Setting setting = db.Settings.Where(m => m.ID == id).FirstOrDefault();
+					return PartialView("EditSetting", setting);
+				}
+				ViewBag.IsUpdate = false;
+				return PartialView("EditSetting");
+			}
+			else
+			{
+				if (id != null)
+				{
+					ViewBag.IsUpdate = true;
+					Setting setting = db.Settings.Where(m => m.ID == id).FirstOrDefault();
+					return PartialView("EditSetting", setting);
+				}
+				ViewBag.IsUpdate = false;
+				return View("EditSetting");
+			}
+		}
+
+		[HttpPost]
+		public ActionResult AddEditCharacter(Character character, string cmd)
+		{
+			if (ModelState.IsValid)
+			{
+				if (cmd == "Save")
+				{
+					try
+					{
+						db.Characters.Add(character);
+						db.SaveChanges();
+						return RedirectToAction("MyBlueScript");
+					}
+					catch { }
+				}
+				else
+				{
+					try
+					{
+						Character chara = db.Characters.Where(m => m.CharacterID == character.CharacterID).FirstOrDefault();
+						if (chara != null)
+						{
+							chara.FullName = character.FullName;
+							chara.Notes = character.Notes;
+							db.SaveChanges();
+						}
+						return RedirectToAction("MyBlueScript");
+					}
+					catch { }
+				}
+			}
+
+			if (Request.IsAjaxRequest())
+			{
+				return PartialView("EditCharacter", character);
+			}
+			else
+			{
+				return View("EditCharacter", character);
+			}
+		}
+
+		[HttpPost]
+		public ActionResult AddEditSetting(Setting setting, string cmd)
+		{
+			if (ModelState.IsValid)
+			{
+				if (cmd == "Save")
+				{
+					try
+					{
+						db.Settings.Add(setting);
+						db.SaveChanges();
+						return RedirectToAction("MyBlueScript");
+					}
+					catch { }
+				}
+				else
+				{
+					try
+					{
+						Setting sett = db.Settings.Where(m => m.ID == setting.ID).FirstOrDefault();
+						if (sett != null)
+						{
+							sett.Name = setting.Name;
+							sett.Notes = setting.Notes;
+							db.SaveChanges();
+						}
+						return RedirectToAction("MyBlueScript");
+					}
+					catch { }
+				}
+			}
+
+			if (Request.IsAjaxRequest())
+			{
+				return PartialView("EditSetting", setting);
+			}
+			else
+			{
+				return View("EditSetting", setting);
+			}
+		}
 
 		public ActionResult CreateCharacter()
 		{
@@ -124,27 +262,11 @@ namespace Blue_Script.Controllers
 		}
 
         [HttpPost]
-        public ActionResult Setting(Setting setting)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(setting).State = System.Data.EntityState.Modified;
-                db.SaveChanges();
-                TempData["message"] = setting.Name + " has been saved";
-                return RedirectToAction("MyBlueScript");
-            }
-            else
-            {
-                return View("MyBlueScript", db.Scenes);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult Delete(Scene eve)
+        public ActionResult DeleteScene(Scene s)
         {
             try
             {
-                db.Entry(eve).State = System.Data.EntityState.Deleted;
+                db.Entry(s).State = System.Data.EntityState.Deleted;
                 db.SaveChanges();
                 return RedirectToAction("MyBlueScript");
             }
