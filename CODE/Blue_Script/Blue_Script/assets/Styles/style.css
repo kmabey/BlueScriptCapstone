@@ -2,10 +2,29 @@
 {
     font-size: 62.5%
 }
-.row{
-	width: 960px;
-	margin: 0 auto;
+body 
+{
+	background: #ddf1f9;
+	color: White;
+	
 }
+img {
+	max-width: 100px;
+}
+.title 
+{
+	font-family: 'Dancing Script', cursive;
+	font-size: 4em;
+	color: White;
+	
+}
+.headerholder 
+{
+	padding-top: 10px;
+	background: #374775;
+	padding-bottom: 10px;
+}
+
 .event 
 {
     float: left;

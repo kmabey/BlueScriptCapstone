@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="../../assets/Styles/reset.css" />
 	<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.css"/>
 	<link rel="stylesheet" href="../../assets/font-awesome/css/font-awesome.min.css" />
+	<link href='http://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="@Url.Content("~/assets/JavaScript/jquery-ui-1.10.3.custom/css/cupertino/jquery-ui-1.10.3.custom.css")" />
 	<script src="@Url.Content("~/Scripts/jquery-2.0.3.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/assets/JavaScript/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js")" type="text/javascript"></script>
@@ -21,17 +23,22 @@
     <div class="page">
         <header class="headerholder">
             <div class="row">
-				<div class="col-md-5"></div>
-				<div class="col-md-7">
-					<nav>
+				<div class="col-md-offset-2">
+					<div class="col-md-6">
+						<img class="pull-left" src="@Url.Content("~/assets/Images/LogoDesign.png")" alt="Logo" />
+						<a class="title" href="#">BlueScript</a>
+						</div>
+						</div>
+						<div class="col-md-4">
+						<nav>
 						<ul class="nav nav-pills">
 							<li>@Html.ActionLink("Home", "Index", "Home")</li>
 							<li>@Html.ActionLink("My Blue Script", "MyBlueScript", "Home")</li>
 							<li>@Html.ActionLink("Current Statistics", "MyStats", "Home")</li>
 						</ul>
 					</nav>
+					</div>
 				</div>
-			</div>
             
         </header>
         <section id="main">
