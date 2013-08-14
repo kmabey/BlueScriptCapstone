@@ -28,7 +28,7 @@
 					@foreach (var item in ViewBag.myCharacters)
 	 {
 						<div class="event">
-							@Html.ActionLink((string)item.FullName, "AddEditCharacter", "Home", new { id = item.CharacterID }, new { @class = "editDialog" })
+							@Html.Action("AddEditCharacter", "Home", new { id = item.CharacterID })
 						</div>
 	 }
 					<div class="event">
@@ -40,7 +40,7 @@
 					@foreach (var setting in ViewBag.Settings)
 	 {
 						<div class="event">
-							@Html.ActionLink((string)setting.Name, "AddEditSetting", new { id = setting.ID }, new { @class = "editDialog" })
+							@Html.Action("AddEditSetting", "Home", new { id = setting.ID })
 						</div>
 	 }
 					<div class="event">
@@ -68,56 +68,6 @@
 
 		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
 		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
-
-		$("#openDialog").on("click", function (e) {
-			e.preventDefault();
-			var url = $(this).attr('href');
-
-			$("#dialog-edit").dialog({
-				title: 'Add New',
-				autoOpen: false,
-				resizable: false,
-				height: 355,
-				width: 400,
-				show: { effect: 'drop', direction: "up" },
-				modal: false,
-				draggable: true,
-				open: function (event, ui) {
-					$(this).load(url);
-				},
-				close: function (event, ui) {
-					$(this).dialog('close');
-				}
-			});
-
-			$("#dialog-edit").dialog('open');
-			return false;
-		});
-
-		$(".editDialog").on("click", function (e) {
-			e.preventDefault();
-			var url = $(this).attr('href');
-			$("#dialog-edit").dialog({
-				title: 'Edit',
-				autoOpen: false,
-				resizable: false,
-				height: 355,
-				width: 400,
-				show: { effect: 'drop', direction: "up" },
-				modal: false,
-				draggable: true,
-				open: function (event, ui) {
-					$(this).load(url);
-
-				},
-				close: function (event, ui) {
-					$(this).dialog('close');
-				}
-			});
-
-			$("#dialog-edit").dialog('open');
-			return false;
-		});
 
 		$(".confirmDialog").on("click", function (e) {
 

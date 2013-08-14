@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="../../assets/Styles/reset.css" />
-	<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.css"/>
 	<link rel="stylesheet" href="../../assets/font-awesome/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="@Url.Content("~/assets/JavaScript/jquery-ui-1.10.3.custom/css/cupertino/jquery-ui-1.10.3.custom.css")" />
 	<script src="@Url.Content("~/Scripts/jquery-2.0.3.js")" type="text/javascript"></script>
@@ -14,15 +14,15 @@
 <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/MicrosoftAjax.js")" type="text/javascript"></script>
 	<link rel="stylesheet" href="../../assets/Styles/style.css" />
-	<script src="../../assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
 	
 </head>
 <body>
     <div class="page">
         <header class="headerholder">
-            <div class="row-fluid">
-				<div class="span5"></div>
-				<div class="span6 offset1">
+            <div class="row">
+				<div class="col-md-5"></div>
+				<div class="col-md-7">
 					<nav>
 						<ul class="nav nav-pills">
 							<li>@Html.ActionLink("Home", "Index", "Home")</li>

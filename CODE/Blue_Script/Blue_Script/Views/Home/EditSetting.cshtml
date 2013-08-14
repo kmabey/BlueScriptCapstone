@@ -1,10 +1,11 @@
 ﻿@model Blue_Script.Setting
 
-@using (Ajax.BeginForm("AddEditSetting", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "dialog-edit" }))
+<div class="event" draggable="true">
+@using (Ajax.BeginForm("AddEditSetting", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "workarea" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend class="black">Setting</legend>
+        <legend>Setting</legend>
 
         @Html.HiddenFor(model => model.ID)
 
@@ -25,15 +26,8 @@
         </div>
 
          <p>
-            @if (ViewBag.IsUpdate == true)
-            {
-                <input type="submit" value="Update" id="btnUpdate" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
-            }
-            else
-            {
                 <input type="submit" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
-            }
-            <input type="button" value="Cancel" id="btncancel" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
         </p>
     </fieldset>
 }
+</div>

@@ -48,7 +48,6 @@ namespace Blue_Script.Controllers
 			return View(db.Scenes);
         }
 
-		[HttpGet]
 		public ActionResult AddEditCharacter(int? id)
 		{
 			if (Request.IsAjaxRequest())
@@ -75,7 +74,6 @@ namespace Blue_Script.Controllers
 			}
 		}
 
-		[HttpGet]
 		public ActionResult AddEditSetting(int? id)
 		{
 			if (Request.IsAjaxRequest())
@@ -83,7 +81,7 @@ namespace Blue_Script.Controllers
 				if (id != null)
 				{
 					ViewBag.IsUpdate = true;
-					Setting setting = db.Settings.Where(m => m.ID == id).FirstOrDefault();
+					Setting setting = db.Settings.Find(id);
 					return PartialView("EditSetting", setting);
 				}
 				ViewBag.IsUpdate = false;
@@ -94,7 +92,7 @@ namespace Blue_Script.Controllers
 				if (id != null)
 				{
 					ViewBag.IsUpdate = true;
-					Setting setting = db.Settings.Where(m => m.ID == id).FirstOrDefault();
+					Setting setting = db.Settings.Find(id);
 					return PartialView("EditSetting", setting);
 				}
 				ViewBag.IsUpdate = false;
