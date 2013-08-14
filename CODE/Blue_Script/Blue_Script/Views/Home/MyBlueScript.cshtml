@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<div class="span10">
-		<div class="workarea">
+		<div class="workarea" id="workarea">
 			@for (var i = 0; i < Model.Count(); i++)
    {
 				<div class="event">
@@ -60,6 +60,10 @@
 
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
+
+		$(".accordion").accordion({
+			collapsible: true
+		});
 
 		$("#openDialog").on("click", function (e) {
 			e.preventDefault();
