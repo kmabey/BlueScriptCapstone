@@ -4,71 +4,75 @@
 }
 <!--Side Nav & drag and drop area-->
 <div class="row-fluid">
-	<div class="span2">
-		<div class="sidebar">
-			<ul class="nav nav-list">
-				<li class="nav-header">Add New</li>
-				<li>@Html.ActionLink("Scene", "CreateScene", "Home")</li>
-				<li>@Html.ActionLink("Character", "AddEditCharacter", "Home", null, new { @id = "openDialog" })</li>
-				<li>@Html.ActionLink("Setting", "AddEditSetting", "Home", null, new { @id = "openDialog" })</li>
-				<li class="nav-header">Characters</li>
-				@foreach (var item in ViewBag.myCharacters)
-	  {
-					<li>
-						@Html.ActionLink((string)item.FullName, "AddEditCharacter", "Home", new { id = item.CharacterID }, new { @class = "editDialog" })
-						@Html.ActionLink("X", "DeleteCharacter", new { id = item.CharacterID }, new { @class = "confirmDialog" })
-					</li>
-	  }
-				<li class="nav-header">Settings</li>
-				@foreach (var setting in ViewBag.Settings)
-	  {
-					<li>
-						@Html.ActionLink((string)setting.Name, "AddEditSetting", new { id = setting.ID }, new { @class = "editDialog" })
-						@Html.ActionLink("X", "DeleteSetting", new { id = setting.ID }, new { @class = "confirmDialog" })
-					</li>
-	  }
-			</ul>
-		</div>
-	</div>
-	<div class="span10">
+	<div class="span12">
 		<div class="workarea" id="workarea">
-			@for (var i = 0; i < Model.Count(); i++)
-   {
-				<div class="event">
-					@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Scenes</a></li>
+					<li><a href="#tabs-2">Characters</a></li>
+					<li><a href="#tabs-3">Settings</a></li>
+				</ul>
+				<div id="tabs-1">
+					@for (var i = 0; i < Model.Count(); i++)
+	 {
+						<div class="event">
+							@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
+						</div>				
+	 }
+					<div class="event">
+						<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+						</a>
+					</div>
 				</div>
-					
-   }
-			<div class="event">
-				<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-				</a>
+				<div id="tabs-2">
+					@foreach (var item in ViewBag.myCharacters)
+	 {
+						<div class="event">
+							@Html.ActionLink((string)item.FullName, "AddEditCharacter", "Home", new { id = item.CharacterID }, new { @class = "editDialog" })
+						</div>
+	 }
+					<div class="event">
+						<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+						</a>
+					</div>
+				</div>
+				<div id="tabs-3">
+					@foreach (var setting in ViewBag.Settings)
+	 {
+						<div class="event">
+							@Html.ActionLink((string)setting.Name, "AddEditSetting", new { id = setting.ID }, new { @class = "editDialog" })
+						</div>
+	 }
+					<div class="event">
+						<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 <div id="dialog-confirm" style="display: none">
-        <p>
-            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-            Are you sure to delete ?
-        </p>
-    </div>
-    <div id="dialog-edit" style="display: none">
-    </div>
+	<p>
+		<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+		Are you sure to delete ?
+	</p>
+</div>
+<div id="dialog-edit" style="display: none">
+</div>
 <script type="text/javascript">
 	$(document).ready(function () {
 
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
 
-		$(".accordion").accordion({
-			collapsible: true
-		});
+		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
 
 		$("#openDialog").on("click", function (e) {
 			e.preventDefault();
 			var url = $(this).attr('href');
-			
+
 			$("#dialog-edit").dialog({
 				title: 'Add New',
 				autoOpen: false,
@@ -76,7 +80,7 @@
 				height: 355,
 				width: 400,
 				show: { effect: 'drop', direction: "up" },
-				modal: true,
+				modal: false,
 				draggable: true,
 				open: function (event, ui) {
 					$(this).load(url);
@@ -100,7 +104,7 @@
 				height: 355,
 				width: 400,
 				show: { effect: 'drop', direction: "up" },
-				modal: true,
+				modal: false,
 				draggable: true,
 				open: function (event, ui) {
 					$(this).load(url);
@@ -124,7 +128,7 @@
 				height: 170,
 				width: 350,
 				show: { effect: 'drop', direction: "up" },
-				modal: true,
+				modal: false,
 				draggable: true,
 				buttons: {
 					"OK": function () {

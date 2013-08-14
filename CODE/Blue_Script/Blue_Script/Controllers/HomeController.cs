@@ -56,7 +56,7 @@ namespace Blue_Script.Controllers
 				if (id != null)
 				{
 					ViewBag.IsUpdate = true;
-					Character character = db.Characters.Where(m => m.CharacterID == id).FirstOrDefault();
+					Character character = db.Characters.Find(id);
 					return PartialView("EditCharacter", character);
 				}
 				ViewBag.IsUpdate = false;
@@ -67,7 +67,7 @@ namespace Blue_Script.Controllers
 				if (id != null)
 				{
 					ViewBag.IsUpdate = true;
-					Character character = db.Characters.Where(m => m.CharacterID == id).FirstOrDefault();
+					Character character = db.Characters.Find(id);
 					return PartialView("EditCharacter", character);
 				}
 				ViewBag.IsUpdate = false;
