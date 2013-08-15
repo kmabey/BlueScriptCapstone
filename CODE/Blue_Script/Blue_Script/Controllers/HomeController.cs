@@ -234,7 +234,6 @@ namespace Blue_Script.Controllers
 		}
 
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public ActionResult EditScene(int id, FormCollection formCollection, string[] selectedCharacters)
 		{
 			var sceneToUpdate = db.Scenes.Find(id);

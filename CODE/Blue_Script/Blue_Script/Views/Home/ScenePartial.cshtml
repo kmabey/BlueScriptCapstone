@@ -1,6 +1,6 @@
 ﻿@model Blue_Script.Scene
 <div class="event" draggable="true">
-	@using (Ajax.BeginForm("EditScene", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "workarea" }))
+	@using (Ajax.BeginForm("EditScene", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "tabs-1" }))
  {
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true)

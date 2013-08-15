@@ -5,9 +5,21 @@
 }
 body 
 {
-	background: #D9E1FC;
+	
 	color: White;
 	font-family: 'Lato', sans-serif;
+	height: 100%;
+}
+.row.background 
+{
+	background: #d9e1fc;
+	background: -moz-linear-gradient(top,  #d9e1fc 0%, #bbd9f7 25%, #374775 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9e1fc), color-stop(25%,#bbd9f7), color-stop(100%,#374775));
+	background: -webkit-linear-gradient(top,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
+	background: -o-linear-gradient(top,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
+	background: -ms-linear-gradient(top,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
+	background: linear-gradient(to bottom,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9e1fc', endColorstr='#374775',GradientType=0 );
 }
 img {
 	max-width: 100px;
