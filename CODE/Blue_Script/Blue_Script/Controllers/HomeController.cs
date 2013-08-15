@@ -214,9 +214,33 @@ namespace Blue_Script.Controllers
 			return RedirectToAction("MyBlueScript");
 		}
 
+		public ActionResult CreateCharacter()
+		{
+			var newCharacter = new Character
+			{
+				FullName = "Character Name",
+				Notes = "Notes go here."
+			};
+			db.Characters.Add(newCharacter);
+			db.SaveChanges();
+			return RedirectToAction("MyBlueScript");
+		}
+
+		public ActionResult CreateSetting()
+		{
+			var newSetting = new Setting
+			{
+				Name = "Setting Name",
+				Notes = "Notes go here."
+			};
+			db.Settings.Add(newSetting);
+			db.SaveChanges();
+			return RedirectToAction("MyBlueScript");
+		}
+
 		public ActionResult CreateScene()
 		{
-			var newScene = new Scene {Name = "SceneName", Characters = new List<Character>(),
+			var newScene = new Scene {Name = "Scene Name", Characters = new List<Character>(),
 			Setting = null, Notes = "Notes go here."};
 			PopulateSettingsDropDownList();
 			PopulateAssignedCharacters(newScene);
