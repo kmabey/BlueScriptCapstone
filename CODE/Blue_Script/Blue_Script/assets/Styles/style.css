@@ -8,7 +8,9 @@ body
 	
 	color: White;
 	font-family: 'Lato', sans-serif;
-	height: 100%;
+}
+.bodyholder {
+	
 }
 .row.background 
 {
@@ -40,8 +42,26 @@ img {
 	padding-top: 10px;
 	background: #374775;
 	padding-bottom: 10px;
+	
 }
-
+.workarea 
+{
+background: #f2f9fe;
+background: -moz-linear-gradient(top,  #f2f9fe 0%, #d6f0fd 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f9fe), color-stop(100%,#d6f0fd));
+background: -webkit-linear-gradient(top,  #f2f9fe 0%,#d6f0fd 100%);
+background: -o-linear-gradient(top,  #f2f9fe 0%,#d6f0fd 100%);
+background: -ms-linear-gradient(top,  #f2f9fe 0%,#d6f0fd 100%);
+background: linear-gradient(to bottom,  #f2f9fe 0%,#d6f0fd 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f9fe', endColorstr='#d6f0fd',GradientType=0 );
+-webkit-border-bottom-right-radius: 25px;
+-webkit-border-bottom-left-radius: 25px;
+-moz-border-radius-bottomright: 25px;
+-moz-border-radius-bottomleft: 25px;
+border-bottom-right-radius: 25px;
+border-bottom-left-radius: 25px;
+	
+}
 .event 
 {
     float: left;
@@ -50,6 +70,7 @@ img {
     text-align:left;
     max-width: 40rem;
     border: none;
+    background: #374775;
 	
 }
 .event.over
