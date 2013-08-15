@@ -1,5 +1,4 @@
 ﻿@model Blue_Script.Scene
-<div class="event" draggable="true">
 	@using (Ajax.BeginForm("EditScene", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "tabs-1" }))
  {
 		@Html.AntiForgeryToken()
@@ -23,11 +22,15 @@
 
 	 foreach (var character in characters)
 	 {
+		<div class="checkbox">
+			<label>
 					<input type="checkbox" 
                                name="selectedCharacters" 
                                value="@character.CharacterID" 
                                @(Html.Raw(character.Assigned ? "checked=\"checked\"" : "")) /> 
-					 @: @character.FullName
+					 @character.FullName
+			</label>
+		</div>
      }
 				}
 			</div>
@@ -39,4 +42,4 @@
 
  }
 		@Html.ActionLink("X", "DeleteScene", new { id = Model.ID }, new { @class = "confirmDialog" })
-</div>
+

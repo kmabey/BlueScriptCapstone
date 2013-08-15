@@ -5,19 +5,15 @@
 }
 body 
 {
-	
 	color: White;
-	font-family: 'Lato', sans-serif;
 }
 a {
 	color:White;
 	
 }
 .bodyholder {
-	background: #DEE8F7;
-}
-.row.background 
-{
+	font-family: 'Lato', sans-serif;
+	min-height: 60em;
 	background: #d9e1fc;
 	background: -moz-linear-gradient(top,  #d9e1fc 0%, #bbd9f7 25%, #374775 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9e1fc), color-stop(25%,#bbd9f7), color-stop(100%,#374775));
@@ -33,6 +29,11 @@ img {
 .mainnav {
 	padding-top: 2.5em;
 	font-size: 1.2em;
+}
+legend {
+	color: White;
+	text-align: center;
+	
 }
 .title 
 {
@@ -66,7 +67,6 @@ border-bottom-left-radius: 5px;
     margin: 1em;
     border-radius: 1.5em;
     text-align:left;
-    max-width: 40rem;
     border: none;
     background: #374775;
 	

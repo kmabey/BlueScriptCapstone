@@ -15,7 +15,7 @@
 				<div id="tabs-1">
 					@for (var i = 0; i < Model.Count(); i++)
 	 {
-						<div class="event">
+						<div class="event well" draggable="true">
 							@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
 						</div>				
 	 }
@@ -27,7 +27,7 @@
 				<div id="tabs-2">
 					@foreach (var item in ViewBag.myCharacters)
 	 {
-						<div class="event">
+						<div class="event well" draggable="true">
 							@Html.Action("AddEditCharacter", "Home", new { id = item.CharacterID })
 						</div>
 	 }
@@ -39,7 +39,7 @@
 				<div id="tabs-3">
 					@foreach (var setting in ViewBag.Settings)
 	 {
-						<div class="event">
+						<div class="event well" draggable="true">
 							@Html.Action("AddEditSetting", "Home", new { id = setting.ID })
 						</div>
 	 }
