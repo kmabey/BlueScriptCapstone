@@ -1,6 +1,6 @@
 ﻿@model Blue_Script.Character
 
-<div class="event" draggable="true">		   
+		   
 @using (Ajax.BeginForm("AddEditCharacter", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "tabs-2" }))
 {
     @Html.ValidationSummary(true)
@@ -30,6 +30,5 @@
         </p>
     </fieldset>
 }
-	@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID }, new { @class = "confirmDialog" })
-</div>
+	@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })
 

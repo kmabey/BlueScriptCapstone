@@ -252,7 +252,7 @@ namespace Blue_Script.Controllers
 		public ActionResult ScenePartial(int id)
 		{
 			Scene scene = db.Scenes.Find(id);
-			PopulateSettingsDropDownList(scene.Setting);
+			PopulateSettingsDropDownList(scene.SettingID);
 			PopulateAssignedCharacters(scene);
 			return PartialView(scene);
 		}
@@ -262,7 +262,7 @@ namespace Blue_Script.Controllers
 		{
 			var sceneToUpdate = db.Scenes.Find(id);
 			if (TryUpdateModel(sceneToUpdate, "",
-			   new string[] { "Name", "Notes" }))
+			   new string[] { "Name", "Notes", "SettingID" }))
 			{
 				try
 				{
@@ -289,7 +289,7 @@ namespace Blue_Script.Controllers
 			var q = from s in db.Settings
 								   orderby s.Name
 								   select s;
-			ViewBag.PossibleSettings = new SelectList(q.AsEnumerable(), "ID", "Name", selectedSetting);
+			ViewBag.PossibleSettings = new SelectList(q.AsEnumerable(), "ID", "Name", db.Settings.Find(selectedSetting));
 		}
 
 		private void PopulateAssignedCharacters(Scene scene)

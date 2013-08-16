@@ -1,6 +1,5 @@
 ﻿@model Blue_Script.Setting
 
-<div class="event" draggable="true">
 @using (Ajax.BeginForm("AddEditSetting", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "tabs-3" }))
 {
     @Html.ValidationSummary(true)
@@ -30,5 +29,4 @@
         </p>
     </fieldset>
 }
-	@Html.ActionLink("X", "DeleteSetting", new { id = Model.ID }, new { @class = "confirmDialog" })
-</div>
+	@Html.ActionLink("X", "DeleteSetting", new { id = Model.ID })

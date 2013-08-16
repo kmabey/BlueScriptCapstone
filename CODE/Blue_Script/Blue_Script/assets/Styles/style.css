@@ -43,6 +43,10 @@ legend {
 	color: White;
 	
 }
+.title:hover {
+	color: White;
+	text-decoration: none;
+}
 .headerholder 
 {
 	padding-top: 10px;
@@ -90,4 +94,12 @@ background: white;
 footer 
 {
 	min-height: 30px;
+}
+.backcolorWhite {
+	background: white;
+	color: Black;
+	margin: 1em;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
 }
