@@ -4,7 +4,7 @@
 		HttpMethod = "POST",
 		UpdateTargetId = "tabs-1",
 		InsertionMode = InsertionMode.InsertAfter
-	}))
+	}, new { @class = "sceneForm" }))
  {
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true)
@@ -12,8 +12,7 @@
 			<legend>Scene</legend>
 			@Html.HiddenFor(model => Model.ID)
 			<h5>
-				Name</h5>
-			<div class="editor-field">@Html.EditorFor(model => Model.Name)</div>
+				Name: @Html.EditorFor(model => Model.Name)</h5>
 			<h5>
 				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings)
 				
@@ -42,13 +41,8 @@
 			<h5>
 				Notes</h5>
 			@Html.EditorFor(model => Model.Notes)
-			<input type="submit" value="Save" style="display:none;" />
+			<input type="submit" value="Save" />
 		</fieldset>
 
  }
 		@Html.ActionLink("X", "DeleteScene", new { id = Model.ID }, new { @class = "confirmDialog" })
-
-		<script type="text/javascript">
-			$(function () {
-			});
-		</script>
