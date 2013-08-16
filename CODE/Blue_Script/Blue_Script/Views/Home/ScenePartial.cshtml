@@ -1,5 +1,5 @@
 ﻿@model Blue_Script.Scene
-	@using (Ajax.BeginForm("EditScene", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "tabs-1" }))
+	@using (Ajax.BeginForm("EditScene", "Home", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.InsertAfter, UpdateTargetId = "tabs-1" }))
  {
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true)
@@ -36,10 +36,19 @@
 			</div>
 			<h5>
 				Notes</h5>
-			@Html.EditorFor(model => Model.Notes)
-			<input type="submit" value="Save" />
+			@Html.EditorFor(model => Model.Notes, new {@class =  "notes"})
+			<input type="submit" name="save" value="Save" style="display:none;" />
 		</fieldset>
 
  }
 		@Html.ActionLink("X", "DeleteScene", new { id = Model.ID }, new { @class = "confirmDialog" })
 
+
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('.notes').change(function () {
+					$('#save').click();
+				});
+			});
+
+		</script>
