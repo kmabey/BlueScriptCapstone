@@ -39,7 +39,7 @@
 				<div id="tabs-3">
 					@foreach (var setting in ViewBag.Settings)
 	 {
-						<div class="event well" draggable="true">
+						<div class="event well"  draggable="true">
 							@Html.Action("AddEditSetting", "Home", new { id = setting.ID })
 						</div>
 	 }
