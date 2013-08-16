@@ -5,6 +5,7 @@
 }
 body 
 {
+	background: #374775;
 	color: White;
 }
 a {
@@ -79,4 +80,14 @@ border-bottom-left-radius: 5px;
 {
     padding: .5em;
     font-size: 1em;
+}
+.ui-dialog-buttonpane  {
+	background: white;
+}
+ui-dialog{
+background: white;
+}
+footer 
+{
+	min-height: 30px;
 }
