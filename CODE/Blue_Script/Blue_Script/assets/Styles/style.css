@@ -3,16 +3,14 @@
     font-size: 62.5%;
 	font-family: 'Lato', sans-serif;
 }
+.row 
+{
+	max-width: 1300px;
+	margin: 0 auto;
+}
+
 body 
 {
-	background: #374775;
-	color: White;
-}
-a {
-	color:White;
-	
-}
-.bodyholder {
 	font-family: 'Lato', sans-serif;
 	min-height: 60em;
 	background: #d9e1fc;
@@ -23,13 +21,22 @@ a {
 	background: -ms-linear-gradient(top,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
 	background: linear-gradient(to bottom,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9e1fc', endColorstr='#374775',GradientType=0 );
+	color: White;
+}
+a {
+	color:White;
+	
+}
+.bodyholder 
+{
+	
 }
 img {
 	max-width: 100px;
 }
 .mainnav {
 	padding-top: 2.5em;
-	font-size: 1.2em;
+	font-size: 1.3em;
 }
 legend {
 	color: White;
@@ -69,7 +76,7 @@ border-bottom-left-radius: 5px;
 .event 
 {
     float: left;
-    margin: 1em;
+    margin: 1.5em;
     border-radius: 1.5em;
     text-align:left;
     border: none;
@@ -85,15 +92,20 @@ border-bottom-left-radius: 5px;
     padding: .5em;
     font-size: 1em;
 }
-.ui-dialog-buttonpane  {
+.ui-dialog-buttonpane  
+{
 	background: white;
 }
-ui-dialog{
-background: white;
+ui-dialog
+{
+	background: white;
 }
 footer 
 {
 	min-height: 30px;
+	background: #374775;
+	padding: .5em;
+	border: 3px solid white;
 }
 .backcolorWhite {
 	background: white;
