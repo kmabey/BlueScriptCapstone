@@ -5,7 +5,7 @@
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Character</legend>
+        <legend>Character <span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span></legend>
 
         @Html.HiddenFor(model => model.CharacterID)
 
@@ -30,5 +30,5 @@
         </p>
     </fieldset>
 }
-	@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })
+	
 

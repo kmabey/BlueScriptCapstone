@@ -12,7 +12,6 @@
 body 
 {
 	font-family: 'Lato', sans-serif;
-	min-height: 60em;
 	background: #d9e1fc;
 	background: -moz-linear-gradient(top,  #d9e1fc 0%, #bbd9f7 25%, #374775 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9e1fc), color-stop(25%,#bbd9f7), color-stop(100%,#374775));
@@ -21,6 +20,7 @@ body
 	background: -ms-linear-gradient(top,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
 	background: linear-gradient(to bottom,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9e1fc', endColorstr='#374775',GradientType=0 );
+	background-size: cover;
 	color: White;
 }
 a {
@@ -100,12 +100,11 @@ ui-dialog
 {
 	background: white;
 }
+
 footer 
 {
 	min-height: 30px;
-	background: #374775;
 	padding: .5em;
-	border: 3px solid white;
 }
 .backcolorWhite {
 	background: white;

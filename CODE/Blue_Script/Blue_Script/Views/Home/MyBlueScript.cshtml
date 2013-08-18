@@ -11,7 +11,7 @@
 					<li><a href="#tabs-2">Characters</a></li>
 					<li><a href="#tabs-3">Settings</a></li>
 				</ul>
-				<div id="tabs-1">
+				<div id="tabs-1" class="tab">
 					@for (var i = 0; i < Model.Count(); i++)
 	 {
 						<div class="event well" draggable="true">
@@ -23,7 +23,7 @@
 						</a>
 					</div>
 				</div>
-				<div id="tabs-2">
+				<div id="tabs-2" class="tab">
 					@foreach (var item in ViewBag.myCharacters)
 	 {
 						<div class="event well" draggable="true">
@@ -35,7 +35,7 @@
 						</a>
 					</div>
 				</div>
-				<div id="tabs-3">
+				<div id="tabs-3" class="tab">
 					@foreach (var setting in ViewBag.Settings)
 	 {
 						<div class="event well"  draggable="true">
