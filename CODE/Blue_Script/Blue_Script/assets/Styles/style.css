@@ -60,6 +60,10 @@ input[type=text]
 	border: none; 
 	color: White;
 }
+input[type=submit] 
+{
+	display: none;
+}
 .page {
 	background: #d9e1fc;
 	background: -moz-linear-gradient(top,  #d9e1fc 0%, #bbd9f7 25%, #374775 100%);

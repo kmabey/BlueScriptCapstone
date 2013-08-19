@@ -5,13 +5,12 @@
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>@Html.EditorFor(model => model.FullName) <span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span></legend>
+        <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.FullName" name="Name" onchange="this.form.submit()"><span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span></legend>
 		@Html.ValidationMessageFor(model => model.FullName)
         @Html.HiddenFor(model => model.CharacterID)
         <h5>Notes:</h5>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Notes)
-            @Html.ValidationMessageFor(model => model.Notes)
+            <textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="this.form.submit()">@Model.Notes</textarea>
         </div>
 
         <p>

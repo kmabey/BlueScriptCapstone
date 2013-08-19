@@ -9,10 +9,10 @@
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true)
 		<fieldset>
-			<legend>@Html.EditorFor(model => Model.Name)<span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
+			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="this.form.submit()"><span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
 			@Html.HiddenFor(model => Model.ID)
 			<h5>
-				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings)
+				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings, new { @onchange="this.form.submit()" })
 				
 			</h5>
 			<h5>
@@ -29,6 +29,7 @@
 					<input type="checkbox" 
                                name="selectedCharacters" 
                                value="@character.CharacterID" 
+							   onchange="this.form.submit()"
                                @(Html.Raw(character.Assigned ? "checked=\"checked\"" : "")) /> 
 					 @character.FullName
 			</label>
@@ -38,8 +39,8 @@
 			</div>
 			<h5>
 				Notes</h5>
-			@Html.EditorFor(model => Model.Notes)
-			<input type="submit" value="Save" />
+			<textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="this.form.submit()">@Model.Notes</textarea>
+			<input type="submit" value="Save"/>
 		</fieldset>
 
  }
