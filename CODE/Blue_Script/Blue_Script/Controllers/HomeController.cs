@@ -48,140 +48,97 @@ namespace Blue_Script.Controllers
 			return View(db.Scenes);
         }
 
-		public ActionResult AddEditCharacter(int? id)
+		public ActionResult AddEditCharacter(int id)
 		{
-			if (Request.IsAjaxRequest())
-			{
-				if (id != null)
-				{
-					ViewBag.IsUpdate = true;
-					Character character = db.Characters.Find(id);
-					return PartialView("EditCharacter", character);
-				}
-				ViewBag.IsUpdate = false;
-				return PartialView("EditCharacter");
-			}
-			else
-			{
-				if (id != null)
-				{
-					ViewBag.IsUpdate = true;
-					Character character = db.Characters.Find(id);
-					return PartialView("EditCharacter", character);
-				}
-				ViewBag.IsUpdate = false;
-				return View("EditCharacter");
-			}
+			Character character = db.Characters.Find(id);
+			return PartialView("EditCharacter", character);
 		}
 
-		public ActionResult AddEditSetting(int? id)
+		public ActionResult AddEditSetting(int id)
 		{
-			if (Request.IsAjaxRequest())
-			{
-				if (id != null)
-				{
-					ViewBag.IsUpdate = true;
-					Setting setting = db.Settings.Find(id);
-					return PartialView("EditSetting", setting);
-				}
-				ViewBag.IsUpdate = false;
-				return PartialView("EditSetting");
-			}
-			else
-			{
-				if (id != null)
-				{
-					ViewBag.IsUpdate = true;
-					Setting setting = db.Settings.Find(id);
-					return PartialView("EditSetting", setting);
-				}
-				ViewBag.IsUpdate = false;
-				return View("EditSetting");
-			}
+			Setting setting = db.Settings.Find(id);
+			return PartialView("EditSetting", setting);
+		}
+
+		public ActionResult ScenePartial(int id)
+		{
+			Scene scene = db.Scenes.Find(id);
+			PopulateSettingsDropDownList(scene.SettingID);
+			PopulateAssignedCharacters(scene);
+			return PartialView(scene);
 		}
 
 		[HttpPost]
-		public ActionResult AddEditCharacter(Character character, string cmd)
+		public ActionResult EditScene(int id, FormCollection formCollection, string[] selectedCharacters)
 		{
-			if (ModelState.IsValid)
+			var sceneToUpdate = db.Scenes.Find(id);
+			if (TryUpdateModel(sceneToUpdate, "",
+			   new string[] { "Name", "Notes", "SettingID" }))
 			{
-				if (cmd == "Save")
+				try
 				{
-					try
-					{
-						db.Characters.Add(character);
-						db.SaveChanges();
-						return RedirectToAction("MyBlueScript");
-					}
-					catch { }
-				}
-				else
-				{
-					try
-					{
-						Character chara = db.Characters.Where(m => m.CharacterID == character.CharacterID).FirstOrDefault();
-						if (chara != null)
-						{
-							chara.FullName = character.FullName;
-							chara.Notes = character.Notes;
-							db.SaveChanges();
-						}
-						return RedirectToAction("MyBlueScript");
-					}
-					catch { }
-				}
-			}
 
-			if (Request.IsAjaxRequest())
-			{
-				return PartialView("EditCharacter", character);
+					UpdateSceneCharacters(selectedCharacters, sceneToUpdate);
+
+					db.Entry(sceneToUpdate).State = EntityState.Modified;
+					db.SaveChanges();
+
+					return RedirectToAction("MyBlueScript");
+				}
+				catch (DataException /* dex */)
+				{
+					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+				}
 			}
-			else
-			{
-				return View("EditCharacter", character);
-			}
+			PopulateAssignedCharacters(sceneToUpdate);
+			return View("MyBlueScript", sceneToUpdate);
 		}
 
 		[HttpPost]
-		public ActionResult AddEditSetting(Setting setting, string cmd)
+		public ActionResult AddEditCharacter(int id, FormCollection formCollection)
 		{
-			if (ModelState.IsValid)
+			var characterToUpdate = db.Characters.Find(id);
+			if (TryUpdateModel(characterToUpdate, "",
+			   new string[] { "FullName", "Notes"}))
 			{
-				if (cmd == "Save")
+				try
 				{
-					try
-					{
-						db.Settings.Add(setting);
-						db.SaveChanges();
-						return RedirectToAction("MyBlueScript");
-					}
-					catch { }
-				}
-				else
-				{
-					try
-					{
-						Setting sett = db.Settings.Where(m => m.ID == setting.ID).FirstOrDefault();
-						if (sett != null)
-						{
-							sett.Name = setting.Name;
-							sett.Notes = setting.Notes;
-							db.SaveChanges();
-						}
-						return RedirectToAction("MyBlueScript");
-					}
-					catch { }
-				}
-			}
+					db.Entry(characterToUpdate).State = EntityState.Modified;
+					db.SaveChanges();
 
-			if (Request.IsAjaxRequest())
-			{
-				return PartialView("EditSetting", setting);
+					return RedirectToAction("MyBlueScript");
+				}
+				catch (DataException /* dex */)
+				{
+					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+				}
 			}
-			else
+			return View("MyBlueScript", characterToUpdate);
+		}
+
+		[HttpPost]
+		public ActionResult AddEditSetting(int id, FormCollection formCollection)
+		{
+			var settingToUpdate = db.Settings.Find(id);
+			if (TryUpdateModel(settingToUpdate, "",
+			   new string[] { "Name", "Notes"}))
 			{
-				return View("EditSetting", setting);
+				try
+				{
+					db.Entry(settingToUpdate).State = EntityState.Modified;
+					db.SaveChanges();
+
+					return RedirectToAction("MyBlueScript");
+				}
+				catch (DataException /* dex */)
+				{
+					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+				}
 			}
+			return View("MyBlueScript", settingToUpdate);
 		}
 
 		public ActionResult DeleteCharacter(int id)
@@ -249,40 +206,7 @@ namespace Blue_Script.Controllers
 			return RedirectToAction("MyBlueScript");
 		}
 
-		public ActionResult ScenePartial(int id)
-		{
-			Scene scene = db.Scenes.Find(id);
-			PopulateSettingsDropDownList(scene.SettingID);
-			PopulateAssignedCharacters(scene);
-			return PartialView(scene);
-		}
-
-		[HttpPost]
-		public ActionResult EditScene(int id, FormCollection formCollection, string[] selectedCharacters)
-		{
-			var sceneToUpdate = db.Scenes.Find(id);
-			if (TryUpdateModel(sceneToUpdate, "",
-			   new string[] { "Name", "Notes", "SettingID" }))
-			{
-				try
-				{
-
-					UpdateSceneCharacters(selectedCharacters, sceneToUpdate);
-
-					db.Entry(sceneToUpdate).State = EntityState.Modified;
-					db.SaveChanges();
-
-					return RedirectToAction("MyBlueScript");
-				}
-				catch (DataException /* dex */)
-				{
-					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
-					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-				}
-			}
-			PopulateAssignedCharacters(sceneToUpdate);
-			return View("MyBlueScript", sceneToUpdate);
-		}
+		
 
 		private void PopulateSettingsDropDownList(object selectedSetting = null)
 		{

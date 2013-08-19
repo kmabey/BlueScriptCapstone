@@ -12,6 +12,10 @@
 body 
 {
 	font-family: 'Lato', sans-serif;
+	background: #374775;
+	color: White;
+}
+.page {
 	background: #d9e1fc;
 	background: -moz-linear-gradient(top,  #d9e1fc 0%, #bbd9f7 25%, #374775 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9e1fc), color-stop(25%,#bbd9f7), color-stop(100%,#374775));
@@ -21,24 +25,31 @@ body
 	background: linear-gradient(to bottom,  #d9e1fc 0%,#bbd9f7 25%,#374775 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d9e1fc', endColorstr='#374775',GradientType=0 );
 	background-size: cover;
-	color: White;
 }
-a {
+a 
+{
 	color:White;
 	
+}
+a:hover 
+{
+	text-decoration: none;
 }
 .bodyholder 
 {
 	
 }
-img {
+img 
+{
 	max-width: 100px;
 }
-.mainnav {
+.mainnav 
+{
 	padding-top: 2.5em;
 	font-size: 1.3em;
 }
-legend {
+legend 
+{
 	color: White;
 	text-align: center;
 	
@@ -50,7 +61,8 @@ legend {
 	color: White;
 	
 }
-.title:hover {
+.title:hover 
+{
 	color: White;
 	text-decoration: none;
 }
@@ -100,13 +112,14 @@ ui-dialog
 {
 	background: white;
 }
-
 footer 
 {
 	min-height: 30px;
 	padding: .5em;
+	bottom: 1em;
 }
-.backcolorWhite {
+.backcolorWhite 
+{
 	background: white;
 	color: Black;
 	margin: 1em;
