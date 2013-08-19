@@ -3,28 +3,61 @@
     font-size: 62.5%;
 	font-family: 'Lato', sans-serif;
 }
-h1 {
+h1 
+{
 	font-family: 'Dancing Script', cursive;
+	text-align: center;
 }
-h3 {
-	font-family: 'Dancing Script', cursive;
+h3 
+{
+	padding: 0;
+	margin: 0;
+	font-size: 1.2em;
+	text-align: center;
+}
+body 
+{
+	font-family: 'Lato', sans-serif;
+	background: #374775;
+	color: White;
 }
 .row 
 {
 	max-width: 1300px;
 	margin: 0 auto;
 }
-.homeHolder {
+.homeHolder 
+{
+	margin-top: 1em;
 	background: white;
 	min-height: 30em;
 	min-width: 20em;
+	max-width: 60em;
 	color: #374775;
-	font-family: 'Dancing Script', cursive;
-}
-body 
-{
 	font-family: 'Lato', sans-serif;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.innerHome 
+{
+	margin-top: 1em;
+}
+.sideNavHolder 
+{
+	margin-top: 5em;
 	background: #374775;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-left: -1.2em;
+}
+input[type=text] 
+{
+	background-color: transparent;
+	border: none; 
 	color: White;
 }
 .page {

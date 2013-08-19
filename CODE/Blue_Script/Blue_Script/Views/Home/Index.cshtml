@@ -3,8 +3,22 @@
 }
 <div class="row">
 	<div class="homeHolder">
-		<h1>Welcome to Blue Script</h1>
-		<h3>The blue print for writers</h3>
+		<div class="col-md-5">
+			<div class="innerHome">
+				<h1>Welcome to Blue Script</h1>
+				<h3>The blue print for writers</h3>
+			</div>
+			<div class="sideNavHolder">
+				<ul class="nav nav-pills nav-stacked">
+					<li>@Html.ActionLink("My Blue Script", "MyBlueScript", "Home")</li>
+					<li>@Html.ActionLink("Current Statistics", "MyStats", "Home")</li>
+					<li>@Html.ActionLink("Chapters", "Chapters", "Home")</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-7">
+			insert slideshow or picture here.
+		</div>
 	</div>
 </div>
 

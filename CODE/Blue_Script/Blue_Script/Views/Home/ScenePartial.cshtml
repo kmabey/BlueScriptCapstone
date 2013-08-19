@@ -9,10 +9,8 @@
 		@Html.AntiForgeryToken()
 		@Html.ValidationSummary(true)
 		<fieldset>
-			<legend>Scene <span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
+			<legend>@Html.EditorFor(model => Model.Name)<span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
 			@Html.HiddenFor(model => Model.ID)
-			<h5>
-				Name: @Html.EditorFor(model => Model.Name)</h5>
 			<h5>
 				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings)
 				

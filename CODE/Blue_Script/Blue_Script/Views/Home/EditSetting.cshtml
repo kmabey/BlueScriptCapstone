@@ -4,21 +4,11 @@
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Setting <span class="pull-right">@Html.ActionLink("X", "DeleteSetting", new { id = Model.ID })</span></legend>
-
+        <legend>@Html.EditorFor(model => model.Name) <span class="pull-right">@Html.ActionLink("X", "DeleteSetting", new { id = Model.ID })</span></legend>
+		@Html.ValidationMessageFor(model => model.Name)
         @Html.HiddenFor(model => model.ID)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Notes)
-        </div>
+        <h5>Notes</h5>
         <div class="editor-field">
             @Html.EditorFor(model => model.Notes)
             @Html.ValidationMessageFor(model => model.Notes)
