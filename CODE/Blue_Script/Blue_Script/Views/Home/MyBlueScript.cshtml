@@ -3,60 +3,70 @@
 	ViewBag.Title = "My BlueScript";
 }
 <div class="row">
-	<div class="col-md-12">
-		<div class="workarea" id="workarea">
-			<div id="tabs">
-				<ul class="nav nav-pills">
-					<li><a href="#tabs-1">Scenes</a></li>
-					<li><a href="#tabs-2">Characters</a></li>
-					<li><a href="#tabs-3">Settings</a></li>
-				</ul>
-				<div id="tabs-1" class="tab">
-					@for (var i = 0; i < Model.Count(); i++)
-	 {
-						<div class="event well" draggable="true">
-							@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
-						</div>				
-	 }
-					<div class="event">
-						<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-						</a>
-					</div>
-				</div>
-				<div id="tabs-2" class="tab">
-					@foreach (var item in ViewBag.myCharacters)
-	 {
-						<div class="event well" draggable="true">
-							@Html.Action("AddEditCharacter", "Home", new { id = item.CharacterID })
-						</div>
-	 }
-					<div class="event">
-						<a href="@Url.Action("CreateCharacter", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-						</a>
-					</div>
-				</div>
-				<div id="tabs-3" class="tab">
-					@foreach (var setting in ViewBag.Settings)
-	 {
-						<div class="event well"  draggable="true">
-							@Html.Action("AddEditSetting", "Home", new { id = setting.ID })
-						</div>
-	 }
-					<div class="event">
-						<a href="@Url.Action("CreateSetting", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-						</a>
-					</div>
-				</div>
+<header class="bsHeader" id="sceneHead">
+			<h1>
+				Scenes</h1>
+		</header>
+	<div id="tabs-1" class="tab">
+		
+		@for (var i = 0; i < Model.Count(); i++)
+  {
+			<div class="event well" draggable="true">
+				@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
+			</div>				
+  }
+		<div class="event add">
+			<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+			</a>
+		</div>
+	</div>
+</div>
+<div class="row">
+<header class="bsHeader" id="charHead">
+			<h1>
+				Characters</h1>
+		</header>
+	<div id="tabs-2" class="tab">
+		
+		@foreach (var item in ViewBag.myCharacters)
+  {
+			<div class="event well" draggable="true">
+				@Html.Action("AddEditCharacter", "Home", new { id = item.CharacterID })
 			</div>
+  }
+		<div class="event add">
+			<a href="@Url.Action("CreateCharacter", "Home")"><i class="icon-plus-sign-alt icon-4x">
+			</i></a>
+		</div>
+	</div>
+</div>
+<div class="row">
+<header class="bsHeader" id="setHead">
+			<h1>
+				Settings</h1>
+		</header>
+	<div id="tabs-3" class="tab">
+		
+		@foreach (var setting in ViewBag.Settings)
+  {
+			<div class="event well" draggable="true">
+				@Html.Action("AddEditSetting", "Home", new { id = setting.ID })
+			</div>
+  }
+		<div class="event add">
+			<a href="@Url.Action("CreateSetting", "Home")"><i class="icon-plus-sign-alt icon-4x">
+			</i></a>
 		</div>
 	</div>
 </div>
 <div class="modal-dialog" id="dialog-confirm" style="display: none">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close">&times;</button>
-        <h4 class="modal-title">Are you sure to delete ?</h4>
-      </div>
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close">
+				&times;</button>
+			<h4 class="modal-title">
+				Are you sure to delete ?</h4>
+		</div>
 	</div>
 </div>
 <div id="dialog-edit" style="display: none">
@@ -71,9 +81,33 @@
 			$('.sceneForm').trigger('input.submit');
 		});
 
+		function runEffect1() {
+			var options = {};
+			$("#tabs-1").toggle('clip', options, 1000);
+		};
 
-		$("#tabs").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
-		$("#tabs li").removeClass("ui-corner-top").addClass("ui-corner-left");
+		$("#sceneHead").click(function () {
+			runEffect1();
+			return false;
+		});
+		function runEffect2() {
+			var options = {};
+			$("#tabs-2").toggle('clip', options, 1000);
+		};
+
+		$("#charHead").click(function () {
+			runEffect2();
+			return false;
+		});
+		function runEffect3() {
+			var options = {};
+			$("#tabs-3").toggle("clip", options, 1000);
+		};
+
+		$("#setHead").click(function () {
+			runEffect3();
+			return false;
+		});
 
 		$(".confirmDialog").on("click", function (e) {
 

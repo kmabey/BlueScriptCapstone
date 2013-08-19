@@ -7,6 +7,7 @@ h1
 {
 	font-family: 'Dancing Script', cursive;
 	text-align: center;
+	margin-top: .1em;
 }
 h3 
 {
@@ -30,7 +31,7 @@ body
 {
 	margin-top: 1em;
 	background: white;
-	min-height: 30em;
+	min-height: 20em;
 	min-width: 20em;
 	max-width: 60em;
 	color: #374775;
@@ -47,7 +48,7 @@ body
 }
 .sideNavHolder 
 {
-	margin-top: 5em;
+	margin-top: 3em;
 	background: #374775;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
@@ -64,7 +65,8 @@ input[type=submit]
 {
 	display: none;
 }
-.page {
+.page 
+{
 	background: #d9e1fc;
 	background: -moz-linear-gradient(top,  #d9e1fc 0%, #bbd9f7 25%, #374775 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9e1fc), color-stop(25%,#bbd9f7), color-stop(100%,#374775));
@@ -97,6 +99,16 @@ img
 	padding-top: 2.5em;
 	font-size: 1.3em;
 }
+.bsHeader 
+{
+	width:  100%;
+	background: #374775;
+	-moz-border-radius: 1.5em;
+	-webkit-border-radius: 1.5em;
+	border-radius: 1.5em;
+	border: 3px solid white;
+	margin-top: 1em; 
+}
 legend 
 {
 	color: White;
@@ -123,26 +135,23 @@ legend
 	border-bottom: 3px solid white;
 	
 }
-.workarea 
-{
-background: #374775;
--webkit-border-bottom-right-radius: 5px;
--webkit-border-bottom-left-radius: 5px;
--moz-border-radius-bottomright: 5px;
--moz-border-radius-bottomleft: 5px;
-border-bottom-right-radius: 5px;
-border-bottom-left-radius: 5px;
-	
-}
 .event 
 {
     float: left;
-    margin: 1.5em;
+    margin: .5em;
+    -moz-border-radius: 1.5em;
+	-webkit-border-radius: 1.5em;
     border-radius: 1.5em;
     text-align:left;
     border: none;
     background: #374775;
+    border: 3px solid white;
 	
+}
+.event.add 
+{
+	border: none;
+	background: Transparent;
 }
 .event.over
 {
