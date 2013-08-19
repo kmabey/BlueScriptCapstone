@@ -3,12 +3,24 @@
     font-size: 62.5%;
 	font-family: 'Lato', sans-serif;
 }
+h1 {
+	font-family: 'Dancing Script', cursive;
+}
+h3 {
+	font-family: 'Dancing Script', cursive;
+}
 .row 
 {
 	max-width: 1300px;
 	margin: 0 auto;
 }
-
+.homeHolder {
+	background: white;
+	min-height: 30em;
+	min-width: 20em;
+	color: #374775;
+	font-family: 'Dancing Script', cursive;
+}
 body 
 {
 	font-family: 'Lato', sans-serif;
