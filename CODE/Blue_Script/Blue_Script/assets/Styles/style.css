@@ -31,7 +31,6 @@ body
 {
 	margin-top: 1em;
 	background: white;
-	min-height: 20em;
 	min-width: 20em;
 	max-width: 60em;
 	color: #374775;
@@ -46,27 +45,19 @@ body
 {
 	margin-top: 1em;
 }
-.sideNavHolder 
-{
-	margin-top: 3em;
-	background: #374775;
-	-webkit-border-top-right-radius: 5px;
-	-webkit-border-bottom-right-radius: 5px;
-	-moz-border-top-right-radius: 5px;
-	-moz-border-bottom-right-radius: 5px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	margin-left: -1.1em;
-}
 .slideshow 
 {
-	margin: 1em;
+	margin-bottom: 1.2em;
 	border: .3em solid #374775;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	-webkit-box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
     box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
+    min-width: 40em;
+    max-width: 50em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 input[type=text] 
 {
