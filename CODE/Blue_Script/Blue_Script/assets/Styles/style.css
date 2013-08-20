@@ -29,7 +29,8 @@ body
 }
 .homeHolder 
 {
-	margin-top: 1em;
+	margin-top: 2em;
+	margin-bottom: 2em;
 	background: white;
 	min-width: 20em;
 	max-width: 60em;
@@ -37,6 +38,9 @@ body
 	font-family: 'Lato', sans-serif;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
+	-webkit-box-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
+	-moz-box-shadow:    0px 0px 30px rgba(0, 0, 0, 1);
+	box-shadow:         0px 0px 30px rgba(0, 0, 0, 1);
 	border-radius: 30px;
 	margin-left: auto;
 	margin-right: auto;
@@ -52,8 +56,9 @@ body
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	-webkit-box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
-    box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
+	-webkit-box-shadow:  3px 3px 4px #333333;
+	-moz-box-shadow:  3px 3px 4px #333333;
+    box-shadow:  3px 3px 4px #333333;
     min-width: 40em;
     max-width: 50em;
     margin-top: 1em;
@@ -114,8 +119,9 @@ img
 	margin-top: 1em; 
 	margin-bottom: .5em; 
 	color: #374775;
-	-webkit-box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
-    box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
+	-webkit-box-shadow:  3px 3px 4px #333333;
+	-moz-box-shadow:  3px 3px 4px #333333;
+    box-shadow:  3px 3px 4px #333333;
 }
 legend 
 {
