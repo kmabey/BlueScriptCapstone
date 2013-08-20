@@ -77,10 +77,6 @@
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
 
-		$('.sceneForm').change(function () {
-			$('.sceneForm').trigger('input.submit');
-		});
-
 		function runEffect1() {
 			var options = {};
 			$("#tabs-1").toggle('clip', options, 1000);

@@ -50,10 +50,23 @@ body
 {
 	margin-top: 3em;
 	background: #374775;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-top-right-radius: 5px;
+	-moz-border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-left: -1.1em;
+}
+.slideshow 
+{
+	margin: 1em;
+	border: .3em solid #374775;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-	margin-left: -1.2em;
+	-webkit-box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
+    box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
 }
 input[type=text] 
 {
@@ -102,12 +115,16 @@ img
 .bsHeader 
 {
 	width:  100%;
-	background: #374775;
+	background: white;
 	-moz-border-radius: 1.5em;
 	-webkit-border-radius: 1.5em;
 	border-radius: 1.5em;
 	border: 3px solid white;
 	margin-top: 1em; 
+	margin-bottom: .5em; 
+	color: #374775;
+	-webkit-box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
+    box-shadow:  3px 3px 4px 1px rgba(44, 33, ff, .5);
 }
 legend 
 {
