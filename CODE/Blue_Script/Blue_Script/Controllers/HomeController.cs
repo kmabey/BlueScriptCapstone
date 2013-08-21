@@ -83,7 +83,6 @@ namespace Blue_Script.Controllers
 					db.Entry(sceneToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
 
-					return RedirectToAction("MyBlueScript");
 				}
 				catch (DataException /* dex */)
 				{
@@ -96,7 +95,7 @@ namespace Blue_Script.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult AddEditCharacter(int id, FormCollection formCollection)
+		public EmptyResult AddEditCharacter(int id, FormCollection formCollection)
 		{
 			var characterToUpdate = db.Characters.Find(id);
 			if (TryUpdateModel(characterToUpdate, "",
@@ -107,7 +106,6 @@ namespace Blue_Script.Controllers
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
 
-					return RedirectToAction("MyBlueScript");
 				}
 				catch (DataException /* dex */)
 				{
@@ -115,7 +113,7 @@ namespace Blue_Script.Controllers
 					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 				}
 			}
-			return View("MyBlueScript", characterToUpdate);
+			return new EmptyResult();
 		}
 
 		[HttpPost]

@@ -1,7 +1,9 @@
 ﻿@model Blue_Script.Character
 
 		   
-@using (Ajax.BeginForm("AddEditCharacter", "Home", new AjaxOptions{ HttpMethod = "POST", UpdateTargetId = "tabs-2" }))
+@using (Ajax.BeginForm("AddEditCharacter", "Home", new AjaxOptions{ 
+	HttpMethod = "POST", 
+	UpdateTargetId = "tabs-2" }))
 {
     @Html.ValidationSummary(true)
     <fieldset>
