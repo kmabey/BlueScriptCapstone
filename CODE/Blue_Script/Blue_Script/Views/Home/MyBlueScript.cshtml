@@ -30,7 +30,7 @@
 		
 		@foreach (var item in ViewBag.myCharacters)
   {
-			<div class="event well" draggable="true">
+			<div class="event well" draggable="true" id="character@(item.FullName)">
 				@Html.Action("AddEditCharacter", "Home", new { id = item.CharacterID })
 			</div>
   }
