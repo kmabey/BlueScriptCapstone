@@ -82,6 +82,7 @@ namespace Blue_Script.Controllers
 
 					db.Entry(sceneToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
+					return RedirectToAction("MyBlueScript");
 
 				}
 				catch (DataException /* dex */)
