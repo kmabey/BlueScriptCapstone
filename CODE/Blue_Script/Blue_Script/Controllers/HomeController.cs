@@ -47,6 +47,10 @@ namespace Blue_Script.Controllers
             
 			return View(db.Scenes);
         }
+		public ActionResult Chapters()
+		{
+			return View();
+		}
 
 		public ActionResult AddEditCharacter(int id)
 		{
