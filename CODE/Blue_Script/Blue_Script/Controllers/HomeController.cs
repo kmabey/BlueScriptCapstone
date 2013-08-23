@@ -103,11 +103,10 @@ namespace Blue_Script.Controllers
 		public ActionResult AddEditCharacter(int id, FormCollection formCollection)
 		{
 			var characterToUpdate = db.Characters.Find(id);
-			if (TryUpdateModel(characterToUpdate, "",
-			   new string[] { "FullName", "Notes"}))
-			{
+			
 				try
 				{
+					UpdateModel(characterToUpdate, formCollection);
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
 					return PartialView("EditCharacter", db.Characters.Find(id));
@@ -118,7 +117,6 @@ namespace Blue_Script.Controllers
 					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
 					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 				}
-			}
 			return View("MyBlueScript", characterToUpdate);
 		}
 

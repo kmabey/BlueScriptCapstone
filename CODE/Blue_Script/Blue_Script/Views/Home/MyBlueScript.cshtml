@@ -146,11 +146,11 @@
 	});
 
 	function updateCharacter(obj, num) {
-		var datastring = $(obj).serialize();
+		var datastring = $('#charForm' + num).serialize();
 		$.ajax({
 			url: '/Home/AddEditCharacter',
 			type: 'POST',
-			data: ({ id: num, formCollection: datastring }),
+			data: ({ "id": num, "formCollection": datastring }),
 			success: function (r) {
 				var options = {};
 				$('#saveChar' + num).show("blind", options, 500, callbackChar(num));
