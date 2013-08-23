@@ -6,7 +6,7 @@
 	HttpMethod = "POST",
 	InsertionMode = System.Web.Mvc.Ajax.InsertionMode.InsertAfter,
 	UpdateTargetId = "character" + @Model.CharacterID,
-	OnSuccess = "updateCharacter(@Model.CharacterID)"
+	OnSuccess = "updateCharacter(this, @Model.CharacterID)"
 
 }, 
 new { id = "charForm" + @Model.CharacterID }
