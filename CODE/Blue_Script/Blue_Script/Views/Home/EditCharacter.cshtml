@@ -1,24 +1,31 @@
 ﻿@model Blue_Script.Character
 
 		   
-@using (Ajax.BeginForm("AddEditCharacter", "Home", new AjaxOptions{ 
-	HttpMethod = "POST", 
+@using (Ajax.BeginForm("AddEditCharacter", "Home", new AjaxOptions
+{
+	HttpMethod = "POST",
 	InsertionMode = System.Web.Mvc.Ajax.InsertionMode.InsertAfter,
-	UpdateTargetId = "character" + @Model.CharacterID }))
+	UpdateTargetId = "character" + @Model.CharacterID
+
+}, 
+new { id = "charForm" + @Model.CharacterID }
+))
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.FullName" name="Name" onchange="this.form.submit()"><span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span></legend>
+        <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.FullName" name="Name" onchange="updateCharacter(this, @Model.CharacterID);"><span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span></legend>
 		@Html.ValidationMessageFor(model => model.FullName)
         @Html.HiddenFor(model => model.CharacterID)
         <h5>Notes:</h5>
         <div class="editor-field">
-            <textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="this.form.submit()">@Model.Notes</textarea>
+            <textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="updateCharacter(this, @Model.CharacterID);">@Model.Notes</textarea>
         </div>
 
         <p>
                 <input type="submit" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
         </p>
+		<div class="btn btn-success btn-xs pull-right hideme" id="saveChar@(Model.CharacterID)">Saved</div>
+		
     </fieldset>
 }
 	

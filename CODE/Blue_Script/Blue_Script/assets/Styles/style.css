@@ -199,3 +199,7 @@ footer
 	-webkit-border-radius: 25px;
 	border-radius: 25px;
 }
+.hideme 
+{
+	margin: 0;
+}

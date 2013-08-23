@@ -77,7 +77,7 @@
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
 
-		
+
 
 
 		function runEffect1() {
@@ -141,19 +141,28 @@
 		});
 
 
-		function updateCharacter() {
-			var datastring = $(this).closest('form').serialize(); 
-			$.ajax({
-				url: '/Home/EditCharacter',
-				type: 'POST',
-				data: datastring,
-				success: function(r){
-					alert("Saved");
-				}
-			});
-		};
+		$('.hideme').hide();
 
 	});
 
-	
+	function updateCharacter(obj, num) {
+		var datastring = $(obj).serialize();
+		$.ajax({
+			url: '/Home/AddEditCharacter',
+			type: 'POST',
+			data: ({ id: num, formCollection: datastring }),
+			success: function (r) {
+				var options = {};
+				$('#saveChar' + num).show("blind", options, 500, callbackChar(num));
+			}
+		});
+	};
+
+
+	function callbackChar(id) {
+		setTimeout(function () {
+			var options = {};
+			$('#saveChar' + id + ':visible').removeAttr("style").fadeOut();
+		}, 1000);
+	};
 </script>
