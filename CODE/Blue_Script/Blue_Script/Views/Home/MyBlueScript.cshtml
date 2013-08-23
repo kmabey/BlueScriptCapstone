@@ -77,6 +77,9 @@
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
 
+		
+
+
 		function runEffect1() {
 			var options = {};
 			$("#tabs-1").toggle('clip', options, 1000);
@@ -138,5 +141,19 @@
 		});
 
 
+		function updateCharacter() {
+			var datastring = $(this).closest('form').serialize(); 
+			$.ajax({
+				url: '/Home/EditCharacter',
+				type: 'POST',
+				data: datastring,
+				success: function(r){
+					alert("Saved");
+				}
+			});
+		};
+
 	});
+
+	
 </script>

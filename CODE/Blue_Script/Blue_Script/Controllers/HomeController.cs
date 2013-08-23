@@ -99,7 +99,7 @@ namespace Blue_Script.Controllers
 			return View("MyBlueScript", sceneToUpdate);
 		}
 
-		[HttpPost]
+		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult AddEditCharacter(int id, FormCollection formCollection)
 		{
 			var characterToUpdate = db.Characters.Find(id);
@@ -110,7 +110,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return PartialView("MyBlueScript", db.Scenes);
+					return PartialView("EditCharacter", db.Characters.Find(id));
 
 				}
 				catch (DataException /* dex */)
