@@ -5,21 +5,23 @@
 {
 	HttpMethod = "POST",
 	InsertionMode = System.Web.Mvc.Ajax.InsertionMode.Replace,
-	UpdateTargetId = "character" + @Model.CharacterID,
-	OnSuccess = "updateCharacter(this, @Model.CharacterID)"
+	UpdateTargetId = "tabs-2"
 
 }, 
-new { id = "charForm" + @Model.CharacterID }
+new { @id = "charForm" + @Model.CharacterID }
 ))
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.FullName" name="FullName" onchange="updateCharacter(this, @Model.CharacterID);"><span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span></legend>
+        <legend>
+			<input id="Name" class="text-box single-line valid" type="text" value="@Model.FullName" name="FullName" onchange="(this).form.submit();">
+			<span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span>
+		</legend>
 		@Html.ValidationMessageFor(model => model.FullName)
         @Html.HiddenFor(model => model.CharacterID)
         <h5>Notes:</h5>
         <div class="editor-field">
-            <input id="Notes" value="@Model.Notes" class="text-box multi-line" name="Notes" onchange="updateCharacter(this, @Model.CharacterID);" />
+            <input id="Notes" value="@Model.Notes" class="text-box multi-line" name="Notes" onchange="(this).form.submit();" />
         </div>
 
         <p>

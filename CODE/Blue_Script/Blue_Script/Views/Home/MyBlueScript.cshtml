@@ -35,9 +35,6 @@
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
 
-
-
-
 		function runEffect1() {
 			var options = {};
 			$("#tabs-1").toggle('clip', options, 1000);
@@ -103,7 +100,7 @@
 
 	});
 
-	function updateCharacter(obj, num) {
+	function updateCharacter(num) {
 		var datastring = $('#charForm' + num).serialize();
 		$.ajax({
 			url: '/Home/EditCharacter',

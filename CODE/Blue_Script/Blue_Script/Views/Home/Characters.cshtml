@@ -1,7 +1,8 @@
-﻿@foreach (var item in ViewBag.myCharacters)
+﻿@model IEnumerable<Blue_Script.Character>
+@for (var i = 0; i < Model.Count(); i++)
 {
-	<div class="event well" draggable="true" id="character@(item.FullName)">
-		@Html.Action("EditCharacter", "Home", new { id = item.CharacterID })
+	<div class="event well" draggable="true">
+		@Html.Action("EditCharacter", "Home", new { id = Model.ElementAt(i).CharacterID })
 	</div>
 }
 <div class="event add">

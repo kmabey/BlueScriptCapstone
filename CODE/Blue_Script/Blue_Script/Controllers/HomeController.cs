@@ -61,13 +61,13 @@ namespace Blue_Script.Controllers
 				myChars.Add(item);
 			}
 			ViewBag.myCharacters = myChars;
-			return PartialView();
+			return PartialView(db.Characters);
 		}
 
 		public ActionResult Settings()
 		{
 			ViewBag.Settings = new List<Setting>(db.Settings);
-			return PartialView();
+			return PartialView(db.Settings);
 		}
 		
 		public ActionResult Chapters()
@@ -122,17 +122,18 @@ namespace Blue_Script.Controllers
 			return View("MyBlueScript", sceneToUpdate);
 		}
 
-		[AcceptVerbs(HttpVerbs.Post)]
+		[HttpPost]
 		public ActionResult EditCharacter(int id, FormCollection formCollection)
 		{
 			var characterToUpdate = db.Characters.Find(id);
-			
+			if (TryUpdateModel(characterToUpdate, "",
+			   new string[] { "FullName", "Notes" }))
+			{
 				try
 				{
-					UpdateModel(characterToUpdate, formCollection);
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return PartialView("EditCharacter", db.Characters.Find(id));
+					return PartialView("Characters", db.Characters);
 
 				}
 				catch (DataException /* dex */)
@@ -140,6 +141,7 @@ namespace Blue_Script.Controllers
 					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
 					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 				}
+			}
 			return View("MyBlueScript", characterToUpdate);
 		}
 

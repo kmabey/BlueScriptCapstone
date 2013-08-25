@@ -1,7 +1,8 @@
-﻿@foreach (var setting in ViewBag.Settings)
+﻿@model IEnumerable<Blue_Script.Setting>
+@for (var i = 0; i < Model.Count(); i++)
 {
 	<div class="event well" draggable="true">
-		@Html.Action("EditSetting", "Home", new { id = setting.ID })
+		@Html.Action("EditSetting", "Home", new { id = Model.ElementAt(i).ID })
 	</div>
 }
 <div class="event add">
