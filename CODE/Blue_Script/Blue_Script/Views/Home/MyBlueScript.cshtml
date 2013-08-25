@@ -100,10 +100,17 @@
 
 	});
 
-	function updateCharacter(data) {
-		var num = data.ID;
-		var options = {};
-		$('#saveChar' + num).show("blind", options, 500, callbackChar(num));
+	function updateCharacter(num) {
+		var datastring = $('#charForm' + num).serialize();
+		$.ajax({
+			url: '/Home/EditCharacter',
+			type: 'POST',
+			data: ({ "id": num, "formCollection": datastring }),
+			success: function (r) {
+				var options = {};
+				$('#saveChar' + num).show("blind", options, 500, callbackChar(num));
+			}
+		});
 		return false;
 	};
 

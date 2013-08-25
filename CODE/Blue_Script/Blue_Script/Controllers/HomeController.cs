@@ -133,7 +133,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return Json(new {ID = id});
+					return Json(new {ID = id, FullName = characterToUpdate.FullName, Notes = characterToUpdate.Notes});
 
 				}
 				catch (DataException /* dex */)
