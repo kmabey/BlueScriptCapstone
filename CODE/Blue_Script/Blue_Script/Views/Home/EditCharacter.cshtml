@@ -1,15 +1,11 @@
 ﻿@model Blue_Script.Character
 
 		   
-@using (Ajax.BeginForm("EditCharacter", "Home", new AjaxOptions
+@using (Ajax.BeginForm("EditCharacter", new AjaxOptions
 {
-	OnBegin = "function(){return updateCharacter('" + @Model.CharacterID + "')}",
 	HttpMethod = "POST",
-	InsertionMode = InsertionMode.Replace,
-	UpdateTargetId = "charForm" + @Model.CharacterID
-
-}, 
-new { @id = "charForm" + @Model.CharacterID }
+	OnSuccess = "updateCharacter"
+}
 ))
 {
     @Html.ValidationSummary(true)
