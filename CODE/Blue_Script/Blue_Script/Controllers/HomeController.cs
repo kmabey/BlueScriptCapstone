@@ -133,7 +133,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return PartialView("Characters", db.Characters);
+					return PartialView("EditCharacter", characterToUpdate);
 
 				}
 				catch (DataException /* dex */)

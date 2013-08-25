@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<Blue_Script.Character>
-@for (var i = 0; i < Model.Count(); i++)
+@for (var c = 0; c < Model.Count();  c++)
 {
 	<div class="event well" draggable="true">
-		@Html.Action("EditCharacter", "Home", new { id = Model.ElementAt(i).CharacterID })
+		@Html.Action("EditCharacter", "Home", new { id = Model.ElementAt(c).CharacterID })
 	</div>
 }
 <div class="event add">
