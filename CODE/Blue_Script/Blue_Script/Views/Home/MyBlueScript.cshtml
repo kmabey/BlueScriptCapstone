@@ -8,17 +8,7 @@
 				Scenes</h1>
 		</header>
 	<div id="tabs-1" class="tab">
-		
-		@for (var i = 0; i < Model.Count(); i++)
-  {
-			<div class="event well" draggable="true">
-				@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
-			</div>				
-  }
-		<div class="event add">
-			<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-			</a>
-		</div>
+		@Html.Action("Scenes","Home")
 	</div>
 </div>
 <div class="row">
@@ -27,17 +17,7 @@
 				Characters</h1>
 		</header>
 	<div id="tabs-2" class="tab">
-		
-		@foreach (var item in ViewBag.myCharacters)
-  {
-			<div class="event well" draggable="true" id="character@(item.FullName)">
-				@Html.Action("AddEditCharacter", "Home", new { id = item.CharacterID })
-			</div>
-  }
-		<div class="event add">
-			<a href="@Url.Action("CreateCharacter", "Home")"><i class="icon-plus-sign-alt icon-4x">
-			</i></a>
-		</div>
+		@Html.Action("Characters","Home")
 	</div>
 </div>
 <div class="row">
@@ -46,30 +26,8 @@
 				Settings</h1>
 		</header>
 	<div id="tabs-3" class="tab">
-		
-		@foreach (var setting in ViewBag.Settings)
-  {
-			<div class="event well" draggable="true">
-				@Html.Action("AddEditSetting", "Home", new { id = setting.ID })
-			</div>
-  }
-		<div class="event add">
-			<a href="@Url.Action("CreateSetting", "Home")"><i class="icon-plus-sign-alt icon-4x">
-			</i></a>
-		</div>
+		@Html.Action("Settings","Home")
 	</div>
-</div>
-<div class="modal-dialog" id="dialog-confirm" style="display: none">
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close">
-				&times;</button>
-			<h4 class="modal-title">
-				Are you sure to delete ?</h4>
-		</div>
-	</div>
-</div>
-<div id="dialog-edit" style="display: none">
 </div>
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -148,7 +106,7 @@
 	function updateCharacter(obj, num) {
 		var datastring = $('#charForm' + num).serialize();
 		$.ajax({
-			url: '/Home/AddEditCharacter',
+			url: '/Home/EditCharacter',
 			type: 'POST',
 			data: ({ "id": num, "formCollection": datastring }),
 			success: function (r) {

@@ -33,32 +33,55 @@ namespace Blue_Script.Controllers
 		}
 
         public ActionResult MyBlueScript()
-        {
+        {   
+			return View(db.Scenes);
+        }
+		
+		public ActionResult Scenes()
+		{
 			var query = db.Settings.Select(c => new { c.ID, c.Name });
 			ViewBag.PossibleSettings = new SelectList(query.AsEnumerable(), "ID", "Name");
 			var query2 = db.Characters.Select(c => new { c.CharacterID, c.FullName });
 			var myChars = new List<Character>();
-			foreach(var item in db.Characters)
+			foreach (var item in db.Characters)
 			{
 				myChars.Add(item);
 			}
 			ViewBag.myCharacters = myChars;
 			ViewBag.Settings = new List<Setting>(db.Settings);
-            
-			return View(db.Scenes);
-        }
+
+			return PartialView(db.Scenes);
+		}
+
+		public ActionResult Characters()
+		{
+			var myChars = new List<Character>();
+			foreach (var item in db.Characters)
+			{
+				myChars.Add(item);
+			}
+			ViewBag.myCharacters = myChars;
+			return PartialView();
+		}
+
+		public ActionResult Settings()
+		{
+			ViewBag.Settings = new List<Setting>(db.Settings);
+			return PartialView();
+		}
+		
 		public ActionResult Chapters()
 		{
 			return View();
 		}
 
-		public ActionResult AddEditCharacter(int id)
+		public ActionResult EditCharacter(int id)
 		{
 			Character character = db.Characters.Find(id);
 			return PartialView("EditCharacter", character);
 		}
 
-		public ActionResult AddEditSetting(int id)
+		public ActionResult EditSetting(int id)
 		{
 			Setting setting = db.Settings.Find(id);
 			return PartialView("EditSetting", setting);
@@ -100,7 +123,7 @@ namespace Blue_Script.Controllers
 		}
 
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult AddEditCharacter(int id, FormCollection formCollection)
+		public ActionResult EditCharacter(int id, FormCollection formCollection)
 		{
 			var characterToUpdate = db.Characters.Find(id);
 			
@@ -121,7 +144,7 @@ namespace Blue_Script.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult AddEditSetting(int id, FormCollection formCollection)
+		public ActionResult EditSetting(int id, FormCollection formCollection)
 		{
 			var settingToUpdate = db.Settings.Find(id);
 			if (TryUpdateModel(settingToUpdate, "",

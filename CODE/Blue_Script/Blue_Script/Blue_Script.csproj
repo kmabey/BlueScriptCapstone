@@ -1041,6 +1041,9 @@
     <Content Include="Views\Home\EditCharacter.cshtml" />
     <Content Include="Views\Home\EditSetting.cshtml" />
     <Content Include="Views\Home\Chapters.cshtml" />
+    <Content Include="Views\Home\Scenes.cshtml" />
+    <Content Include="Views\Home\Characters.cshtml" />
+    <Content Include="Views\Home\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Blue_Script.Scene>
+@for (var i = 0; i < Model.Count(); i++)
+{
+	<div class="event well" draggable="true">
+		@Html.Action("ScenePartial", "Home", new { id = Model.ElementAt(i).ID, sID = Model.ElementAt(i).SettingID })
+	</div>			
+}
+<div class="event add">
+	<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+	</a>
+</div>

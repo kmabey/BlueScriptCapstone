@@ -1,0 +1,10 @@
+﻿@foreach (var item in ViewBag.myCharacters)
+{
+	<div class="event well" draggable="true" id="character@(item.FullName)">
+		@Html.Action("EditCharacter", "Home", new { id = item.CharacterID })
+	</div>
+}
+<div class="event add">
+	<a href="@Url.Action("CreateCharacter", "Home")"><i class="icon-plus-sign-alt icon-4x">
+	</i></a>
+</div>

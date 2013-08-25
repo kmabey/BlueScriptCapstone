@@ -1,0 +1,10 @@
+﻿@foreach (var setting in ViewBag.Settings)
+{
+	<div class="event well" draggable="true">
+		@Html.Action("EditSetting", "Home", new { id = setting.ID })
+	</div>
+}
+<div class="event add">
+	<a href="@Url.Action("CreateSetting", "Home")"><i class="icon-plus-sign-alt icon-4x">
+	</i></a>
+</div>
