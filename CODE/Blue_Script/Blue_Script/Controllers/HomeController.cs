@@ -109,7 +109,7 @@ namespace Blue_Script.Controllers
 
 					db.Entry(sceneToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return RedirectToAction("MyBlueScript");
+					return Json(new {ID = id });
 
 				}
 				catch (DataException /* dex */)
@@ -156,8 +156,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(settingToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-
-					return RedirectToAction("MyBlueScript");
+					return Json(new {ID = id });
 				}
 				catch (DataException /* dex */)
 				{

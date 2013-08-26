@@ -1,18 +1,11 @@
 ﻿@model Blue_Script.Scene
-	@using (Ajax.BeginForm("EditScene", "Home", new AjaxOptions
-	{
-		HttpMethod = "POST",
-		UpdateTargetId = "tabs-1",
-		InsertionMode = InsertionMode.InsertAfter
-	}))
- {
-		@Html.AntiForgeryToken()
+<form id="sceneForm@(Model.ID)" name="sceneForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate" onsubmit="updateScene(@Model.ID)">
 		@Html.ValidationSummary(true)
 		<fieldset>
-			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="this.form.submit()"><span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
+			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateScene(@Model.ID)"><span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
 			@Html.HiddenFor(model => Model.ID)
 			<h5>
-				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings, new { @onchange="this.form.submit()" })
+				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings, new { @onchange = "updateScene(@Model.ID)" })
 				
 			</h5>
 			<h5>
@@ -20,28 +13,29 @@
 			</h5>
 			<div class="editor-field">
 				@{
-	 List<Blue_Script.Models.AssignedCharacters> characters = ViewBag.Characters;
+					List<Blue_Script.Models.AssignedCharacters> characters = ViewBag.Characters;
 
-	 foreach (var character in characters)
-	 {
+					foreach (var character in characters)
+					{
 		<div class="checkbox">
 			<label>
 					<input type="checkbox" 
                                name="selectedCharacters" 
                                value="@character.CharacterID" 
-							   onchange="this.form.submit()"
+							   onchange="updateScene(@Model.ID)"
                                @(Html.Raw(character.Assigned ? "checked=\"checked\"" : "")) /> 
 					 @character.FullName
 			</label>
 		</div>
-	 }
+					}
 				}
 			</div>
 			<h5>
 				Notes</h5>
-			<textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="this.form.submit()">@Model.Notes</textarea>
-			<input type="submit" value="Save"/>
+			<textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="updateScene(@Model.ID)">@Model.Notes</textarea>
+			<p><input type="submit" value="Save"/></p>
+			<div class="btn btn-success btn-xs pull-right hideme" id="saveScene@(Model.ID)">Saved</div>
 		</fieldset>
 
- }
+ </form>
 		

@@ -1,18 +1,18 @@
 ﻿@model Blue_Script.Character
 
 		   
-<form id="charForm@(Model.CharacterID)" name="charForm@(Model.CharacterID)" method="post" data-ajax-method="POST" data-ajax="true" action="" novalidate="novalidate" onsubmit="updateCharacter(@Model.CharacterID);">
+<form id="charForm@(Model.CharacterID)" name="charForm@(Model.CharacterID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate" onsubmit="updateCharacter(@Model.CharacterID)">
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>
-			<input id="FullName" class="text-box single-line valid" type="text" value="@Model.FullName" name="FullName" onchange="updateCharacter(@Model.CharacterID);">
+			<input id="FullName" class="text-box single-line valid" type="text" value="@Model.FullName" name="FullName" onchange="updateCharacter(@Model.CharacterID)">
 			<span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span>
 		</legend>
 		@Html.ValidationMessageFor(model => model.FullName)
         @Html.HiddenFor(model => model.CharacterID)
         <h5>Notes:</h5>
         <div class="editor-field">
-            <input id="Notes" value="@Model.Notes" class="text-box multi-line" name="Notes" onchange="updateCharacter(@Model.CharacterID);" />
+            <input id="Notes" value="@Model.Notes" class="text-box multi-line" name="Notes" onchange="updateCharacter(@Model.CharacterID)" />
         </div>
 
         <p>

@@ -100,6 +100,48 @@
 
 	});
 
+	function updateScene(num) {
+		$.ajax({
+			url: '/Home/EditScene/' + num,
+			type: 'POST',
+			data: $('#sceneForm' + num).serialize(),
+			success: function (r) {
+				var options = {};
+				$('#saveScene' + num).show("blind", options, 500, callbackScene(num));
+			}
+		});
+		return false;
+	};
+
+
+	function callbackScene(id) {
+		setTimeout(function () {
+			var options = {};
+			$('#saveScene' + id + ':visible').removeAttr("style").fadeOut();
+		}, 1000);
+	};
+
+	function updateSetting(num) {
+		$.ajax({
+			url: '/Home/EditSetting/' + num,
+			type: 'POST',
+			data: $('#setForm' + num).serialize(),
+			success: function (r) {
+				var options = {};
+				$('#saveSet' + num).show("blind", options, 500, callbackSet(num));
+			}
+		});
+		return false;
+	};
+
+
+	function callbackSet(id) {
+		setTimeout(function () {
+			var options = {};
+			$('#saveSet' + id + ':visible').removeAttr("style").fadeOut();
+		}, 1000);
+	};
+
 	function updateCharacter(num) {
 		$.ajax({
 			url: '/Home/EditCharacter/' + num,
