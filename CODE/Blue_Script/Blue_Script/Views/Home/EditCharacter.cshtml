@@ -1,7 +1,7 @@
 ﻿@model Blue_Script.Character
 
 		   
-<form id="charForm@(Model.CharacterID)" name="charForm@(Model.CharacterID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate" onsubmit="updateCharacter(@Model.CharacterID)">
+<form id="charForm@(Model.CharacterID)" name="charForm@(Model.CharacterID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate">
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>

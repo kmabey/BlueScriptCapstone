@@ -1,6 +1,6 @@
 ﻿@model Blue_Script.Setting
 
-<form id="setForm@(Model.ID)" name="setForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate" onsubmit="updateSetting(@Model.ID)">
+<form id="setForm@(Model.ID)" name="setForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate">
     @Html.ValidationSummary(true)
     <fieldset>
         <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateSetting(@Model.ID)"> <span class="pull-right">@Html.ActionLink("X", "DeleteSetting", new { id = Model.ID })</span></legend>
