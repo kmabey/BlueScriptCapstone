@@ -102,9 +102,9 @@
 
 	function updateCharacter(num) {
 		$.ajax({
-			url: '/Home/EditCharacter',
+			url: '/Home/EditCharacter/' + num,
 			type: 'POST',
-			data: { id: num, formCollection: $('#charForm' + num).serialize() },
+			data: $('#charForm' + num).serialize(),
 			success: function (r) {
 				var options = {};
 				$('#saveChar' + num).show("blind", options, 500, callbackChar(num));
