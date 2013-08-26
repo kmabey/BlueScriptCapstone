@@ -101,11 +101,10 @@
 	});
 
 	function updateCharacter(num) {
-		var datastring = $('#charForm' + num).serialize();
 		$.ajax({
 			url: '/Home/EditCharacter',
 			type: 'POST',
-			data: ({ "id": num, "formCollection": datastring }),
+			data: { id: num, formCollection: $('#charForm' + num).serialize() },
 			success: function (r) {
 				var options = {};
 				$('#saveChar' + num).show("blind", options, 500, callbackChar(num));
