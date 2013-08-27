@@ -123,6 +123,7 @@
     <Content Include="assets\font-awesome\css\font-awesome.css" />
     <Content Include="assets\font-awesome\css\font-awesome.min.css" />
     <Content Include="assets\font-awesome\font\fontawesome-webfont.svg" />
+    <Content Include="assets\JavaScript\ajax.js" />
     <Content Include="assets\JavaScript\jquery-ui-1.10.3.custom\css\cupertino\images\animated-overlay.gif" />
     <Content Include="assets\JavaScript\jquery-ui-1.10.3.custom\css\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="assets\JavaScript\jquery-ui-1.10.3.custom\css\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
