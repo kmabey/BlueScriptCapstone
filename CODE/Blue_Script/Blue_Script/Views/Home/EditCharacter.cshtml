@@ -12,7 +12,7 @@
         @Html.HiddenFor(model => model.CharacterID)
         <h5>Notes:</h5>
         <div class="editor-field">
-            <input id="Notes" value="@Model.Notes" class="text-box multi-line" name="Notes" onchange="updateCharacter(@Model.CharacterID)" />
+            <textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="updateCharacter(@Model.CharacterID)">@Model.Notes</textarea>
         </div>
 
         <p>

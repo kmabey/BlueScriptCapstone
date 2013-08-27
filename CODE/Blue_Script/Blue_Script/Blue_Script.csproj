@@ -42,6 +42,12 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Omu.Awesome.Core">
+      <HintPath>..\packages\MvcProjectAwesome.1.9\lib\40\Omu.Awesome.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.Awesome.Mvc">
+      <HintPath>..\packages\MvcProjectAwesome.1.9\lib\40\Omu.Awesome.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -66,8 +72,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MvcProjectAwesome.cs" />
     <Compile Include="Character.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -109,6 +119,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="! mvc project awesome readme.txt" />
     <Content Include="assets\bootstrap\css\bootstraptheme.css" />
     <Content Include="assets\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="assets\bootstrap\css\bootstrap-responsive.min.css" />
@@ -721,6 +732,7 @@
     <Content Include="assets\JavaScript\myjs.js" />
     <Content Include="assets\Styles\reset.css" />
     <Content Include="assets\Styles\style.css" />
+    <Content Include="Content\Awesome.css" />
     <Content Include="Content\DataTables-1.9.4\docs\media\css\doc.css" />
     <Content Include="Content\DataTables-1.9.4\docs\media\css\shCore.css" />
     <Content Include="Content\DataTables-1.9.4\docs\media\css\shThemeDataTables.css" />
@@ -863,6 +875,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\Awesome.js" />
+    <Content Include="Scripts\Awesome.min.js" />
     <Content Include="Scripts\DataTables-1.9.4\docs\media\js\doc.js" />
     <Content Include="Scripts\DataTables-1.9.4\docs\media\js\jquery.js" />
     <Content Include="Scripts\DataTables-1.9.4\docs\media\js\shBrushJScript.js" />
@@ -908,12 +922,28 @@
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Shared\Awesome\AjaxCheckBoxList.ascx" />
+    <Content Include="Views\Shared\Awesome\AjaxDropdown.ascx" />
+    <Content Include="Views\Shared\Awesome\AjaxRadioList.ascx" />
+    <Content Include="Views\Shared\Awesome\Autocomplete.ascx" />
+    <Content Include="Views\Shared\Awesome\Confirm.ascx" />
+    <Content Include="Views\Shared\Awesome\header.ascx" />
+    <Content Include="Views\Shared\Awesome\Lookup.ascx" />
+    <Content Include="Views\Shared\Awesome\LookupList.ascx" />
+    <Content Include="Views\Shared\Awesome\LookupPopup.ascx" />
+    <Content Include="Views\Shared\Awesome\MultiLookup.ascx" />
+    <Content Include="Views\Shared\Awesome\MultiLookupPopup.ascx" />
+    <Content Include="Views\Shared\Awesome\Popup.ascx" />
+    <Content Include="Views\Shared\Awesome\PopupForm.ascx" />
+    <Content Include="Views\Shared\Awesome\SearchForm.ascx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
