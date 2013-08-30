@@ -12,21 +12,22 @@ namespace Blue_Script
     using System;
     using System.Collections.Generic;
     
-    public partial class Scene
+    public partial class Project
     {
-        public Scene()
+        public Project()
         {
+            this.Chapters = new HashSet<Chapter>();
             this.Characters = new HashSet<Character>();
+            this.Scenes = new HashSet<Scene>();
+            this.Settings = new HashSet<Setting>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Notes { get; set; }
-        public int SettingID { get; set; }
-        public int ProjectID { get; set; }
     
-        public virtual Project Project { get; set; }
-        public virtual Setting Setting { get; set; }
+        public virtual ICollection<Chapter> Chapters { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
+        public virtual ICollection<Scene> Scenes { get; set; }
+        public virtual ICollection<Setting> Settings { get; set; }
     }
 }

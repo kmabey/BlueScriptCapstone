@@ -78,44 +78,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\MvcProjectAwesome.cs" />
+    <Compile Include="Blue.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Blue.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blue.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Blue.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blue.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Blue.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Chapter.cs">
+      <DependentUpon>Blue.tt</DependentUpon>
+    </Compile>
     <Compile Include="Character.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Blue.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="C__MigrationHistory.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Blue.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AssignedCharacters.cs" />
-    <Compile Include="Models\CharacterView.cs" />
+    <Compile Include="Project.cs">
+      <DependentUpon>Blue.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Blue.tt</DependentUpon>
     </Compile>
     <Compile Include="Setting.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Blue.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Blue.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -1036,23 +1041,23 @@
     <None Include="assets\JavaScript\jquery-ui-1.10.3.custom\development-bundle\ui.tabs.jquery.json" />
     <None Include="assets\JavaScript\jquery-ui-1.10.3.custom\development-bundle\ui.tooltip.jquery.json" />
     <None Include="assets\JavaScript\jquery-ui-1.10.3.custom\development-bundle\ui.widget.jquery.json" />
+    <EntityDeploy Include="Blue.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Blue.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Blue.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Blue.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Blue.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Blue.cs</LastGenOutput>
+    </None>
     <None Include="Content\DataTables-1.9.4\extras\TableTools\media\images\psd\collection.psd" />
     <None Include="Content\DataTables-1.9.4\extras\TableTools\media\images\psd\copy document.psd" />
     <None Include="Content\DataTables-1.9.4\extras\TableTools\media\images\psd\file_types.psd" />
     <None Include="Content\DataTables-1.9.4\extras\TableTools\media\images\psd\printer.psd" />
     <None Include="Content\DataTables-1.9.4\media\images\Sorting icons.psd" />
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </None>
-    <None Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </None>
     <None Include="Scripts\DataTables-1.9.4\extras\AutoFill\media\js\AutoFill.min.js.gz" />
     <None Include="Scripts\DataTables-1.9.4\extras\ColReorder\media\js\ColReorder.min.js.gz" />
     <None Include="Scripts\DataTables-1.9.4\extras\ColVis\media\js\ColVis.min.js.gz" />

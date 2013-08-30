@@ -69,6 +69,10 @@
 
 	});
 
+	function updateChapter() {
+		
+	};
+
 	function updateScene(num) {
 		$.ajax({
 			url: '/Home/EditScene/' + num,

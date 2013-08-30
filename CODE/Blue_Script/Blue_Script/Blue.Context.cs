@@ -13,10 +13,10 @@ namespace Blue_Script
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BSEntities : DbContext
+    public partial class BlueScriptEntities : DbContext
     {
-        public BSEntities()
-            : base("name=BSEntities")
+        public BlueScriptEntities()
+            : base("name=BlueScriptEntities")
         {
         }
     
@@ -26,7 +26,9 @@ namespace Blue_Script
         }
     
         public DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public DbSet<Chapter> Chapters { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Project> Projects { get; set; }
         public DbSet<Scene> Scenes { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }

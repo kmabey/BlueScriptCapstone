@@ -10,15 +10,20 @@ namespace Blue_Script.Controllers
 {
     public class HomeController : Controller
     {
-        BSEntities db = new BSEntities();
+        BlueScriptEntities db = new BlueScriptEntities();
+		int projectNum;
 
         public HomeController()
         {
+			projectNum = 1;
         }
 
         public ActionResult Index()
         {
-            return View();
+			Project project = db.Projects.Find(projectNum);
+			var chapters = db.Chapters.Where(x => x.ProjectID == projectNum);
+			PopulateChaptersDropDownList(projectNum);
+			return View(db.Chapters.Where(x => x.ProjectID == projectNum));
         }
 
 		public ActionResult MyStats()
@@ -232,7 +237,13 @@ namespace Blue_Script.Controllers
 			return RedirectToAction("MyBlueScript");
 		}
 
-		
+		private void PopulateChaptersDropDownList(object selectedchapter = null)
+		{
+			var q = from s in db.Chapters.Where(x => x.ProjectID == projectNum)
+					orderby s.ID
+					select s;
+			ViewBag.AllChapters = new SelectList(q.AsEnumerable(), "ID", "Name", db.Chapters.Find(selectedchapter));
+		}
 
 		private void PopulateSettingsDropDownList(object selectedSetting = null)
 		{

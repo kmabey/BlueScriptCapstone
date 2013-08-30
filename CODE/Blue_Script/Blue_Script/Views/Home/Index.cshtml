@@ -1,21 +1,15 @@
-﻿@{
-    ViewBag.Title = "BlueScript Home";
+﻿@model IEnumerable<Blue_Script.Chapter>
+@{
+	ViewBag.Title = "BlueScript Home";
 }
-<div class="row">
-	<div class="homeHolder clearfix">
-		<div class="col-md-12">
-			<div class="innerHome">
-				<h1>Welcome to Blue Script</h1>
-				<h3>The blue print for writers</h3>
-			</div>
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<img class="slideshow" alt="bluescript" src="@Url.Content("~/assets/Images/bsImage.png")" />
-				</div>
-				<div class="col-md-2"></div>
-			</div>
-		</div>
-	</div>
+<div class="row chapters">
+		<select name="chapterSelect" onchange="updateChapter();">
+   @for (var i = 0; i < Model.Count(); i++)
+   {
+			<option>@Model.ElementAt(i).Name</option>
+   }
+		</select>
 </div>
-
+<div class="row">
+	<textarea id="chapterText" name="body" class="text-box multi-line" onchange="save">@Model.ElementAt(0).Body</textarea>
+</div>
