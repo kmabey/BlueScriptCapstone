@@ -8,23 +8,23 @@ using System.Data;
 
 namespace Blue_Script.Controllers
 {
-    public class HomeController : Controller
-    {
-        BlueScriptEntities db = new BlueScriptEntities();
+	public class HomeController : Controller
+	{
+		BlueScriptEntities db = new BlueScriptEntities();
 		int projectNum;
 
-        public HomeController()
-        {
+		public HomeController()
+		{
 			projectNum = 1;
-        }
+		}
 
-        public ActionResult Index()
-        {
+		public ActionResult Index()
+		{
 			Project project = db.Projects.Find(projectNum);
 			var chapters = db.Chapters.Where(x => x.ProjectID == projectNum);
 			PopulateChaptersDropDownList(projectNum);
 			return View(db.Chapters.Where(x => x.ProjectID == projectNum));
-        }
+		}
 
 		public ActionResult MyStats()
 		{
@@ -37,11 +37,11 @@ namespace Blue_Script.Controllers
 			return View();
 		}
 
-        public ActionResult MyBlueScript()
-        {   
+		public ActionResult MyBlueScript()
+		{
 			return View(db.Scenes);
-        }
-		
+		}
+
 		public ActionResult Scenes()
 		{
 			var query = db.Settings.Select(c => new { c.ID, c.Name });
@@ -74,17 +74,17 @@ namespace Blue_Script.Controllers
 			ViewBag.Settings = new List<Setting>(db.Settings);
 			return PartialView(db.Settings);
 		}
-		
+
 		public ActionResult Chapters()
 		{
 			return View();
 		}
 
-		public ActionResult UpdateChapter(string id)
+		public string UpdateChapter(string theID)
 		{
-			Chapter chapter = db.Chapters.SingleOrDefault(c => c.Name==id);
+			Chapter chapter = db.Chapters.SingleOrDefault(c => c.Name == theID);
 			var theText = chapter.Body;
-			return Json(new{body = theText});
+			return theText;
 		}
 
 		public ActionResult EditCharacter(int id)
@@ -121,7 +121,7 @@ namespace Blue_Script.Controllers
 
 					db.Entry(sceneToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return Json(new {ID = id });
+					return Json(new { ID = id });
 
 				}
 				catch (DataException /* dex */)
@@ -162,13 +162,13 @@ namespace Blue_Script.Controllers
 		{
 			var settingToUpdate = db.Settings.Find(id);
 			if (TryUpdateModel(settingToUpdate, "",
-			   new string[] { "Name", "Notes"}))
+			   new string[] { "Name", "Notes" }))
 			{
 				try
 				{
 					db.Entry(settingToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return Json(new {ID = id });
+					return Json(new { ID = id });
 				}
 				catch (DataException /* dex */)
 				{
@@ -184,19 +184,19 @@ namespace Blue_Script.Controllers
 			Character character = new Character() { CharacterID = id };
 			if (character != null)
 			{
-					db.Entry(character).State = EntityState.Deleted;
-					db.SaveChanges();
+				db.Entry(character).State = EntityState.Deleted;
+				db.SaveChanges();
 			}
 			return RedirectToAction("MyBlueScript");
 		}
 
 		public ActionResult DeleteSetting(int id)
 		{
-			Setting setting = new Setting() {ID = id };
+			Setting setting = new Setting() { ID = id };
 			if (setting != null)
 			{
-					db.Entry(setting).State = EntityState.Deleted;
-					db.SaveChanges();
+				db.Entry(setting).State = EntityState.Deleted;
+				db.SaveChanges();
 			}
 			return RedirectToAction("MyBlueScript");
 		}
@@ -235,13 +235,31 @@ namespace Blue_Script.Controllers
 
 		public ActionResult CreateScene()
 		{
-			var newScene = new Scene {Name = "Scene Name", Characters = new List<Character>(),
-			Setting = null, Notes = "Notes go here."};
+			var newScene = new Scene
+			{
+				Name = "Scene Name",
+				Characters = new List<Character>(),
+				Setting = null,
+				Notes = "Notes go here."
+			};
 			PopulateSettingsDropDownList();
 			PopulateAssignedCharacters(newScene);
 			db.Scenes.Add(newScene);
 			db.SaveChanges();
 			return RedirectToAction("MyBlueScript");
+		}
+
+		public ActionResult CreateChapter()
+		{
+			var newChapter = new Chapter
+			{
+				ProjectID = projectNum,
+				Name = "New Chapter",
+				Body = "Chapter goes here."
+			};
+			db.Chapters.Add(newChapter);
+			db.SaveChanges();
+			return RedirectToAction("Index");
 		}
 
 		private void PopulateChaptersDropDownList(object selectedchapter = null)
@@ -255,8 +273,8 @@ namespace Blue_Script.Controllers
 		private void PopulateSettingsDropDownList(object selectedSetting = null)
 		{
 			var q = from s in db.Settings
-								   orderby s.Name
-								   select s;
+					orderby s.Name
+					select s;
 			ViewBag.PossibleSettings = new SelectList(q.AsEnumerable(), "ID", "Name", db.Settings.Find(selectedSetting));
 		}
 
@@ -306,5 +324,5 @@ namespace Blue_Script.Controllers
 				}
 			}
 		}
-    }
+	}
 }

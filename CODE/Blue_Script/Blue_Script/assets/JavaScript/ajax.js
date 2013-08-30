@@ -70,11 +70,13 @@
 	});
 
 	function updateChapter() {
+		var mytext = ' ';
 		$("#chapterSelect option:selected").each(function () {
+			mytext = $("#chapterSelect option:selected").text();
 			$.ajax({
 				url: '/Home/UpdateChapter',
 				type: 'POST',
-				data: $("#chapterSelect option:selected").text(),
+				data: { theID: mytext },
 				success: function (r) {
 					$("#chapterText").text(r);
 				}
@@ -83,10 +85,21 @@
 		});
 	};
 
+	function updateBody() {
+		var myText = $("#chapterText").text();
+		$.ajax({
+			url: '/Home/UpdateChapter',
+			type: 'POST',
+			data: { bodyToSave: mytext },
+			success: function (r) {
+			}
+		});
+	};
+
 	function updateScene(num) {
 		$.ajax({
 			url: '/Home/EditScene/' + num,
-			type: 'POST',
+			type: 'GET',
 			data: $('#sceneForm' + num).serialize(),
 			success: function (r) {
 				var options = {};
