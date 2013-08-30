@@ -69,14 +69,14 @@
 
 	});
 
-	function updateChapter(num) {
+	function updateChapter() {
 		$("#chapterSelect option:selected").each(function () {
 			$.ajax({
 				url: '/Home/UpdateChapter',
 				type: 'POST',
-				data: {id: num},
+				data: $("#chapterSelect option:selected").text(),
 				success: function (r) {
-					$("#chapterText").text(data);
+					$("#chapterText").text(r);
 				}
 			});
 			return false;

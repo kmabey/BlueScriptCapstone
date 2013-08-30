@@ -80,10 +80,11 @@ namespace Blue_Script.Controllers
 			return View();
 		}
 
-		public string UpdateChapter(int id)
+		public ActionResult UpdateChapter(string id)
 		{
-			Chapter chapter = db.Chapters.Find(id);
-			return chapter.Body;
+			Chapter chapter = db.Chapters.SingleOrDefault(c => c.Name==id);
+			var theText = chapter.Body;
+			return Json(new{body = theText});
 		}
 
 		public ActionResult EditCharacter(int id)
