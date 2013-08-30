@@ -3,13 +3,14 @@
 	ViewBag.Title = "BlueScript Home";
 }
 <div class="row chapters">
-		<select name="chapterSelect" onchange="updateChapter();">
+		<select id="chapterSelect" name="chapterSelect" onchange="updateChapter();">
    @for (var i = 0; i < Model.Count(); i++)
    {
-			<option>@Model.ElementAt(i).Name</option>
+			<option class="@Model.ElementAt(i).ID">@Model.ElementAt(i).Name</option>
    }
+			<option>Add New +</option>
 		</select>
+		<br />
+		<textarea id="chapterText" cols="150" rows="25" name="body" class="text-box multi-line" onchange="save">@Model.ElementAt(0).Body</textarea>
 </div>
-<div class="row">
-	<textarea id="chapterText" name="body" class="text-box multi-line" onchange="save">@Model.ElementAt(0).Body</textarea>
-</div>
+

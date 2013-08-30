@@ -69,8 +69,18 @@
 
 	});
 
-	function updateChapter() {
-		
+	function updateChapter(num) {
+		$("#chapterSelect option:selected").each(function () {
+			$.ajax({
+				url: '/Home/UpdateChapter',
+				type: 'POST',
+				data: {id: num},
+				success: function (r) {
+					$("#chapterText").text(data);
+				}
+			});
+			return false;
+		});
 	};
 
 	function updateScene(num) {
