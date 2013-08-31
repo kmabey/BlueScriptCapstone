@@ -80,13 +80,6 @@ namespace Blue_Script.Controllers
 			return View();
 		}
 
-		public string UpdateChapter(string theID)
-		{
-			Chapter chapter = db.Chapters.SingleOrDefault(c => c.Name == theID);
-			var theText = chapter.Body;
-			return theText;
-		}
-
 		public ActionResult EditChapter(int id)
 		{
 			Chapter chapter = db.Chapters.Find(id);
@@ -111,6 +104,29 @@ namespace Blue_Script.Controllers
 			PopulateSettingsDropDownList(scene.SettingID);
 			PopulateAssignedCharacters(scene);
 			return PartialView(scene);
+		}
+
+		[HttpPost]
+		public ActionResult EditChapter(int id, FormCollection formCollection)
+		{
+			var chapterToUpdate = db.Chapters.Find(id);
+			if (TryUpdateModel(chapterToUpdate, "",
+			   new string[] { "Name", "Body" }))
+			{
+				try
+				{
+					db.Entry(chapterToUpdate).State = EntityState.Modified;
+					db.SaveChanges();
+					return Json(new { ID = id, Name = chapterToUpdate.Name, Body = chapterToUpdate.Body });
+
+				}
+				catch (DataException /* dex */)
+				{
+					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+				}
+			}
+			return View("MyBlueScript", chapterToUpdate);
 		}
 
 		[HttpPost]
@@ -183,6 +199,17 @@ namespace Blue_Script.Controllers
 				}
 			}
 			return View("MyBlueScript", settingToUpdate);
+		}
+
+		public ActionResult DeleteChapter(int id)
+		{
+			Chapter chapter = new Chapter() { ID = id };
+			if (chapter != null)
+			{
+				db.Entry(chapter).State = EntityState.Deleted;
+				db.SaveChanges();
+			}
+			return RedirectToAction("Index");
 		}
 
 		public ActionResult DeleteCharacter(int id)

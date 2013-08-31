@@ -47,20 +47,12 @@ body
 }
 .chapters 
 {
-	width: 100%;
 	margin: 0 auto;
-	padding: 5em;
-	margin: 2em;
-    -moz-border-radius: 1.5em;
-	-webkit-border-radius: 1.5em;
-    border-radius: 1.5em;
-    text-align:left;
-    background: #374775;
-    border: 3px solid white; 
+	margin-top: 2em;
 }
 .chapters h3 
 {
-	background: Transparent;
+	background: #374775;
 	border: 1px solid white;
 	color: White;
 	font-family: 'Dancing Script', cursive;
@@ -71,6 +63,10 @@ body
 	width: 90%;
 	font-size: 2em;
 	margin-bottom: 1em;
+}
+.add 
+{
+	margin-top: 1em; 
 }
 .innerHome 
 {
@@ -168,6 +164,11 @@ legend
 	color: White;
 	text-decoration: none;
 }
+.subtitle:hover 
+{
+	color: White;
+	text-decoration: none;
+}
 .headerholder 
 {
 	padding-top: 10px;
@@ -188,6 +189,18 @@ legend
     background: #374775;
     border: 3px solid white;
 	
+}
+.chapterholder 
+{
+	width: 90%;
+	-moz-border-radius: 1.5em;
+	-webkit-border-radius: 1.5em;
+    border-radius: 1.5em;
+    text-align:left;
+    border: none;
+    background: #374775;
+    border: 3px solid white;
+    margin-bottom: 1em;
 }
 .event.add 
 {

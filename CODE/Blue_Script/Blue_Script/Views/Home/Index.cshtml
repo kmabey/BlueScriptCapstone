@@ -2,17 +2,24 @@
 @{
 	ViewBag.Title = "BlueScript Home";
 }
-<div class="row chapters">
-	<div class="add pull-right">
-		<a href="@Url.Action("CreateChapter", "Home")"><i class="icon-plus-sign-alt icon-4x">
+<div class="row top">
+	<header class="bsHeader chap">
+		<h1>
+			Chapters</h1>
+			
+	</header>
+</div>
+	<div class="row chapters">
+	<a href="@Url.Action("CreateChapter", "Home")" class="pull-right"><i class="icon-plus-sign-alt icon-4x">
 		</i></a>
-	</div>
 	<div id="accordion">
 		@for (var i = 0; i < Model.Count(); i++)
   {
-			
-			@Html.Action("EditChapter", "Home", new { id = Model.ElementAt(i).ID })
+			<h3>
+				<a href="#" class="subtitle" id="chap@(Model.ElementAt(i).ID)">@Model.ElementAt(i).Name</a></h3>
+			<div class="chapterholder well">
+				@Html.Action("EditChapter", "Home", new { id = Model.ElementAt(i).ID })
+			</div>
   }
 	</div>
 </div>
-

@@ -70,32 +70,28 @@
 
 	});
 
-	function updateChapter() {
-		var mytext = ' ';
-		$("#chapterSelect option:selected").each(function () {
-			mytext = $("#chapterSelect option:selected").text();
-			$.ajax({
-				url: '/Home/UpdateChapter',
-				type: 'POST',
-				data: { theID: mytext },
-				success: function (r) {
-					$("#chapterText").text(r);
-				}
-			});
-			return false;
-		});
-	};
-
-	function updateBody() {
-		var myText = $("#chapterText").text();
+	function updateChapter(num) {
 		$.ajax({
-			url: '/Home/UpdateChapter',
+			url: '/Home/EditChapter/' + num,
 			type: 'POST',
-			data: { bodyToSave: mytext },
+			data: $('#chapForm' + num).serialize(),
 			success: function (r) {
+				//var response = jQuery.parseJSON(r);
+				$('#chap' + num).html(r.Name);
+				var options = {};
+				$('#saveChap' + num).show("blind", options, 500, callbackChap(num));
 			}
 		});
+		return false;
 	};
+
+	function callbackChap(id) {
+		setTimeout(function () {
+			var options = {};
+			$('#saveChap' + id + ':visible').removeAttr("style").fadeOut();
+		}, 1000);
+	};
+
 
 	function updateScene(num) {
 		$.ajax({
