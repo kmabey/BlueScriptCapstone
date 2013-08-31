@@ -3,6 +3,7 @@
 
 		//Start of test code.
 		$.ajaxSetup({ cache: false });
+		$("#accordion").accordion({ collapsible: true });
 
 		function runEffect1() {
 			var options = {};

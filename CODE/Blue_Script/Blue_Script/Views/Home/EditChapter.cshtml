@@ -1,0 +1,24 @@
+﻿@model Blue_Script.Chapter
+
+<form id="chapForm@(Model.ID)" name="chapForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate">
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>
+			<input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateChapter(@Model.ID)">
+			<span class="pull-right">@Html.ActionLink("X", "DeleteChapter", new { id = Model.ID })</span>
+		</legend>
+		@Html.ValidationMessageFor(model => model.Name)
+        @Html.HiddenFor(model => model.ID)
+		@Html.HiddenFor(model => model.ProjectID)
+        <div class="editor-field">
+            <textarea id="Body" cols="130" rows="25" name="Body" class="text-box multi-line"
+					onchange="updateChapter(@Model.ID)">@Model.Body</textarea>
+		</div>
+
+        <p>
+                <input type="submit" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+        </p>
+		<div class="btn btn-success btn-xs pull-right hideme" id="saveChap@(Model.ID)">Saved</div>
+		
+    </fieldset>
+</form>

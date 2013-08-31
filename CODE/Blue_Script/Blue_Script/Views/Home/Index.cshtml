@@ -3,17 +3,16 @@
 	ViewBag.Title = "BlueScript Home";
 }
 <div class="row chapters">
-	<select id="chapterSelect" name="chapterSelect" onchange="updateChapter();">
+	<div class="add pull-right">
+		<a href="@Url.Action("CreateChapter", "Home")"><i class="icon-plus-sign-alt icon-4x">
+		</i></a>
+	</div>
+	<div id="accordion">
 		@for (var i = 0; i < Model.Count(); i++)
   {
-			<option class="@Model.ElementAt(i).ID">@Model.ElementAt(i).Name</option>
+			
+			@Html.Action("EditChapter", "Home", new { id = Model.ElementAt(i).ID })
   }
-	</select>
-	<div class="add pull-right">
-		<a href="@Url.Action("CreateChapter", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-		</a>
 	</div>
-	<br />
-	<textarea id="chapterText" cols="150" rows="25" name="body" class="text-box multi-line"
-		onchange="save">@Model.ElementAt(0).Body</textarea>
 </div>
+

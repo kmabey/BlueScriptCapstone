@@ -87,6 +87,12 @@ namespace Blue_Script.Controllers
 			return theText;
 		}
 
+		public ActionResult EditChapter(int id)
+		{
+			Chapter chapter = db.Chapters.Find(id);
+			return PartialView("EditChapter", chapter);
+		}
+
 		public ActionResult EditCharacter(int id)
 		{
 			Character character = db.Characters.Find(id);
