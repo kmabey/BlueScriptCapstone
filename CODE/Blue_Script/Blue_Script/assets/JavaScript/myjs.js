@@ -1,15 +1,24 @@
 ﻿$(document).ready(function () {
 
-	$('#navigation a').stop().animate({ 'marginLeft': '-85px' }, 1000);
+	$('#navigation a').stop().animate({ 'marginLeft': '-200px' }, 1000);
 
 	$('#navigation > li').hover(
   function () {
   	$('a', $(this)).stop().animate({ 'marginLeft': '-2px' }, 200);
   },
   function () {
-  	$('a', $(this)).stop().animate({ 'marginLeft': '-85px' }, 200);
+  	$('a', $(this)).stop().animate({ 'marginLeft': '-200px' }, 200);
   }
  );
+
+  var $items = $('#vtab>ul>li');
+  $items.mouseover(function () {
+  	$items.removeClass('selected');
+  	$(this).addClass('selected');
+
+  	var index = $items.index($(this));
+  	$('#vtab>div').hide().eq(index).show();
+  }).eq(1).mouseover();
 
 });
 
