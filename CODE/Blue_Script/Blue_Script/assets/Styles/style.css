@@ -65,6 +65,10 @@ ul#navigation
     z-index:9999;
     color: #374775;
 }
+.sideout 
+{
+	left: 20em;
+}
 ul#navigation li 
 {
     width: 100px;
@@ -91,10 +95,15 @@ ul#navigation li a
 
 .sidrcontent 
 {
-	height: 100%;
 	position: fixed;
-	width: auto;
-	padding: 1em;
+	top: 10px;
+    left: 19em;
+    list-style: none;
+    z-index:9999;
+	max-height: 80%;
+	max-width: 25em;
+	background: #374775;
+	overflow: auto;
 }
 .chapters 
 {

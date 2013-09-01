@@ -33,6 +33,16 @@
 			return false;
 		});
 
+		function runEffect4() {
+			var options = {};
+			$(".sidrcontent").toggle("drop", options, 1000);
+		};
+
+		$(".sceneNav").click(function () {
+			runEffect4();
+			return false;
+		});
+
 		$(".confirmDialog").on("click", function (e) {
 
 			var url = $(this).attr('href');
