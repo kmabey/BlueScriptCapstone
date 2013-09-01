@@ -88,6 +88,14 @@ ul#navigation li a
     -moz-box-shadow: 0px 4px 3px #000;
     -webkit-box-shadow: 0px 4px 3px #000;
 }
+
+.sidrcontent 
+{
+	height: 100%;
+	position: fixed;
+	width: auto;
+	padding: 1em;
+}
 .chapters 
 {
 	margin: 0 auto;

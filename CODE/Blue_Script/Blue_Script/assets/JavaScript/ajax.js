@@ -67,6 +67,7 @@
 
 
 		$('.hideme').hide();
+		$('.sidrcontent').hide();
 
 	});
 
