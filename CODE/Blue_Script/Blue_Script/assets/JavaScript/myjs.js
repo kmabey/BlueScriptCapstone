@@ -1,24 +1,14 @@
 ﻿$(document).ready(function () {
 
-	$('#navigation a').stop().animate({ 'marginLeft': '-200px' }, 1000);
+	$.ajaxSetup({ cache: false });
 
-	$('#navigation > li').hover(
-  function () {
-  	$('a', $(this)).stop().animate({ 'marginLeft': '-2px' }, 200);
-  },
-  function () {
-  	$('a', $(this)).stop().animate({ 'marginLeft': '-200px' }, 200);
-  }
- );
+	$("#sidetabs").tabs({ hide: { effect: "fade", duration: 500} },
+    { show: { effect: "fade", duration: 300} },
+    { cache: false },
+    { activate: function (event, ui) { $(ui.oldPanel).empty(); } },
+    { spinner: 'Loading...' });
 
-  var $items = $('#vtab>ul>li');
-  $items.mouseover(function () {
-  	$items.removeClass('selected');
-  	$(this).addClass('selected');
 
-  	var index = $items.index($(this));
-  	$('#vtab>div').hide().eq(index).show();
-  }).eq(1).mouseover();
 
 });
 
