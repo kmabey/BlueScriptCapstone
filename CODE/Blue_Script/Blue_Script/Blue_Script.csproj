@@ -734,7 +734,9 @@
     <Content Include="assets\JavaScript\jquery-ui-1.10.3.custom\js\jquery-1.9.1.js" />
     <Content Include="assets\JavaScript\jquery-ui-1.10.3.custom\js\jquery-ui-1.10.3.custom.js" />
     <Content Include="assets\JavaScript\jquery-ui-1.10.3.custom\js\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="assets\JavaScript\jquery.sidr.min.js" />
     <Content Include="assets\JavaScript\myjs.js" />
+    <Content Include="assets\Styles\jquery.sidr.dark.css" />
     <Content Include="assets\Styles\reset.css" />
     <Content Include="assets\Styles\style.css" />
     <Content Include="Content\Awesome.css" />

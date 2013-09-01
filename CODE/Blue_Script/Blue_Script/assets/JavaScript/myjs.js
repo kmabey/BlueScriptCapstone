@@ -2,11 +2,18 @@
 
 	$.ajaxSetup({ cache: false });
 
-	$("#sidetabs").tabs({ hide: { effect: "fade", duration: 500} },
-    { show: { effect: "fade", duration: 300} },
-    { cache: false },
-    { activate: function (event, ui) { $(ui.oldPanel).empty(); } },
-    { spinner: 'Loading...' });
+	$('#navigation a').stop().animate({ 'marginLeft': '-85px' }, 1000);
+
+	$("#opensidr").sidr();
+
+	$('#navigation > li').hover(
+  function () {
+  	$('a', $(this)).stop().animate({ 'marginLeft': '-2px' }, 200);
+  },
+  function () {
+  	$('a', $(this)).stop().animate({ 'marginLeft': '-85px' }, 200);
+  }
+);
 
 
 
