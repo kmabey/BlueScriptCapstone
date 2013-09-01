@@ -26,6 +26,11 @@ namespace Blue_Script.Controllers
 			return View(db.Chapters.Where(x => x.ProjectID == projectNum));
 		}
 
+		public ActionResult Nav()
+		{
+			return PartialView();
+		}
+
 		public ActionResult MyStats()
 		{
 			ViewBag.Scenes = new List<Scene>(db.Scenes);
