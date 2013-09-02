@@ -15,7 +15,31 @@
   }
 );
 
+  $("#dialog").dialog({
+  	autoOpen: false,
+	height: 300,
+	modal: true,
+  	show: {
+  		effect: "blind",
+  		duration: 1000
+  	},
+  	hide: {
+  		effect: "explode",
+  		duration: 1000
+  	},
+  	buttons: {
+  		"Okay": function () {
+  			$(this).dialog("close");
+  		},
+  		Cancel: function () {
+  			$(this).dialog("close");
+  		}
+  	}
+  });
 
+  $(".projectNav").click(function () {
+  	$("#dialog").dialog("open");
+  });
 
 
 });

@@ -105,6 +105,10 @@ ul#navigation li a
 	background: #374775;
 	overflow: auto;
 }
+.ui-dialog, .ui-corner-all, .ui-draggable, .ui-resizable 
+{
+	background:#374775 !important;
+}
 .chapters 
 {
 	margin: 0 auto;

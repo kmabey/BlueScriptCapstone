@@ -33,11 +33,16 @@ namespace Blue_Script.Controllers
 			return PartialView();
 		}
 
+		public ActionResult Projects()
+		{
+			return PartialView(db.Projects);
+		}
+
 		public ActionResult MyStats()
 		{
-			ViewBag.Scenes = new List<Scene>(db.Scenes);
-			ViewBag.Characters = new List<Character>(db.Characters);
-			ViewBag.Settings = new List<Setting>(db.Settings);
+			ViewBag.Scenes = new List<Scene>(db.Scenes.Where(x => x.ProjectID == projectNum));
+			ViewBag.Characters = new List<Character>(db.Characters.Where(x => x.ProjectID == projectNum));
+			ViewBag.Settings = new List<Setting>(db.Settings.Where(x => x.ProjectID == projectNum));
 			ViewBag.TotalScenes = ViewBag.Scenes.Count;
 			ViewBag.TotalCharacters = ViewBag.Characters.Count;
 			ViewBag.TotalSettings = ViewBag.Settings.Count;
@@ -46,16 +51,17 @@ namespace Blue_Script.Controllers
 
 		public ActionResult MyBlueScript()
 		{
-			return View(db.Scenes);
+			return View(db.Scenes.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult Scenes()
 		{
-			var query = db.Settings.Select(c => new { c.ID, c.Name });
+			var set = db.Settings.Where(x => x.ProjectID == projectNum);
+			var query = set.Select(c => new { c.ID, c.Name });
 			ViewBag.PossibleSettings = new SelectList(query.AsEnumerable(), "ID", "Name");
 			var query2 = db.Characters.Select(c => new { c.CharacterID, c.FullName });
 			var myChars = new List<Character>();
-			foreach (var item in db.Characters)
+			foreach (var item in db.Characters.Where(x => x.ProjectID == projectNum))
 			{
 				myChars.Add(item);
 			}
@@ -68,7 +74,7 @@ namespace Blue_Script.Controllers
 		public ActionResult Characters()
 		{
 			var myChars = new List<Character>();
-			foreach (var item in db.Characters)
+			foreach (var item in db.Characters.Where(x => x.ProjectID == projectNum))
 			{
 				myChars.Add(item);
 			}
@@ -78,7 +84,7 @@ namespace Blue_Script.Controllers
 
 		public ActionResult Settings()
 		{
-			ViewBag.Settings = new List<Setting>(db.Settings);
+			ViewBag.Settings = new List<Setting>(db.Settings.Where(x => x.ProjectID == projectNum));
 			return PartialView(db.Settings);
 		}
 
@@ -379,6 +385,25 @@ namespace Blue_Script.Controllers
 
 			foreach (String s in matches)
 			{
+				bool alreadyExists = false;
+				foreach (Character c in db.Characters.Where(x => x.ProjectID == projectNum))
+				{
+					if(c.FullName.Equals(s))
+					{
+						alreadyExists = true;
+					}
+				}
+				foreach (Setting set in db.Settings.Where(x => x.ProjectID == projectNum))
+				{
+					if (set.Name.Equals(s))
+					{
+						alreadyExists = true;
+					}
+				}
+				if(!alreadyExists)
+				{
+					//create character or setting
+				}
 				Trace.WriteLine("Found: " + s);
 			}
 
