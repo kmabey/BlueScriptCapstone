@@ -122,6 +122,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(chapterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
+					FindMatches(formCollection["Body"]);
 					return Json(new { ID = id, Name = chapterToUpdate.Name, Body = chapterToUpdate.Body });
 
 				}
@@ -361,6 +362,12 @@ namespace Blue_Script.Controllers
 					}
 				}
 			}
+		}
+		
+
+		private void FindMatches(string body)
+		{
+			
 		}
 	}
 }
