@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Blue_Script.Models;
 using System.Data;
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Blue_Script.Controllers
 {
@@ -367,7 +369,19 @@ namespace Blue_Script.Controllers
 
 		private void FindMatches(string body)
 		{
-			
+			MatchCollection matchCollection = Regex.Matches(body, @"[^.:?!\d\n\v\e\r\s""']\s([A-Z]+[a-z]+)[,.:;?!\s]");
+
+			List<string> matches = matchCollection
+			.Cast<Match>()
+			.Select(m => m.Groups[1].Value)
+			.Distinct()
+			.ToList();
+
+			foreach (String s in matches)
+			{
+				Trace.WriteLine("Found: " + s);
+			}
+
 		}
 	}
 }
