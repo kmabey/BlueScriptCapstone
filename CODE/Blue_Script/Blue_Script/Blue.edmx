@@ -14,6 +14,7 @@
           <EntitySet Name="SceneCharacter" EntityType="BlueScriptModel.Store.SceneCharacter" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Setting" EntityType="BlueScriptModel.Store.Setting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="BlueScriptModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Unsorted" EntityType="BlueScriptModel.Store.Unsorted" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK__SceneChar__Chara__2F10007B" Association="BlueScriptModel.Store.FK__SceneChar__Chara__2F10007B">
             <End Role="Character" EntitySet="Character" />
             <End Role="SceneCharacter" EntitySet="SceneCharacter" />
@@ -41,6 +42,10 @@
           <AssociationSet Name="FK_Setting_Project" Association="BlueScriptModel.Store.FK_Setting_Project">
             <End Role="Project" EntitySet="Project" />
             <End Role="Setting" EntitySet="Setting" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unsorted_Project" Association="BlueScriptModel.Store.FK_Unsorted_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Unsorted" EntitySet="Unsorted" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="__MigrationHistory">
@@ -112,6 +117,14 @@
           <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Unsorted">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__SceneChar__Chara__2F10007B">
           <End Role="Character" Type="BlueScriptModel.Store.Character" Multiplicity="1">
@@ -199,6 +212,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Unsorted_Project">
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1" />
+          <End Role="Unsorted" Type="BlueScriptModel.Store.Unsorted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Unsorted">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -266,6 +291,11 @@
             <End Role="Character" EntitySet="Characters" />
             <End Role="Scene" EntitySet="Scenes" />
           </AssociationSet>
+          <EntitySet Name="Unsorteds" EntityType="BlueScriptModel.Unsorted" />
+          <AssociationSet Name="FK_Unsorted_Project" Association="BlueScriptModel.FK_Unsorted_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Unsorted" EntitySet="Unsorteds" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -306,6 +336,7 @@
           <NavigationProperty Name="Characters" Relationship="BlueScriptModel.FK_Character_Project" FromRole="Project" ToRole="Character" />
           <NavigationProperty Name="Scenes" Relationship="BlueScriptModel.FK_Scene_Project" FromRole="Project" ToRole="Scene" />
           <NavigationProperty Name="Settings" Relationship="BlueScriptModel.FK_Setting_Project" FromRole="Project" ToRole="Setting" />
+          <NavigationProperty Name="Unsorteds" Relationship="BlueScriptModel.FK_Unsorted_Project" FromRole="Project" ToRole="Unsorted" />
         </EntityType>
         <EntityType Name="Scene">
           <Key>
@@ -405,6 +436,27 @@
           <End Role="Character" Type="BlueScriptModel.Character" Multiplicity="*" />
           <End Role="Scene" Type="BlueScriptModel.Scene" Multiplicity="*" />
         </Association>
+        <EntityType Name="Unsorted">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ProjectID" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="BlueScriptModel.FK_Unsorted_Project" FromRole="Unsorted" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Unsorted_Project">
+          <End Type="BlueScriptModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="BlueScriptModel.Unsorted" Role="Unsorted" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Unsorted">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -488,6 +540,15 @@
               <ScalarProperty Name="ID" ColumnName="SceneID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Unsorteds">
+            <EntityTypeMapping TypeName="BlueScriptModel.Unsorted">
+              <MappingFragment StoreEntitySet="Unsorted">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -527,13 +588,15 @@
           <ConnectorPoint PointX="3" PointY="5.3987939453125" />
         </AssociationConnector>
         <AssociationConnector Association="BlueScriptModel.FK_Scene_Project" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="6.516337890625" />
-          <ConnectorPoint PointX="5.25" PointY="6.516337890625" />
+          <ConnectorPoint PointX="2.25" PointY="6.6124886067708326" />
+          <ConnectorPoint PointX="5.25" PointY="6.6124886067708326" />
         </AssociationConnector>
         <AssociationConnector Association="BlueScriptModel.FK_Setting_Project" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="6.672587890625" />
-          <ConnectorPoint PointX="1.5" PointY="8.4035953776041659" />
-          <ConnectorPoint PointX="3" PointY="8.4035953776041659" />
+          <ConnectorPoint PointX="1.5" PointY="6.8648893229166656" />
+          <ConnectorPoint PointX="1.5" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="3" PointY="8.2112939453125" />
         </AssociationConnector>
         <AssociationConnector Association="BlueScriptModel.FK_Scene_Setting" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="7.6535953776041659" />
@@ -542,6 +605,12 @@
         <AssociationConnector Association="BlueScriptModel.SceneCharacter" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="5.9612939453125" />
           <ConnectorPoint PointX="5.25" PointY="5.9612939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BlueScriptModel.Unsorted" Width="1.5" PointX="3" PointY="10.75" Height="1.7879850260416674" />
+        <AssociationConnector Association="BlueScriptModel.FK_Unsorted_Project" >
+          <ConnectorPoint PointX="1.9062525" PointY="6.8648893229166656" />
+          <ConnectorPoint PointX="1.9062525" PointY="11.643992513020834" />
+          <ConnectorPoint PointX="3" PointY="11.643992513020834" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

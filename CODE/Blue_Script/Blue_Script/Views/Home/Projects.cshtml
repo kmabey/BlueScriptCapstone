@@ -1,27 +1,17 @@
 ﻿@model IEnumerable<Blue_Script.Project>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            Name
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@foreach (var item in Model)
+{
+	<div class="event well">
+		
+			<span class="pull-right">@Html.ActionLink("X", "DeleteProject", new { id = item.ID })</span>
+			<h3 contenteditable="true" onchange="updateProject(@item.ID, @this)">@item.Name</h3>
+			<!--TODO: add link here that selects that project as the current project.-->
+			<div class="btn btn-success btn-xs pull-right hideme" id="saveSet@(item.ID)">
+				Saved</div>
+	</div>
 }
 
-</table>
+<div class="event add">
+	<a href="@Url.Action("CreateProject", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+	</a>
+</div>

@@ -260,6 +260,7 @@ namespace Blue_Script.Controllers
 		{
 			var newCharacter = new Character
 			{
+				ProjectID = projectNum,
 				FullName = "Character Name",
 				Notes = "Notes go here."
 			};
@@ -272,6 +273,7 @@ namespace Blue_Script.Controllers
 		{
 			var newSetting = new Setting
 			{
+				ProjectID = projectNum,
 				Name = "Setting Name",
 				Notes = "Notes go here."
 			};
@@ -284,6 +286,7 @@ namespace Blue_Script.Controllers
 		{
 			var newScene = new Scene
 			{
+				ProjectID = projectNum,
 				Name = "Scene Name",
 				Characters = new List<Character>(),
 				Setting = null,
@@ -400,9 +403,23 @@ namespace Blue_Script.Controllers
 						alreadyExists = true;
 					}
 				}
+				foreach (Unsorted un in db.Unsorteds.Where(x => x.ProjectID == projectNum))
+				{
+					if (un.Name.Equals(s))
+					{
+						alreadyExists = true;
+					}
+				}
 				if(!alreadyExists)
 				{
-					//create character or setting
+					//add to unsorted
+					var newUnsorted = new Unsorted
+					{
+						ProjectID = projectNum,
+						Name = s
+					};
+					db.Unsorteds.Add(newUnsorted);
+					db.SaveChanges();
 				}
 				Trace.WriteLine("Found: " + s);
 			}

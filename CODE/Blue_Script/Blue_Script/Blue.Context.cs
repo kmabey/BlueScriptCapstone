@@ -32,5 +32,6 @@ namespace Blue_Script
         public DbSet<Scene> Scenes { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<Unsorted> Unsorteds { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace Blue_Script
             this.Characters = new HashSet<Character>();
             this.Scenes = new HashSet<Scene>();
             this.Settings = new HashSet<Setting>();
+            this.Unsorteds = new HashSet<Unsorted>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,6 @@ namespace Blue_Script
         public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<Scene> Scenes { get; set; }
         public virtual ICollection<Setting> Settings { get; set; }
+        public virtual ICollection<Unsorted> Unsorteds { get; set; }
     }
 }

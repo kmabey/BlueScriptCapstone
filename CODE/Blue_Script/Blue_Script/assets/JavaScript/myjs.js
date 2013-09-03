@@ -17,7 +17,7 @@
 
   $("#dialog").dialog({
   	autoOpen: false,
-	height: 300,
+	height: 500,
 	modal: true,
   	show: {
   		effect: "blind",
@@ -26,14 +26,6 @@
   	hide: {
   		effect: "explode",
   		duration: 1000
-  	},
-  	buttons: {
-  		"Okay": function () {
-  			$(this).dialog("close");
-  		},
-  		Cancel: function () {
-  			$(this).dialog("close");
-  		}
   	}
   });
 

@@ -101,8 +101,6 @@ ul#navigation li a
 	position: fixed;
 	top: 10px;
     left: 19em;
-    list-style: none;
-    z-index:9999;
 	max-height: 80%;
 	max-width: 25em;
 	min-width: 20em;
@@ -119,8 +117,9 @@ ul#navigation li a
 display:block;
 border-top:1px solid #dddddd;
 border-bottom:1px solid #ededed;
-margin:0 0 15px;
+margin-left:0;
 padding:0;
+
 }
 .sidrcontent ul li 
 {
@@ -140,21 +139,7 @@ line-height:49px;
 display:block;
 text-decoration:none;
 color:#fff;
-padding:0 15px;
-}
-.sidrcontent ul li ul 
-{
-border-bottom:none;
-margin:0;
-}
-.sidrcontent ul li ul li 
-{
-line-height:40px;
-font-size:13px;
-}
-.sidrcontent ul li ul li:last-child 
-{
-border-bottom:none;
+padding:0 5px;
 }
 .sidrcontent ul li ul li:hover,.sidrcontent ul li ul li.active,.sidrcontent ul li ul li.sidrcontent-class-active 
 {
@@ -315,6 +300,7 @@ legend
     border: none;
     background: #374775;
     border: 3px solid white;
+    min-width: 10em;
 	
 }
 .chapterholder 
@@ -365,6 +351,7 @@ footer
 	-moz-border-radius: 25px;
 	-webkit-border-radius: 25px;
 	border-radius: 25px;
+	padding: 1em;
 }
 .hideme 
 {
