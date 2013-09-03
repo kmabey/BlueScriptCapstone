@@ -4,7 +4,7 @@
 
 	$('#navigation a').stop().animate({ 'marginLeft': '-85px' }, 1000);
 
-	$("#opensidr").sidr();
+	$(".opensidr").sidr();
 
 	$('#navigation > li').hover(
   function () {

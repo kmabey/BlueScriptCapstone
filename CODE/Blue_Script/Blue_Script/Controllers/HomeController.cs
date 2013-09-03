@@ -46,7 +46,7 @@ namespace Blue_Script.Controllers
 			ViewBag.TotalScenes = ViewBag.Scenes.Count;
 			ViewBag.TotalCharacters = ViewBag.Characters.Count;
 			ViewBag.TotalSettings = ViewBag.Settings.Count;
-			return View();
+			return PartialView();
 		}
 
 		public ActionResult MyBlueScript()

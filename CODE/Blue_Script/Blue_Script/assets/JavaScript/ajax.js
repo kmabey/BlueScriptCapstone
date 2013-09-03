@@ -35,11 +35,41 @@
 
 		function runEffect4() {
 			var options = {};
-			$(".sidrcontent").toggle("drop", options, 1000);
+			$("#sidrcontenta").toggle("drop", options, 1000);
 		};
 
 		$(".sceneNav").click(function () {
 			runEffect4();
+			return false;
+		});
+
+		function runEffect5() {
+			var options = {};
+			$("#sidrcontentb").toggle("drop", options, 1000);
+		};
+
+		$(".characterNav").click(function () {
+			runEffect5();
+			return false;
+		});
+
+		function runEffect6() {
+			var options = {};
+			$("#sidrcontentc").toggle("drop", options, 1000);
+		};
+
+		$(".settingNav").click(function () {
+			runEffect6();
+			return false;
+		});
+
+		function runEffect7() {
+			var options = {};
+			$("#sidrcontentd").toggle("drop", options, 1000);
+		};
+
+		$(".statNav").click(function () {
+			runEffect7();
 			return false;
 		});
 
