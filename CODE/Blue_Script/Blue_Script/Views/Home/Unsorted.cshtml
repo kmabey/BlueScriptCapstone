@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Blue_Script.Unsorted>
+<table>
+    <tr class="tabletop">
+        <th>
+            Unsorted
+        </th>
+        <th>Add to</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+			<a href="#"><i class="icon-user"></i></a> |
+			<a href="#"><i class="icon-map-marker"></i></a> |
+			<a href="#">Ignore</a>
+        </td>
+    </tr>
+}
+
+</table>

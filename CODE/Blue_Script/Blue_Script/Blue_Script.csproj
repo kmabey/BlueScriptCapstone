@@ -122,6 +122,9 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Blue.tt</DependentUpon>
     </Compile>
+    <Compile Include="Unsorted.cs">
+      <DependentUpon>Blue.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="! mvc project awesome readme.txt" />
@@ -1079,6 +1082,7 @@
     <Content Include="Views\Home\EditChapter.cshtml" />
     <Content Include="Views\Home\Nav.cshtml" />
     <Content Include="Views\Home\Projects.cshtml" />
+    <Content Include="Views\Home\Unsorted.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

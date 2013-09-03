@@ -93,6 +93,11 @@ namespace Blue_Script.Controllers
 			return View();
 		}
 
+		public ActionResult Unsorted()
+		{
+			return PartialView(db.Unsorteds);
+		}
+
 		public ActionResult EditChapter(int id)
 		{
 			Chapter chapter = db.Chapters.Find(id);

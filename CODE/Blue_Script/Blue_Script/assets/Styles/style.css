@@ -357,3 +357,13 @@ footer
 {
 	margin: 0;
 }
+.unsorted {
+	padding: 1em;
+}
+.unsorted td
+{
+	min-width: 7em;
+}
+.tabletop {
+	border-bottom: 2px solid white;
+}
