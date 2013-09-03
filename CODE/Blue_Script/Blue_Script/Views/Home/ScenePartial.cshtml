@@ -2,7 +2,7 @@
 <form id="sceneForm@(Model.ID)" name="sceneForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate" onsubmit="updateScene(@Model.ID)">
 		@Html.ValidationSummary(true)
 		<fieldset>
-			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateScene(@Model.ID)"><span class="pull-right">@Html.ActionLink("X", "DeleteScene", new { id = Model.ID })</span></legend>
+			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateScene(@Model.ID)"></legend>
 			@Html.HiddenFor(model => Model.ID)
 			<h5>
 				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings, new { @onchange = "updateScene(@Model.ID)" })

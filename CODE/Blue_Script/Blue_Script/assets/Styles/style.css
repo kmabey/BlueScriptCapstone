@@ -9,7 +9,7 @@ h1
 	text-align: center;
 	margin-top: .1em;
 }
-a:link, a:hover, a:active, a:visited
+a:link, a:active, a:visited
 {
 	color: White;
 	text-decoration: none;
@@ -105,8 +105,72 @@ ul#navigation li a
     z-index:9999;
 	max-height: 80%;
 	max-width: 25em;
+	min-width: 20em;
 	background: #374775;
 	overflow: auto;
+	-webkit-box-shadow:inset 0 0 5px 5px #EEE;
+	-moz-box-shadow:inset 0 0 5px 5px #EEE;
+	box-shadow:inset 0 0 5px 5px #EEE;
+	padding: 1em;
+}
+
+.sidrcontent ul 
+{
+display:block;
+border-top:1px solid #dddddd;
+border-bottom:1px solid #ededed;
+margin:0 0 15px;
+padding:0;
+}
+.sidrcontent ul li 
+{
+display:block;
+line-height:48px;
+border-top:1px solid #ededed;
+border-bottom:1px solid #dddddd;
+margin:0;
+}
+.sidrcontent ul li:hover,.sidrcontent ul li.active,.sidrcontent ul li.sidrcontent-class-active 
+{
+border-top:none;
+line-height:49px;
+}
+.sidrcontent ul li a,.sidrcontent ul li span 
+{
+display:block;
+text-decoration:none;
+color:#fff;
+padding:0 15px;
+}
+.sidrcontent ul li ul 
+{
+border-bottom:none;
+margin:0;
+}
+.sidrcontent ul li ul li 
+{
+line-height:40px;
+font-size:13px;
+}
+.sidrcontent ul li ul li:last-child 
+{
+border-bottom:none;
+}
+.sidrcontent ul li ul li:hover,.sidrcontent ul li ul li.active,.sidrcontent ul li ul li.sidrcontent-class-active 
+{
+border-top:none;
+line-height:41px;
+}
+.sidrcontent ul li ul li a,.sidrcontent ul li ul li span 
+{
+color:rgba(255,255,255,0.8);
+padding-left:30px;
+}
+.sidrcontent ul li:hover>a,.sidrcontent ul li:hover>span,.sidrcontent ul li.active>a,.sidrcontent ul li.active>span,.sidrcontent ul li.sidrcontent-class-active>a,.sidrcontent ul li.sidrcontent-class-active>span,.sidrcontent ul li ul li:hover>a,.sidrcontent ul li ul li:hover>span,.sidrcontent ul li ul li.active>a,.sidrcontent ul li ul li.active>span,.sidrcontent ul li ul li.sidrcontent-class-active>a,.sidrcontent ul li ul li.sidrcontent-class-active>span 
+{
+-webkit-box-shadow:inset 0 0 15px 3px #EEE;
+-moz-box-shadow:inset 0 0 15px 3px #EEE;
+box-shadow:inset 0 0 15px 3px #EEE;
 }
 .ui-dialog, .ui-corner-all, .ui-draggable, .ui-resizable 
 {
@@ -180,10 +244,6 @@ a
 {
 	color:White;
 	
-}
-a:hover 
-{
-	text-decoration: none;
 }
 .bodyholder 
 {

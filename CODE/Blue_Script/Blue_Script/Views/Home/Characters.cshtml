@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<Blue_Script.Character>
-@for (var c = 0; c < Model.Count();  c++)
+<ul>
+@for (var i = 0; i < Model.Count(); i++)
 {
-	<div class="event well" draggable="true">
-		@Html.Action("EditCharacter", "Home", new { id = Model.ElementAt(c).CharacterID })
-	</div>
+	<li>
+		<p class="pull-left">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.ElementAt(i).CharacterID })</p>
+		<a href="#">@Model.ElementAt(i).FullName</a>
+	</li>		
 }
+</ul>
 <div class="event add">
 	<a href="@Url.Action("CreateCharacter", "Home")"><i class="icon-plus-sign-alt icon-4x">
 	</i></a>

@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<Blue_Script.Setting>
-@for (var s = 0; s < Model.Count(); s++)
+<ul>
+@for (var i = 0; i < Model.Count(); i++)
 {
-	<div class="event well" draggable="true">
-		@Html.Action("EditSetting", "Home", new { id = Model.ElementAt(s).ID })
-	</div>
+	<li>
+		<p class="pull-left">@Html.ActionLink("X", "DeleteSetting", new { id = Model.ElementAt(i).ID })</p>
+		<a href="#">@Model.ElementAt(i).Name</a>
+	</li>		
 }
+</ul>
 <div class="event add">
 	<a href="@Url.Action("CreateSetting", "Home")"><i class="icon-plus-sign-alt icon-4x">
 	</i></a>
