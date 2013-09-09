@@ -21,6 +21,7 @@ namespace Blue_Script
             this.Scenes = new HashSet<Scene>();
             this.Settings = new HashSet<Setting>();
             this.Unsorteds = new HashSet<Unsorted>();
+            this.Forgets = new HashSet<Forget>();
         }
     
         public int ID { get; set; }
@@ -31,5 +32,6 @@ namespace Blue_Script
         public virtual ICollection<Scene> Scenes { get; set; }
         public virtual ICollection<Setting> Settings { get; set; }
         public virtual ICollection<Unsorted> Unsorteds { get; set; }
+        public virtual ICollection<Forget> Forgets { get; set; }
     }
 }

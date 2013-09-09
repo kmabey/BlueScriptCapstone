@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Blue_Script.Character>
+<header class="bsHeader" id="charHead">
+			<h1>
+				Characters</h1>
+		</header>
 <ul>
 @for (var i = 0; i < Model.Count(); i++)
 {
-	<li>
-		<p class="pull-left">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.ElementAt(i).CharacterID })</p>
-		<a href="#">@Model.ElementAt(i).FullName</a>
+	<li onclick="showCharacter(@Model.ElementAt(i).CharacterID)">
+		<a href="#">@Model.ElementAt(i).FullName<i class="icon-chevron-right hoveronly"></i></a>
 	</li>		
 }
 </ul>
 <div class="event add">
-	<a href="@Url.Action("CreateCharacter", "Home")"><i class="icon-plus-sign-alt icon-4x">
+	<a href="#" onclick="addCharacter();"><i class="icon-plus-sign-alt icon-4x">
 	</i></a>
 </div>

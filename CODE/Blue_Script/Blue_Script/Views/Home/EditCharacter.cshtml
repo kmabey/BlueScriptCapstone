@@ -6,7 +6,7 @@
     <fieldset>
         <legend>
 			<input id="FullName" class="text-box single-line valid" type="text" value="@Model.FullName" name="FullName" onchange="updateCharacter(@Model.CharacterID)">
-			<span class="pull-right">@Html.ActionLink("X", "DeleteCharacter", new { id = Model.CharacterID })</span>
+			<span class="pull-right"><a href="#" onclick="deleteCharacter(@Model.CharacterID);"><i class="icon-trash"></i></a></span>
 		</legend>
 		@Html.ValidationMessageFor(model => model.FullName)
         @Html.HiddenFor(model => model.CharacterID)
@@ -16,7 +16,7 @@
         </div>
 
         <p>
-                <input type="submit" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+                <input type="submit" disabled="disabled" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
         </p>
 		<div class="btn btn-success btn-xs pull-right hideme" id="saveChar@(Model.CharacterID)">Saved</div>
 		

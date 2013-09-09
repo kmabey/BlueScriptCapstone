@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<Blue_Script.Scene>
 
+<header class="bsHeader" id="sceneHead">
+			<h1>
+				Scenes</h1>
+		</header>
 <ul>
 @for (var i = 0; i < Model.Count(); i++)
 {
-	<li>
-		<p class="pull-left">@Html.ActionLink("X", "DeleteScene", new { id = Model.ElementAt(i).ID })</p>
-		<a href="#">@Model.ElementAt(i).Name</a>
+	<li onclick="showScene(@Model.ElementAt(i).ID)">
+		<a href="#">@Model.ElementAt(i).Name<i class="icon-chevron-right hoveronly"></i></a>
 	</li>		
 }
 </ul>
 <div class="event add">
-	<a href="@Url.Action("CreateScene", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
+	<a href="#" onclick="addScene();"><i class="icon-plus-sign-alt icon-4x"></i>
 	</a>
 </div>
 

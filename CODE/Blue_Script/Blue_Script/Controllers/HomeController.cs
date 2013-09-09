@@ -7,25 +7,74 @@ using Blue_Script.Models;
 using System.Data;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Web.SessionState;
+using System.Collections.Specialized;
 
 namespace Blue_Script.Controllers
 {
 	public class HomeController : Controller
 	{
 		BlueScriptEntities db = new BlueScriptEntities();
-		int projectNum;
+		public int projectNum;
+		//public HttpSessionState Session { get; set; }
 
 		public HomeController()
 		{
-			projectNum = 1;
 		}
 
 		public ActionResult Index()
 		{
+			if (HttpContext.Session["Number"] == null)
+			{
+				Session["Number"] = 1;
+			}
+			projectNum = (int)(HttpContext.Session["Number"]);
+
 			Project project = db.Projects.Find(projectNum);
+			ViewBag.projectName = project.Name;
 			var chapters = db.Chapters.Where(x => x.ProjectID == projectNum);
 			PopulateChaptersDropDownList(projectNum);
 			return View(db.Chapters.Where(x => x.ProjectID == projectNum));
+		}
+
+		[HttpPost]
+		public string Link()
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			NameValueCollection q = System.Web.HttpUtility.ParseQueryString(string.Empty);
+			var chapters = db.Chapters.Where(x => x.ProjectID == projectNum);
+			q["id"] = "" + projectNum;
+			foreach(Chapter c in chapters)
+			{
+				q["" + c.Name] = "" + c.Body;
+			}
+			string theuri = (Request.Url.AbsoluteUri).Replace("Link/", "LinkTo/?");
+			return (theuri)+(q.ToString());
+		}
+		[HttpGet]
+		public ActionResult LinkTo(string s)
+		{
+			string result = "";
+			NameValueCollection n = Request.QueryString;
+			projectNum = Convert.ToInt32(Request.QueryString["id"]);
+			foreach (String key in Request.QueryString.AllKeys)
+			{
+				if(!key.Equals("id"))
+				Response.Write(key + ": \n" + Request.QueryString[key] + "\n");
+			}
+			return Content(result);
+		}
+
+		public ActionResult ChangeProject(int id)
+		{
+			HttpContext.Session["Number"] = id;
+			projectNum = id;
+			Project project = db.Projects.Find(projectNum);
+			ViewBag.projectName = project.Name;
+			var chapters = db.Chapters.Where(x => x.ProjectID == projectNum);
+			PopulateChaptersDropDownList(projectNum);
+			checkElements(id);
+			return View("Index", db.Chapters.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult Nav()
@@ -40,6 +89,7 @@ namespace Blue_Script.Controllers
 
 		public ActionResult MyStats()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			ViewBag.Scenes = new List<Scene>(db.Scenes.Where(x => x.ProjectID == projectNum));
 			ViewBag.Characters = new List<Character>(db.Characters.Where(x => x.ProjectID == projectNum));
 			ViewBag.Settings = new List<Setting>(db.Settings.Where(x => x.ProjectID == projectNum));
@@ -51,11 +101,13 @@ namespace Blue_Script.Controllers
 
 		public ActionResult MyBlueScript()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			return View(db.Scenes.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult Scenes()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var set = db.Settings.Where(x => x.ProjectID == projectNum);
 			var query = set.Select(c => new { c.ID, c.Name });
 			ViewBag.PossibleSettings = new SelectList(query.AsEnumerable(), "ID", "Name");
@@ -68,58 +120,115 @@ namespace Blue_Script.Controllers
 			ViewBag.myCharacters = myChars;
 			ViewBag.Settings = new List<Setting>(db.Settings);
 
-			return PartialView(db.Scenes);
+			return PartialView(db.Scenes.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult Characters()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var myChars = new List<Character>();
 			foreach (var item in db.Characters.Where(x => x.ProjectID == projectNum))
 			{
 				myChars.Add(item);
 			}
 			ViewBag.myCharacters = myChars;
-			return PartialView(db.Characters);
+			return PartialView(db.Characters.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult Settings()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			ViewBag.Settings = new List<Setting>(db.Settings.Where(x => x.ProjectID == projectNum));
-			return PartialView(db.Settings);
+			return PartialView(ViewBag.Settings);
 		}
 
 		public ActionResult Chapters()
 		{
-			return View();
+			projectNum = (int)(HttpContext.Session["Number"]);
+			return PartialView(db.Chapters.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult Unsorted()
 		{
-			return PartialView(db.Unsorteds);
+			projectNum = (int)(HttpContext.Session["Number"]);
+			return PartialView(db.Unsorteds.Where(x => x.ProjectID == projectNum));
+		}
+
+		public ActionResult AddToC(int id)
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			Unsorted un = db.Unsorteds.Find(id);
+			var newCharacter = new Character
+			{
+				ProjectID = projectNum,
+				FullName = un.Name,
+				Notes = "Added"
+			};
+
+			db.Characters.Add(newCharacter);
+			db.Entry(un).State = EntityState.Deleted;
+			db.SaveChanges();
+			return PartialView("Unsorted", db.Unsorteds.Where(x => x.ProjectID == projectNum));
+		}
+
+		public ActionResult AddToS(int id)
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			Unsorted un = db.Unsorteds.Find(id);
+			var newSetting = new Setting
+			{
+				ProjectID = projectNum,
+				Name = un.Name,
+				Notes = "Added"
+			};
+
+			db.Settings.Add(newSetting);
+			db.Entry(un).State = EntityState.Deleted;
+			db.SaveChanges();
+			return PartialView("Unsorted", db.Unsorteds.Where(x => x.ProjectID == projectNum));
+		}
+
+		public ActionResult AddToI(int id)
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			Unsorted un = db.Unsorteds.Find(id);
+			var newForget = new Forget
+			{
+				ProjectID = projectNum,
+				Name = un.Name
+			};
+
+			db.Forgets.Add(newForget);
+			db.Entry(un).State = EntityState.Deleted;
+			db.SaveChanges();
+			return PartialView("Unsorted", db.Unsorteds.Where(x => x.ProjectID == projectNum));
 		}
 
 		public ActionResult EditChapter(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Chapter chapter = db.Chapters.Find(id);
 			return PartialView("EditChapter", chapter);
 		}
 
 		public ActionResult EditCharacter(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Character character = db.Characters.Find(id);
 			return PartialView("EditCharacter", character);
 		}
 
 		public ActionResult EditSetting(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Setting setting = db.Settings.Find(id);
 			return PartialView("EditSetting", setting);
 		}
 
 		public ActionResult ScenePartial(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Scene scene = db.Scenes.Find(id);
-			PopulateSettingsDropDownList(scene.SettingID);
 			PopulateAssignedCharacters(scene);
 			return PartialView(scene);
 		}
@@ -127,6 +236,7 @@ namespace Blue_Script.Controllers
 		[HttpPost]
 		public ActionResult EditChapter(int id, FormCollection formCollection)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var chapterToUpdate = db.Chapters.Find(id);
 			if (TryUpdateModel(chapterToUpdate, "",
 			   new string[] { "Name", "Body" }))
@@ -151,6 +261,7 @@ namespace Blue_Script.Controllers
 		[HttpPost]
 		public ActionResult EditScene(int id, FormCollection formCollection, string[] selectedCharacters)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var sceneToUpdate = db.Scenes.Find(id);
 			if (TryUpdateModel(sceneToUpdate, "",
 			   new string[] { "Name", "Notes", "SettingID" }))
@@ -162,7 +273,7 @@ namespace Blue_Script.Controllers
 
 					db.Entry(sceneToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return Json(new { ID = id });
+					return PartialView("Scenes", db.Scenes.Where(x => x.ProjectID == projectNum));
 
 				}
 				catch (DataException /* dex */)
@@ -178,6 +289,7 @@ namespace Blue_Script.Controllers
 		[HttpPost]
 		public ActionResult EditCharacter(int id, FormCollection formCollection)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var characterToUpdate = db.Characters.Find(id);
 			if (TryUpdateModel(characterToUpdate, "",
 			   new string[] { "FullName", "Notes" }))
@@ -186,7 +298,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(characterToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return Json(new { ID = id, FullName = characterToUpdate.FullName, Notes = characterToUpdate.Notes });
+					return PartialView("Characters", db.Characters.Where(x => x.ProjectID == projectNum));
 
 				}
 				catch (DataException /* dex */)
@@ -201,6 +313,7 @@ namespace Blue_Script.Controllers
 		[HttpPost]
 		public ActionResult EditSetting(int id, FormCollection formCollection)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var settingToUpdate = db.Settings.Find(id);
 			if (TryUpdateModel(settingToUpdate, "",
 			   new string[] { "Name", "Notes" }))
@@ -209,7 +322,7 @@ namespace Blue_Script.Controllers
 				{
 					db.Entry(settingToUpdate).State = EntityState.Modified;
 					db.SaveChanges();
-					return Json(new { ID = id });
+					return PartialView("Settings", db.Settings.Where(x => x.ProjectID == projectNum));
 				}
 				catch (DataException /* dex */)
 				{
@@ -220,49 +333,86 @@ namespace Blue_Script.Controllers
 			return View("MyBlueScript", settingToUpdate);
 		}
 
+		[HttpPost]
+		public ActionResult EditProject(int id, FormCollection formCollection)
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			var projectToUpdate = db.Projects.Find(id);
+			if (TryUpdateModel(projectToUpdate, "",
+			   new string[] { "Name" }))
+			{
+				try
+				{
+					db.Entry(projectToUpdate).State = EntityState.Modified;
+					db.SaveChanges();
+					return Json(new { ID = id });
+				}
+				catch (DataException /* dex */)
+				{
+					//Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+					ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+				}
+			}
+			return View("MyBlueScript", projectToUpdate);
+		}
+
 		public ActionResult DeleteChapter(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Chapter chapter = new Chapter() { ID = id };
 			if (chapter != null)
 			{
 				db.Entry(chapter).State = EntityState.Deleted;
 				db.SaveChanges();
 			}
-			return RedirectToAction("Index");
+			return RedirectToAction("Index", db.Chapters.Where(s => s.ProjectID == projectNum));
 		}
 
 		public ActionResult DeleteCharacter(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Character character = new Character() { CharacterID = id };
 			if (character != null)
 			{
 				db.Entry(character).State = EntityState.Deleted;
 				db.SaveChanges();
 			}
-			return RedirectToAction("MyBlueScript");
+			return PartialView("Characters", db.Characters.Where(s => s.ProjectID == projectNum));
 		}
 
 		public ActionResult DeleteSetting(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Setting setting = new Setting() { ID = id };
 			if (setting != null)
 			{
 				db.Entry(setting).State = EntityState.Deleted;
 				db.SaveChanges();
 			}
-			return RedirectToAction("MyBlueScript");
+			return PartialView("Settings", db.Settings.Where(s => s.ProjectID == projectNum));
 		}
 
 		public ActionResult DeleteScene(int id)
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			Scene scene = new Scene() { ID = id };
 			db.Entry(scene).State = System.Data.EntityState.Deleted;
 			db.SaveChanges();
-			return RedirectToAction("MyBlueScript");
+			return PartialView("Scenes", db.Scenes.Where(s => s.ProjectID == projectNum));
+		}
+
+		public ActionResult DeleteProject(int id)
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			Project project = new Project() { ID = id };
+			db.Entry(project).State = System.Data.EntityState.Deleted;
+			db.SaveChanges();
+			return PartialView("Projects", db.Projects);
 		}
 
 		public ActionResult CreateCharacter()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var newCharacter = new Character
 			{
 				ProjectID = projectNum,
@@ -271,11 +421,12 @@ namespace Blue_Script.Controllers
 			};
 			db.Characters.Add(newCharacter);
 			db.SaveChanges();
-			return RedirectToAction("MyBlueScript");
+			return PartialView("Characters", db.Characters.Where(s => s.ProjectID == projectNum));
 		}
 
 		public ActionResult CreateSetting()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var newSetting = new Setting
 			{
 				ProjectID = projectNum,
@@ -284,28 +435,29 @@ namespace Blue_Script.Controllers
 			};
 			db.Settings.Add(newSetting);
 			db.SaveChanges();
-			return RedirectToAction("MyBlueScript");
+			return PartialView("Settings", db.Settings.Where(s => s.ProjectID == projectNum));
 		}
 
 		public ActionResult CreateScene()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var newScene = new Scene
 			{
 				ProjectID = projectNum,
 				Name = "Scene Name",
 				Characters = new List<Character>(),
-				Setting = null,
 				Notes = "Notes go here."
 			};
 			PopulateSettingsDropDownList();
 			PopulateAssignedCharacters(newScene);
 			db.Scenes.Add(newScene);
 			db.SaveChanges();
-			return RedirectToAction("MyBlueScript");
+			return PartialView("Scenes", db.Scenes.Where(s => s.ProjectID == projectNum));
 		}
 
 		public ActionResult CreateChapter()
 		{
+			projectNum = (int)(HttpContext.Session["Number"]);
 			var newChapter = new Chapter
 			{
 				ProjectID = projectNum,
@@ -314,7 +466,19 @@ namespace Blue_Script.Controllers
 			};
 			db.Chapters.Add(newChapter);
 			db.SaveChanges();
-			return RedirectToAction("Index");
+			return RedirectToAction("Index", db.Chapters.Where(s => s.ProjectID == projectNum));
+		}
+
+		public ActionResult CreateProject()
+		{
+			projectNum = (int)(HttpContext.Session["Number"]);
+			var newProject = new Project 
+			{
+ 				Name = "New Project"
+			};
+			db.Projects.Add(newProject);
+			db.SaveChanges();
+			return PartialView("Projects", db.Projects);
 		}
 
 		private void PopulateChaptersDropDownList(object selectedchapter = null)
@@ -335,7 +499,7 @@ namespace Blue_Script.Controllers
 
 		private void PopulateAssignedCharacters(Scene scene)
 		{
-			var allCharacters = db.Characters;
+			var allCharacters = db.Characters.Where(x => x.ProjectID == projectNum);
 			var sceneCharacters = new HashSet<int>(scene.Characters.Select(c => c.CharacterID));
 			var viewModel = new List<AssignedCharacters>();
 			foreach (var cha in allCharacters)
@@ -380,7 +544,6 @@ namespace Blue_Script.Controllers
 			}
 		}
 		
-
 		private void FindMatches(string body)
 		{
 			MatchCollection matchCollection = Regex.Matches(body, @"[^.:?!\d\n\v\e\r\s""']\s([A-Z]+[a-z]+)[,.:;?!\s]");
@@ -415,6 +578,13 @@ namespace Blue_Script.Controllers
 						alreadyExists = true;
 					}
 				}
+				foreach (Forget forget in db.Forgets.Where(x => x.ProjectID == projectNum))
+				{
+					if (forget.Name.Equals(s))
+					{
+						alreadyExists = true;
+					}
+				}
 				if(!alreadyExists)
 				{
 					//add to unsorted
@@ -429,6 +599,61 @@ namespace Blue_Script.Controllers
 				Trace.WriteLine("Found: " + s);
 			}
 
+		}
+	
+		private void checkElements(int id)
+		{
+			var chaptersCount = (db.Chapters.Where(x => x.ProjectID == id)).Count();
+			var scenesCount = (db.Scenes.Where(x => x.ProjectID == id)).Count();
+			var charactersCount = (db.Characters.Where(x => x.ProjectID == id)).Count();
+			var settingsCount = (db.Settings.Where(x => x.ProjectID == id)).Count();
+			if(chaptersCount < 1)
+			{
+				var newChapter = new Chapter
+				{
+					ProjectID = id,
+					Name = "Chapter One",
+					Body = "auto generated chapter"
+				};
+				db.Chapters.Add(newChapter);
+				db.SaveChanges();
+			}
+			if (scenesCount < 1)
+			{
+				var newScene = new Scene
+				{
+					ProjectID = id,
+					Name = "Scene Name",
+					Characters = new List<Character>(),
+					Notes = "Notes go here."
+				};
+				PopulateSettingsDropDownList();
+				PopulateAssignedCharacters(newScene);
+				db.Scenes.Add(newScene);
+				db.SaveChanges();
+			}
+			if(charactersCount < 1)
+			{
+				var newCharacter = new Character
+				{
+					ProjectID = id,
+					FullName = "Character Name",
+					Notes = "Notes go here."
+				};
+				db.Characters.Add(newCharacter);
+				db.SaveChanges();
+			}
+			if(settingsCount < 1)
+			{
+				var newSetting = new Setting
+				{
+					ProjectID = id,
+					Name = "Setting Name",
+					Notes = "Notes go here."
+				};
+				db.Settings.Add(newSetting);
+				db.SaveChanges();
+			}
 		}
 	}
 }

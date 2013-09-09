@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.Title = "Chapters";
-}
-
-<h2>Chapters</h2>
+﻿@model IEnumerable<Blue_Script.Chapter>
+@for (var i = 0; i < Model.Count(); i++)
+  {
+			<h3>
+				<a href="#" class="subtitle" id="chap@(Model.ElementAt(i).ID)">@Model.ElementAt(i).Name</a></h3>
+			<div class="chapterholder well">
+				@Html.Action("EditChapter", "Home", new { id = Model.ElementAt(i).ID })
+			</div>
+  }

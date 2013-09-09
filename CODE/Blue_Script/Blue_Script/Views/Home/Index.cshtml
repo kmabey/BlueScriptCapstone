@@ -7,7 +7,7 @@
 <div class="row top">
 	<header class="bsHeader chap">
 		<h1>
-			Chapters</h1>
+			@ViewBag.projectName</h1>
 			
 	</header>
 </div>
@@ -15,17 +15,10 @@
 	<a href="@Url.Action("CreateChapter", "Home")" class="pull-right"><i class="icon-plus-sign-alt icon-4x">
 		</i></a>
 	<div id="accordion">
-		@for (var i = 0; i < Model.Count(); i++)
-  {
-			<h3>
-				<a href="#" class="subtitle" id="chap@(Model.ElementAt(i).ID)">@Model.ElementAt(i).Name</a></h3>
-			<div class="chapterholder well">
-				@Html.Action("EditChapter", "Home", new { id = Model.ElementAt(i).ID })
-			</div>
-  }
+		@Html.Action("Chapters","Home")
 	</div>
 </div>
 
-<div id="dialog">
+<div id="dialog" title="Change Project">
 	@Html.Action("Projects","Home")
 </div>

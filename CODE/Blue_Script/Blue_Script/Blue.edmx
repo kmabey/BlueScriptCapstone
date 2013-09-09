@@ -9,6 +9,7 @@
           <EntitySet Name="__MigrationHistory" EntityType="BlueScriptModel.Store.__MigrationHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Chapter" EntityType="BlueScriptModel.Store.Chapter" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Character" EntityType="BlueScriptModel.Store.Character" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Forget" EntityType="BlueScriptModel.Store.Forget" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Project" EntityType="BlueScriptModel.Store.Project" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scene" EntityType="BlueScriptModel.Store.Scene" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SceneCharacter" EntityType="BlueScriptModel.Store.SceneCharacter" store:Type="Tables" Schema="dbo" />
@@ -27,12 +28,12 @@
             <End Role="Project" EntitySet="Project" />
             <End Role="Character" EntitySet="Character" />
           </AssociationSet>
+          <AssociationSet Name="FK_Forget_Project" Association="BlueScriptModel.Store.FK_Forget_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="Forget" EntitySet="Forget" />
+          </AssociationSet>
           <AssociationSet Name="FK_Scene_Project" Association="BlueScriptModel.Store.FK_Scene_Project">
             <End Role="Project" EntitySet="Project" />
-            <End Role="Scene" EntitySet="Scene" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scene_Setting" Association="BlueScriptModel.Store.FK_Scene_Setting">
-            <End Role="Setting" EntitySet="Setting" />
             <End Role="Scene" EntitySet="Scene" />
           </AssociationSet>
           <AssociationSet Name="FK_SceneCharacter_Scene" Association="BlueScriptModel.Store.FK_SceneCharacter_Scene">
@@ -74,6 +75,14 @@
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="ProjectID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Forget">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Project">
           <Key>
             <PropertyRef Name="ID" />
@@ -88,7 +97,6 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="SettingID" Type="int" Nullable="false" />
           <Property Name="ProjectID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SceneCharacter">
@@ -141,7 +149,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Chapter_Project">
-          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1" />
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Chapter" Type="BlueScriptModel.Store.Chapter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -153,7 +163,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Character_Project">
-          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1" />
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Character" Type="BlueScriptModel.Store.Character" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -164,8 +176,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Forget_Project">
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Forget" Type="BlueScriptModel.Store.Forget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Forget">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Scene_Project">
-          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1" />
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Scene" Type="BlueScriptModel.Store.Scene" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -173,18 +201,6 @@
             </Principal>
             <Dependent Role="Scene">
               <PropertyRef Name="ProjectID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Scene_Setting">
-          <End Role="Setting" Type="BlueScriptModel.Store.Setting" Multiplicity="1" />
-          <End Role="Scene" Type="BlueScriptModel.Store.Scene" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setting">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Scene">
-              <PropertyRef Name="SettingID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -201,7 +217,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Setting_Project">
-          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1" />
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Setting" Type="BlueScriptModel.Store.Setting" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -213,7 +231,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Unsorted_Project">
-          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1" />
+          <End Role="Project" Type="BlueScriptModel.Store.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Unsorted" Type="BlueScriptModel.Store.Unsorted" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Project">
@@ -283,10 +303,6 @@
             <End Role="Project" EntitySet="Projects" />
             <End Role="Setting" EntitySet="Settings" />
           </AssociationSet>
-          <AssociationSet Name="FK_Scene_Setting" Association="BlueScriptModel.FK_Scene_Setting">
-            <End Role="Setting" EntitySet="Settings" />
-            <End Role="Scene" EntitySet="Scenes" />
-          </AssociationSet>
           <AssociationSet Name="SceneCharacter" Association="BlueScriptModel.SceneCharacter">
             <End Role="Character" EntitySet="Characters" />
             <End Role="Scene" EntitySet="Scenes" />
@@ -295,6 +311,11 @@
           <AssociationSet Name="FK_Unsorted_Project" Association="BlueScriptModel.FK_Unsorted_Project">
             <End Role="Project" EntitySet="Projects" />
             <End Role="Unsorted" EntitySet="Unsorteds" />
+          </AssociationSet>
+          <EntitySet Name="Forgets" EntityType="BlueScriptModel.Forget" />
+          <AssociationSet Name="FK_Forget_Project" Association="BlueScriptModel.FK_Forget_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="Forget" EntitySet="Forgets" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -337,6 +358,7 @@
           <NavigationProperty Name="Scenes" Relationship="BlueScriptModel.FK_Scene_Project" FromRole="Project" ToRole="Scene" />
           <NavigationProperty Name="Settings" Relationship="BlueScriptModel.FK_Setting_Project" FromRole="Project" ToRole="Setting" />
           <NavigationProperty Name="Unsorteds" Relationship="BlueScriptModel.FK_Unsorted_Project" FromRole="Project" ToRole="Unsorted" />
+          <NavigationProperty Name="Forgets" Relationship="BlueScriptModel.FK_Forget_Project" FromRole="Project" ToRole="Forget" />
         </EntityType>
         <EntityType Name="Scene">
           <Key>
@@ -345,10 +367,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="SettingID" Type="Int32" Nullable="false" />
           <Property Name="ProjectID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="BlueScriptModel.FK_Scene_Project" FromRole="Scene" ToRole="Project" />
-          <NavigationProperty Name="Setting" Relationship="BlueScriptModel.FK_Scene_Setting" FromRole="Scene" ToRole="Setting" />
           <NavigationProperty Name="Characters" Relationship="BlueScriptModel.SceneCharacter" FromRole="Scene" ToRole="Character" />
         </EntityType>
         <EntityType Name="Setting">
@@ -360,7 +380,6 @@
           <Property Name="Notes" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="ProjectID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Project" Relationship="BlueScriptModel.FK_Setting_Project" FromRole="Setting" ToRole="Project" />
-          <NavigationProperty Name="Scenes" Relationship="BlueScriptModel.FK_Scene_Setting" FromRole="Setting" ToRole="Scene" />
           </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -420,18 +439,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Scene_Setting">
-          <End Role="Setting" Type="BlueScriptModel.Setting" Multiplicity="1" />
-          <End Role="Scene" Type="BlueScriptModel.Scene" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Setting">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Scene">
-              <PropertyRef Name="SettingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="SceneCharacter">
           <End Role="Character" Type="BlueScriptModel.Character" Multiplicity="*" />
           <End Role="Scene" Type="BlueScriptModel.Scene" Multiplicity="*" />
@@ -453,6 +460,27 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Unsorted">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Forget">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProjectID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Project" Relationship="BlueScriptModel.FK_Forget_Project" FromRole="Forget" ToRole="Project" />
+        </EntityType>
+        <Association Name="FK_Forget_Project">
+          <End Type="BlueScriptModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="BlueScriptModel.Forget" Role="Forget" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Forget">
               <PropertyRef Name="ProjectID" />
             </Dependent>
           </ReferentialConstraint>
@@ -506,7 +534,6 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="SettingID" ColumnName="SettingID" />
                 <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -549,6 +576,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Forgets">
+            <EntityTypeMapping TypeName="BlueScriptModel.Forget">
+              <MappingFragment StoreEntitySet="Forget">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -575,7 +611,7 @@
         <EntityTypeShape EntityType="BlueScriptModel.Chapter" Width="1.5" PointX="3" PointY="1.5" Height="1.9802864583333335" IsExpanded="true" />
         <EntityTypeShape EntityType="BlueScriptModel.Character" Width="1.5" PointX="3" PointY="4.125" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="BlueScriptModel.Project" Width="1.5" PointX="0.75" PointY="4.5" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="BlueScriptModel.Scene" Width="1.5" PointX="5.25" PointY="5.625" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlueScriptModel.Scene" Width="1.5" PointX="5.25" PointY="5.625" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="BlueScriptModel.Setting" Width="1.5" PointX="3" PointY="7.125" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="BlueScriptModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" Height="1.9802864583333317" IsExpanded="true" />
         <AssociationConnector Association="BlueScriptModel.FK_Chapter_Project" ManuallyRouted="false">
@@ -588,19 +624,15 @@
           <ConnectorPoint PointX="3" PointY="5.3987939453125" />
         </AssociationConnector>
         <AssociationConnector Association="BlueScriptModel.FK_Scene_Project" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="6.6124886067708326" />
-          <ConnectorPoint PointX="5.25" PointY="6.6124886067708326" />
+          <ConnectorPoint PointX="2.25" PointY="6.7086393229166656" />
+          <ConnectorPoint PointX="5.25" PointY="6.7086393229166656" />
         </AssociationConnector>
         <AssociationConnector Association="BlueScriptModel.FK_Setting_Project" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="6.8648893229166656" />
-          <ConnectorPoint PointX="1.5" PointY="8.2112939453125" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="8.2112939453125" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="1.2773446875" PointY="7.0571907552083326" />
+          <ConnectorPoint PointX="1.2773446875" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="1.7115915104166668" PointY="8.2112939453125" />
+          <ConnectorPoint PointX="1.8782581770833333" PointY="8.2112939453125" />
           <ConnectorPoint PointX="3" PointY="8.2112939453125" />
-        </AssociationConnector>
-        <AssociationConnector Association="BlueScriptModel.FK_Scene_Setting" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="7.6535953776041659" />
-          <ConnectorPoint PointX="5.25" PointY="7.6535953776041659" />
         </AssociationConnector>
         <AssociationConnector Association="BlueScriptModel.SceneCharacter" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="5.9612939453125" />
@@ -608,9 +640,15 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="BlueScriptModel.Unsorted" Width="1.5" PointX="3" PointY="10.75" Height="1.7879850260416674" />
         <AssociationConnector Association="BlueScriptModel.FK_Unsorted_Project" >
-          <ConnectorPoint PointX="1.9062525" PointY="6.8648893229166656" />
-          <ConnectorPoint PointX="1.9062525" PointY="11.643992513020834" />
+          <ConnectorPoint PointX="1.79492484375" PointY="7.0571907552083326" />
+          <ConnectorPoint PointX="1.79492484375" PointY="11.643992513020834" />
           <ConnectorPoint PointX="3" PointY="11.643992513020834" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="BlueScriptModel.Forget" Width="1.5" PointX="3" PointY="13.875" Height="1.7879850260416674" />
+        <AssociationConnector Association="BlueScriptModel.FK_Forget_Project" >
+          <ConnectorPoint PointX="0.98241984375" PointY="7.0571907552083326" />
+          <ConnectorPoint PointX="0.98241984375" PointY="14.768992513020834" />
+          <ConnectorPoint PointX="3" PointY="14.768992513020834" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

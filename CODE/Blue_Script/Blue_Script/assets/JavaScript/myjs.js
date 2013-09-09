@@ -17,14 +17,16 @@
 
   $("#dialog").dialog({
   	autoOpen: false,
-	height: 500,
+	closeText: "X",
+  	height: 400,
+	width: 700,
 	modal: true,
   	show: {
   		effect: "blind",
   		duration: 1000
   	},
   	hide: {
-  		effect: "explode",
+  		effect: "blind",
   		duration: 1000
   	}
   });

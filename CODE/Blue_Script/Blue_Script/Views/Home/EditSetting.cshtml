@@ -3,7 +3,8 @@
 <form id="setForm@(Model.ID)" name="setForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate">
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateSetting(@Model.ID)"> <span class="pull-right">@Html.ActionLink("X", "DeleteSetting", new { id = Model.ID })</span></legend>
+        <legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateSetting(@Model.ID)"> 
+		<span class="pull-right"><a href="#" onclick="deleteSet(@Model.ID);"><i class="icon-trash"></i></a></span></legend>
 		@Html.ValidationMessageFor(model => model.Name)
         @Html.HiddenFor(model => model.ID)
 
@@ -13,7 +14,7 @@
         </div>
 
          <p>
-                <input type="submit" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+                <input type="submit" disabled="disabled" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
         </p>
 		<div class="btn btn-success btn-xs pull-right hideme" id="saveSet@(Model.ID)">Saved</div>
     </fieldset>

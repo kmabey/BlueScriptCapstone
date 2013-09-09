@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Blue_Script.Setting>
+<header class="bsHeader" id="setHead">
+			<h1>
+				Settings</h1>
+		</header>
 <ul>
 @for (var i = 0; i < Model.Count(); i++)
 {
-	<li>
-		<p class="pull-left">@Html.ActionLink("X", "DeleteSetting", new { id = Model.ElementAt(i).ID })</p>
-		<a href="#">@Model.ElementAt(i).Name</a>
+	<li onclick="showSetting(@Model.ElementAt(i).ID)">
+		<a href="#">@Model.ElementAt(i).Name<i class="icon-chevron-right hoveronly"></i></a>
 	</li>		
 }
 </ul>
 <div class="event add">
-	<a href="@Url.Action("CreateSetting", "Home")"><i class="icon-plus-sign-alt icon-4x">
+	<a href="#" onclick="addSet();"><i class="icon-plus-sign-alt icon-4x">
 	</i></a>
 </div>

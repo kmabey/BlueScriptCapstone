@@ -1,13 +1,12 @@
 ﻿@model Blue_Script.Scene
+		   <div class="event well">
 <form id="sceneForm@(Model.ID)" name="sceneForm@(Model.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate" onsubmit="updateScene(@Model.ID)">
 		@Html.ValidationSummary(true)
 		<fieldset>
-			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateScene(@Model.ID)"></legend>
+			<legend><input id="Name" class="text-box single-line valid" type="text" value="@Model.Name" name="Name" onchange="updateScene(@Model.ID)">
+			<span class="pull-right"><a href="#" onclick="deleteScene(@Model.ID);"><i class="icon-trash"></i></a></span>
+			</legend>
 			@Html.HiddenFor(model => Model.ID)
-			<h5>
-				Setting: @Html.DropDownList("PossibleSettings", (IEnumerable<SelectListItem>)ViewBag.PossibleSettings, new { @onchange = "updateScene(@Model.ID)" })
-				
-			</h5>
 			<h5>
 				Characters:
 			</h5>
@@ -33,9 +32,10 @@
 			<h5>
 				Notes</h5>
 			<textarea id="Notes" class="text-box multi-line" name="Notes" rows="5" onchange="updateScene(@Model.ID)">@Model.Notes</textarea>
-			<p><input type="submit" value="Save"/></p>
+			<p><input type="submit" disabled="disabled" value="Save"/></p>
 			<div class="btn btn-success btn-xs pull-right hideme" id="saveScene@(Model.ID)">Saved</div>
 		</fieldset>
 
  </form>
+ </div>
 		

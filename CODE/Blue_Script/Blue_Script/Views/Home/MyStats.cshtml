@@ -1,4 +1,7 @@
-﻿
+﻿<header class="bsHeader" id="statHead">
+			<h1>
+				Statistics</h1>
+		</header>
 	<div class="backcolorWhite">
 		<h3>Basic Statistics</h3>
 		<dl>
@@ -16,7 +19,7 @@
 	</div>
 	<div class="backcolorWhite">
 		<h3>Character Statistics</h3>
-		<table class="table table-striped">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>Character</th>
@@ -41,30 +44,4 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="backcolorWhite">
-		<h3>Setting Statistics</h3>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Setting</th>
-					<th>Scenes used in</th>
-					<th>%</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var item in ViewBag.Settings)
-	{
-				<tr>
-					<td>@item.Name</td>
-					<td>@(item.Scenes.Count)</td>
-					<td><div class="progress progress-striped active">
-					@{
-						var percent = ((item.Scenes.Count / ViewBag.TotalScenes)*10) + "%";
-					}
-						<div class="bar" style="width: @(percent);"></div>
-					</div></td>
-				</tr>
-	}
-			</tbody>
-		</table>
-	</div>
+	

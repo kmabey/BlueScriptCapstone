@@ -9,9 +9,9 @@ h1
 	text-align: center;
 	margin-top: .1em;
 }
-a:link, a:active, a:visited
+a:visited
 {
-	color: White;
+	color: #eeeeee;
 	text-decoration: none;
 }
 h3 
@@ -25,7 +25,7 @@ body
 {
 	font-family: 'Lato', sans-serif;
 	background: #374775;
-	color: White;
+	color: #eeeeee;
 }
 .row 
 {
@@ -36,7 +36,7 @@ body
 {
 	margin-top: 2em;
 	margin-bottom: 2em;
-	background: white;
+	background: #eeeeee;
 	min-width: 20em;
 	max-width: 60em;
 	color: #374775;
@@ -111,11 +111,10 @@ ul#navigation li a
 	box-shadow:inset 0 0 5px 5px #EEE;
 	padding: 1em;
 }
-
 .sidrcontent ul 
 {
 display:block;
-border-top:1px solid #dddddd;
+border-top:1px solid #eeeeee;
 border-bottom:1px solid #ededed;
 margin-left:0;
 padding:0;
@@ -126,7 +125,7 @@ padding:0;
 display:block;
 line-height:48px;
 border-top:1px solid #ededed;
-border-bottom:1px solid #dddddd;
+border-bottom:1px solid #eeeeee;
 margin:0;
 }
 .sidrcontent ul li:hover,.sidrcontent ul li.active,.sidrcontent ul li.sidrcontent-class-active 
@@ -166,13 +165,31 @@ box-shadow:inset 0 0 15px 3px #EEE;
 	margin: 0 auto;
 	margin-top: 2em;
 }
+.formHolder 
+{
+	position: fixed;
+	top: 10px;
+    left: 41em;
+	max-height: 100%;
+	max-width: 25em;
+	min-width: 20em;
+	background: #374775;
+	overflow: auto;
+	-webkit-box-shadow:inset 0 0 5px 5px #EEE;
+	-moz-box-shadow:inset 0 0 5px 5px #EEE;
+	box-shadow:inset 0 0 5px 5px #EEE;
+	padding: 1em;
+}
+.editorlink {
+	margin-right: 1em;
+}
 .chapters h3 
 {
 	background: #374775;
-	border: 1px solid white;
-	color: White;
+	border: 1px solid #eeeeee;
+	color: #eeeeee;
+	text-align: left;
 	font-family: 'Dancing Script', cursive;
-	text-align: center;
 	-moz-border-radius: 1.5em;
 	-webkit-border-radius: 1.5em;
     border-radius: 1.5em;
@@ -207,7 +224,7 @@ input[type=text]
 {
 	background-color: transparent;
 	border: none; 
-	color: White;
+	color: #eeeeee;
 }
 input[type=submit] 
 {
@@ -227,8 +244,25 @@ input[type=submit]
 }
 a 
 {
-	color:White;
+	color:#eeeeee;
 	
+}
+i:hover {
+	color: gray;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+.unsortedOptions, .unsortedOptions a {
+	color: #374775;
+}
+tr:hover {
+	background-color: #eee;
+	color:#374775;
+}
+#dialog {
+	overflow: auto; 
 }
 .bodyholder 
 {
@@ -246,11 +280,11 @@ img
 .bsHeader 
 {
 	width:  100%;
-	background: white;
+	background:#f8fafb;
 	-moz-border-radius: 1.5em;
 	-webkit-border-radius: 1.5em;
 	border-radius: 1.5em;
-	border: 3px solid white;
+	border: 3px solid #eeeeee;
 	margin-top: 1em; 
 	margin-bottom: .5em; 
 	color: #374775;
@@ -260,7 +294,7 @@ img
 }
 legend 
 {
-	color: White;
+	color: #eeeeee;
 	text-align: center;
 	
 }
@@ -268,17 +302,17 @@ legend
 {
 	font-family: 'Dancing Script', cursive;
 	font-size: 4em;
-	color: White;
+	color: #eeeeee;
 	
 }
 .title:hover 
 {
-	color: White;
+	color: #eeeeee;
 	text-decoration: none;
 }
 .subtitle:hover 
 {
-	color: White;
+	color: #eeeeee;
 	text-decoration: none;
 }
 .headerholder 
@@ -286,7 +320,7 @@ legend
 	padding-top: 10px;
 	background: #374775;
 	padding-bottom: 10px;
-	border-bottom: 3px solid white;
+	border-bottom: 3px solid #eeeeee;
 	
 }
 .event 
@@ -299,7 +333,7 @@ legend
     text-align:left;
     border: none;
     background: #374775;
-    border: 3px solid white;
+    border: 3px solid #eeeeee;
     min-width: 10em;
 	
 }
@@ -312,7 +346,7 @@ legend
     text-align:left;
     border: none;
     background: #374775;
-    border: 3px solid white;
+    border: 3px solid #eeeeee;
     margin-bottom: 1em;
 }
 .event.add 
@@ -331,11 +365,11 @@ legend
 }
 .ui-dialog-buttonpane  
 {
-	background: white;
+	background: #eeeeee;
 }
 ui-dialog
 {
-	background: white;
+	background: #eeeeee;
 }
 footer 
 {
@@ -343,9 +377,9 @@ footer
 	padding: .5em;
 	bottom: 1em;
 }
-.backcolorWhite 
+.backcolor#eeeeee 
 {
-	background: white;
+	background: #eeeeee;
 	color: Black;
 	margin: 1em;
 	-moz-border-radius: 25px;
@@ -357,13 +391,75 @@ footer
 {
 	margin: 0;
 }
-.unsorted {
+.unsorted 
+{
 	padding: 1em;
 }
 .unsorted td
 {
 	min-width: 7em;
 }
-.tabletop {
-	border-bottom: 2px solid white;
+.tabletop 
+{
+	border-bottom: 2px solid #eeeeee;
+}
+.ui-widget-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.ui-front {
+	z-index: 100;
+}
+.ui-dialog {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: .2em;
+	outline: 0;
+}
+.ui-dialog .ui-dialog-titlebar {
+	padding: .4em 1em;
+	position: relative;
+}
+.ui-dialog .ui-dialog-title {
+	float: left;
+	margin: .1em 0;
+	white-space: nowrap;
+	width: 90%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.ui-dialog .ui-dialog-titlebar-close 
+{
+	position: absolute;
+	right: .3em;
+	top: 50%;
+	width: 21px;
+	margin: -10px 0 0 0;
+	padding: 1px;
+	height: 20px;
+}
+.ui-dialog .ui-dialog-content {
+	position: relative;
+	border: 0;
+	padding: .5em 1em;
+	background: none;
+	overflow: auto;
+}
+.ui-dialog .ui-dialog-buttonpane {
+	text-align: left;
+	border-width: 1px 0 0 0;
+	background-image: none;
+	margin-top: .5em;
+	padding: .3em 1em .5em .4em;
+}
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+	float: right;
+}
+.ui-dialog .ui-dialog-buttonpane button {
+	margin: .5em .4em .5em 0;
+	cursor: pointer;
 }

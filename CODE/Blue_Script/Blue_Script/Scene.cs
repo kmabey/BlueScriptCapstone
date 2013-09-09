@@ -22,11 +22,9 @@ namespace Blue_Script
         public int ID { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
-        public int SettingID { get; set; }
         public int ProjectID { get; set; }
     
         public virtual Project Project { get; set; }
-        public virtual Setting Setting { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
     }
 }

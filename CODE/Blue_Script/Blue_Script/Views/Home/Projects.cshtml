@@ -2,16 +2,25 @@
 @foreach (var item in Model)
 {
 	<div class="event well">
-		
-			<span class="pull-right">@Html.ActionLink("X", "DeleteProject", new { id = item.ID })</span>
-			<h3 contenteditable="true" onchange="updateProject(@item.ID, @this)">@item.Name</h3>
-			<!--TODO: add link here that selects that project as the current project.-->
-			<div class="btn btn-success btn-xs pull-right hideme" id="saveSet@(item.ID)">
+		<form id="proForm@(item.ID)" name="proForm@(item.ID)" method="post" data-ajax-method="POST" data-ajax="true" action="#" novalidate="novalidate">
+		@Html.ValidationSummary(true)
+		<fieldset>
+			<legend>
+				<input id="Name" class="text-box single-line valid" type="text" value="@item.Name" name="Name" onchange="updateProject(@item.ID)">
+				<span class="pull-right"><a href="#" onclick="deleteProject(@item.ID)"><i class="icon-remove"></i></a></span></legend>
+			@Html.ValidationMessageFor(model => item.Name)
+			@Html.HiddenFor(model => item.ID)
+			<span class="pull-right"><a href="@Url.Action("ChangeProject", "Home", new { id = @item.ID })"><i class="icon-edit"></i>Open</a></span>
+			<p>
+				<input type="submit" disabled="disabled" value="Save" id="btnSave" name="cmd" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+			</p>
+			<div class="btn btn-success btn-xs pull-right hideme" id="savePro@(item.ID)">
 				Saved</div>
+		</fieldset>
+		</form>
 	</div>
-}
 
+}
 <div class="event add">
-	<a href="@Url.Action("CreateProject", "Home")"><i class="icon-plus-sign-alt icon-4x"></i>
-	</a>
+	<a href="#" onclick="addProject();"><i class="icon-plus-sign-alt icon-4x"></i></a>
 </div>
